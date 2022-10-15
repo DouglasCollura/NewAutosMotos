@@ -1,0 +1,68 @@
+@import "/src/assets/theme/variables";
+
+.temp-inicio{
+    display: grid;
+    max-width: 1600px;
+    margin: 0px auto;
+    min-height: 100%;
+    padding: 30px 40px;
+    grid-gap: 60px;
+    align-content: start;
+}
+
+.section{
+    display: grid;
+    grid-template-rows: max-content auto;
+    grid-gap: 30px;
+    .header{
+        display: grid;
+        padding: 5px 0px;
+        align-items: center;
+        grid-auto-flow: column;
+        h2{
+            color: black;
+            font-weight: 500;
+        }
+
+        &-top{
+            @extend .header;
+            justify-content: space-between;
+        }
+    }
+
+    .content{
+        display: grid;
+    }
+}
+
+
+.carrusel{
+    display: grid;
+    position: relative;
+
+    padding: 10px 40px;
+
+    .chevron-left{
+        position: absolute;
+        align-self: center;
+        left: 0;
+    }
+    .chevron-right{
+        position: absolute;
+        align-self: center;
+        right: 0;
+    }
+
+    &-content{
+        overflow: hidden;
+        padding: 7px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+}
+
+.card-v{
+    width: 270px;
+}

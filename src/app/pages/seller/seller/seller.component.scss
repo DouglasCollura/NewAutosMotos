@@ -1,0 +1,336 @@
+@import "/src/assets/theme/variables";
+
+.section-main{
+	grid-area: section-main;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: 0px auto;
+    position: relative;
+}
+
+.temp{
+    display: grid;
+    max-width: 1600px;
+    margin: 0px auto;
+    min-height: 100%;
+    padding: 10px 40px;
+    align-content: start;
+}
+
+
+.headBoxInfo{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    justify-content: space-between;
+    h2{
+        margin: 30px 0 0 20px;
+        font-family: 'Ubuntu';
+        font-weight: 500;
+        font-size: 24px;
+        color: #1C1C1C;
+    }
+    p{
+        font-size: 16px;
+        margin: 10px 0 0px 20px;
+        color: #000000;
+        font-weight: 400;
+    }
+    .btnInfoHead{
+        display: inline-block;
+        cursor: pointer;
+        position: relative;
+        height: 40px;
+        background: rgba(#ed1c24, .2);
+        border-radius: 100px;   
+        padding: 9px 50px;     
+        margin: 20px 0 0 0;
+        text-decoration: none;
+        span{
+           display: flex;
+            letter-spacing: 1.25px;
+            font-weight: 700;
+            font-size: 15px;
+            text-transform: uppercase;
+            color: #ED1C24!important;
+        
+        }
+    }
+    .btnInfoHeadMore{
+        display: inline-block;
+        position: relative;
+        height: 20px;
+        border-radius: 100px;   
+        padding: 0px 0px;     
+        margin: 40px 0 0 0;
+        text-decoration: none;
+        span{
+           display: flex;
+            letter-spacing: 1.25px;
+            font-weight: 700;
+            font-size: 15px;
+            text-transform: uppercase;
+            color: #ED1C24!important;
+            
+        }
+    }
+}
+
+.cardBox{
+    width: 280px;
+    height: 416px;
+    margin: auto;
+    filter: drop-shadow(0px 0px 9px rgba(102, 102, 102, 0.3));
+    filter: drop-shadow(0px 0px 9px rgba(102, 102, 102, 0.2));
+    -webkit-filter: drop-shadow(0px 0px 9px rgba(102, 102, 102, 0.2));
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    .headCard{
+        width: 280px;
+        height: 150px;
+        border-radius: 6px 6px 0 0;
+        padding: 8px 12px;
+        .optionsCardHead{
+            width: 84px;
+            height: 34px;
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .optionCircle{
+                display: inline-block;
+                width: 34px;
+                height: 34px;
+                border-radius: 100%;
+                background-color: #FFFFFF;
+                opacity: 0.8;
+                img{
+                    width: 18px;
+                    margin: 6px auto ;
+                }
+            }
+        }
+    }
+    .bodyCard{
+        width: 100%;
+        height: 240px;
+        border-radius: 0 0 6px 6px;
+        background-color: #fff;
+        padding: 10px 17px;
+        h2{
+            margin: 0;
+            font-size: 19px;
+            color: #1C1C1C;
+            font-family: 'Ubuntu';
+            font-weight: 500;
+            height: 50px;
+            text-overflow: ellipsis;
+        }
+        h3{
+            font-weight: 14px;
+            color: #787878;
+            margin: 18px 0;
+            font-family: 'Ubuntu';
+            font-weight: 400;
+            .km{
+                margin-left: 18px;
+            }
+        }
+        h4{
+            font-family: 'Ubuntu';
+            font-weight: 700;
+            font-size: 23px;
+            color: #1C1C1C;
+            margin: 0;
+        }
+        .btnCard{
+            display: inline-block;
+            width: 100%;
+            height: 40px;
+            border-radius: 100px;
+            background-color: #F24B4B;
+            text-align: center;
+            font-size: 16px;
+            text-transform: uppercase;
+            color: #fff;
+            padding-top: 8px;
+            margin: 40px 0 0 0;
+        }
+    }
+}
+
+.cardBoxResena{
+    width: 380px;
+    height: 160px;
+    background-color: #CECECE;
+    padding: 14px;
+    .headCard{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        h2{
+            font-size: 17px;
+            font-weight: 400;
+            margin: 0;
+            color: #1C1C1C;
+        }
+        h3{
+            font-size: 14px;
+            font-weight: 400;
+            margin: 0;
+            color: #787878;
+        }
+    }
+    p{
+        font-size: 14px;
+        font-weight: 400;
+        color: #787878;
+        margin: 10px 0;
+    }
+    .footCard{
+        width: 100%;
+        h4{
+            margin: 0;
+            font-weight: 400;
+            font-size: 14px;
+            color: #787878;
+            span{
+                color: #ED1C24;
+                font-weight: 400;
+                margin-left: 18px;
+            }
+            img{
+                display: inline-block;
+                width: 12px;
+                margin-left: 6px;
+            }
+        }
+    }
+}
+
+.cardBoxLarge{
+    width: 280px;
+    height: 530px;
+    margin: auto;
+    filter: drop-shadow(0px 0px 9px rgba(102, 102, 102, 0.3));
+    filter: drop-shadow(0px 0px 9px rgba(102, 102, 102, 0.2));
+    -webkit-filter: drop-shadow(0px 0px 9px rgba(102, 102, 102, 0.2));
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    .headCard{
+        width: 280px;
+        height: 180px;
+        border-radius: 6px 6px 0 0;
+        padding: 8px 12px;
+        justify-content: flex-end;
+        .optionsCardHead{
+            width: 34px;
+            height: 34px;
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            right: 12px;
+            .optionCircle{
+                display: inline-block;
+                width: 34px;
+                height: 34px;
+                text-decoration: none;
+                text-align: center;
+                border-radius: 100%;
+                background-color: #FFFFFF;
+                opacity: 0.8;
+                span{
+                    display: inline-block;
+                    font-size: 21px;
+                    margin-top: 6px;
+                }
+            }
+        }
+    }
+    .bodyCard{
+        width: 100%;
+        height: 330px;
+        border-radius: 0 0 6px 6px;
+        background-color: #fff;
+        padding: 10px 17px;
+        .line{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+            .col-line{
+                display: flex;
+                width: 50%;
+                p{
+                    font-weight: 400;
+                    font-size: 14px;
+                    margin: 12px 0 0 20px;
+                }
+                .point{
+                    color: #ED1C24;
+                    margin-left: 20px;
+                    img{
+                        display: inline-block;
+                        width: 12px;
+                       
+                    }
+                }
+            }
+        }
+        h2{
+            margin: 0;
+            font-size: 19px;
+            color: #1C1C1C;
+            font-family: 'Ubuntu';
+            font-weight: 500;
+        }
+        h3{
+            color: #787878;
+            margin: 10px 0;
+            font-family: 'Ubuntu';
+            font-weight: 400;
+            font-size: 14px;
+            .km{
+                margin-left: 18px;
+            }
+        }
+        h4{
+            font-family: 'Ubuntu';
+            font-weight: 700;
+            font-size: 23px;
+            color: #1C1C1C;
+            margin: 4px 0;
+        }
+        .btnCard{
+            display: inline-block;
+            width: 100%;
+            height: 40px;
+            border-radius: 100px;
+            background-color: #F24B4B;
+            text-align: center;
+            font-size: 16px;
+            text-transform: uppercase;
+            color: #fff;
+            padding-top: 8px;
+            margin: 40px 0 0 0;
+        }
+        .btn-circle{
+            width: 40px;
+            img{
+                width: 40px;
+            }
+            margin-top: 14px;
+        }
+    }
+}
+
+.noflex{
+    display: inline-block!important;
+}
+
+.justify{
+    justify-content: space-between;
+}
+

@@ -1,0 +1,33 @@
+<div class="info">
+    <div class="col70">
+        <div class="row between">
+            <p class="indicePage">Publicación masiva > Venta de vehículos</p>
+            <a class="backText" routerLink="/seller/tienda">Volver a tienda</a>
+        </div>
+        <div class="row">
+            <h2>Publicación masiva de productos</h2>
+            <p>Descarga la planilla csv para completar los datos de tus productos. Una vez completado vuelve a subirla para terminar de publicar.</p>
+        </div>
+        <div class="row" style="margin-top: 40px;">
+            <a>Venta de vehículos</a>
+        </div>
+        <div class="row">
+            <button (click)="download()">
+                <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="26.5" cy="26.5" r="26.5" fill="#CECECE"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 34.5C16.5 36.1569 17.8431 37.5 19.5 37.5L34.5 37.5C36.1569 37.5 37.5 36.1569 37.5 34.5L37.5 33C37.5 32.1716 38.1716 31.5 39 31.5C39.8284 31.5 40.5 32.1716 40.5 33L40.5 34.5C40.5 37.8137 37.8137 40.5 34.5 40.5L19.5 40.5C16.1863 40.5 13.5 37.8137 13.5 34.5L13.5 33C13.5 32.1716 14.1716 31.5 15 31.5C15.8284 31.5 16.5 32.1716 16.5 33L16.5 34.5ZM19.9393 25.9393C20.5251 25.3536 21.4749 25.3536 22.0607 25.9393L25.5 29.3787L25.5 15C25.5 14.1716 26.1716 13.5 27 13.5C27.8284 13.5 28.5 14.1716 28.5 15L28.5 29.3787L31.9393 25.9393C32.5251 25.3536 33.4749 25.3536 34.0607 25.9393C34.6464 26.5251 34.6464 27.4749 34.0607 28.0607L28.0607 34.0607C27.4749 34.6464 26.5251 34.6464 25.9393 34.0607L19.9393 28.0607C19.3536 27.4749 19.3536 26.5251 19.9393 25.9393Z" fill="#1C1C1C"/>
+                </svg>
+                <span>Descargar planilla CSV</span>
+            </button>
+        </div>
+    </div>
+    <div class="col30">
+        <ul>
+            <li>Si ya tiene planilla presione <a href="/seller/importacion-upload">aquí</a></li>
+            <li>Descarga la planilla cada vez que quieras crear publicaciones masivamente.</li>
+            <li>Si tienes dudas sobre como utilizar la planilla no dudes en consultarnos. <a (click)="show()">Ayuda</a></li>
+        </ul>
+    </div>
+</div>
+
+<app-modal-help></app-modal-help>

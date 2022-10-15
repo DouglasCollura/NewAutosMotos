@@ -1,0 +1,385 @@
+@import "/src/assets/theme/variables";
+
+.temp-compra{
+    min-height: 100%;
+    display: grid;
+    grid-template: 
+        "section-header section-header"  90px
+        "section-filtro section-content" auto/
+        285px auto;
+    grid-gap: 10px;
+    padding:40px 25px;
+    max-width: 1600px;
+    margin: 0px auto;
+}
+
+.section-header{
+    display: grid;
+    grid-area:section-header; 
+    width: 100%;
+    grid-gap: 20px;
+    justify-content: start;
+}
+
+.section-filtro{
+    display: grid;
+    grid-area:section-filtro;
+    grid-gap: 20px;
+    margin-top: 30px;
+    width: 100%;
+    align-content: start;
+    overflow-y: auto;
+}
+
+.select-marca{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    
+    .img{
+        width: 48px;
+        height: 36px;
+        position: relative;
+
+        img{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            object-fit: contain;
+        }
+    }
+}
+
+.section-content{
+    grid-area:section-content; 
+    display:grid;
+    margin-top: 10px;
+    padding-left: 15px;
+    gap: 20px;
+    grid-template-rows: 40px auto;
+}
+
+.section-content .content{
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: flex-start;
+    gap: 20px;
+    align-content: flex-start;
+}
+
+.card-filtro{
+    padding: 20px 10px;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-rows: 50px auto;
+}
+
+.card-filtro .section{
+    border-top:0.5px solid #CECECE;
+    border-bottom:0.5px solid #CECECE;
+    padding: 10px;
+    display: grid;
+    grid-gap: 12px;
+}
+
+.card-filtro .section button{
+    background: none;
+    border: none;
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.card-filtro .section button span{
+    font-size: 20px;
+    color: var(--rojo);
+}
+
+.card-comparar{
+    padding: 10px;
+    display: grid;
+    grid-gap: 10px;
+    justify-items: center;
+}
+
+
+.card-carousel{
+    width: 290px;
+    min-height: 440px;
+    display: grid;
+    grid-template-rows: 150px auto;
+    // align-content: start;
+    overflow: hidden;
+}
+
+.card-carousel-img{
+    display: grid;
+    position: relative;
+    overflow: hidden;
+
+    .section-media{
+        display: flex;
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        gap: 3px;
+
+        .card-media{
+            display: flex;
+            padding: 5px;
+            align-items: center;
+            span{
+                color: black;
+            }
+            background-color: #ffffff9d;
+            img{
+                height: max-content !important;
+                object-fit: contain !important;
+                position: relative !important;
+                width: max-content !important;
+            }
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+        }
+    }
+}
+
+.card-carousel-img img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit:cover;
+}
+
+.card-carousel-top-img{
+    position: absolute;
+    display: grid;
+    grid-auto-flow: column;
+    padding: 10px;
+    width: 100%;
+    justify-content: space-between;
+    z-index: 2;
+
+    .btn-primary{
+        padding: 5px 15px;
+    }
+}
+
+.card-carousel-top-img button.btn{
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 20px;
+    color: black;
+    font-weight: 500;
+}
+
+.btn-bookmark{
+    padding: 5px !important;
+
+    &-primary{
+        @extend .btn-bookmark;
+        background: $rojo !important;
+        color: white !important;
+    }
+}
+.btn-bookmark span{
+    font-size: 18px;
+}
+
+.card-carousel-body{
+    padding: 10px;
+    display: grid;
+    gap: 10px;
+    .title{
+        font-weight: 500;
+        color: rgba( 40,40,40,0.9);
+        max-height: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+   
+    span,h5{
+        // color: rgba(24, 22, 22, 0.8)!important;
+        color: black !important;
+    }
+
+    .content-body{
+        display: flex;
+        gap: 7px;
+        flex-wrap: wrap;
+    }
+}
+
+.card-carousel-footer{
+    display: grid;
+    padding: 10px;
+    align-self: end;
+    .footer-contact{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .contact{
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            img{
+                width: 35px;
+            }
+        }
+    }
+
+    .dealer{
+        display: grid;
+        grid-template-columns: 50px auto;
+        grid-gap: 10px;
+        align-items: center;
+        img{
+            width: 100%;
+        }
+
+
+        .info-dealer{
+            .stast{
+                display: flex;
+                gap: 4px;
+                h4{
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    color: black;
+                    cursor: pointer;
+                }
+            }
+            display: grid;
+        }
+    }
+}
+
+.card-carousel-footer a,.card-carousel-footer button{
+    border: none;
+    background: none;
+    width: max-content;
+    height: max-content;
+    cursor: pointer;
+}
+
+
+.btn-select{
+    width: 100% !important;
+    padding: 10px 5px !important;
+    border: 1.5px solid #787878 !important;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+
+.content-select{
+    width: 100%;
+    padding: 10px;
+    display: none;
+    grid-gap: 10px;
+    border: 1.5px solid #787878 !important;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    margin-top: 4px;
+    max-height: 370px;
+    overflow-y: auto;
+
+    .section-select{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 5px;
+    }
+}
+
+
+.card-v{
+    width: 290px;
+    span,h5{
+        // color: rgba(24, 22, 22, 0.8)!important;
+        color: black !important;
+    }
+    .footer{
+        display: grid;
+        grid-auto-flow: column;
+        grid-gap: 10px;
+        button{
+            background: none;
+            border: none;
+        }
+    }
+}
+
+.ui-datepicker-calendar{
+    display: none !important;
+}
+
+
+
+
+// !FILTRO=================================================
+
+.container-range{
+    margin: 20px 0px;
+}
+
+.content-select{
+    button{
+        width: 100% !important;
+    }
+    .select{
+        color: white;
+        background: $rojo !important;
+    }
+}
+
+.card-filtro{
+    .section{
+        .fecha{
+            border: 1px solid #787878;
+            padding: 10px;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+        }
+    }
+
+    .display-km{
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: space-between;
+    }
+}
+
+
+#inspeccion{
+    grid-auto-flow: column;
+    input,select{
+        min-width: 0px !important;
+    }
+}
+
+.btn-filtrar{
+    background-color: #45C04A;
+    color: white;
+}
+
+.close{
+    display: none;
+}

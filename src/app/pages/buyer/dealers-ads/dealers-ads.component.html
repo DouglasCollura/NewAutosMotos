@@ -1,0 +1,137 @@
+<div class="temp-dealers">
+
+    <div class="section-dealer">
+
+        <div class="container-img">
+            <img [src]="GetThumb(dealer?.logo_path)" alt="">
+        </div>
+
+        <div class="content-info">
+            <h1 class="title"> {{dealer?.company_name}} </h1>
+
+            <h3></h3>
+            <h3 class="text-black">Dirección: {{dealer?.address}}, {{dealer?.city}}, {{dealer?.country}}</h3>
+        </div>
+
+    </div>
+
+
+    <div class="section-filtro">
+        <div>
+            <h2 class="text-black font-500">Anuncios publicados</h2>
+            <h3 > {{total}} Resultados</h3>
+        </div>
+        <select class="justify-self-end" #orderBy name="" id="">
+            <option value="0" selected  >Ordenar</option>
+            <option value="created_new" >Más nuevos</option>
+            <option value="created_old" >Más antiguos</option>
+            <option value="lowprice" >Menor precio</option>
+            <option value="hightprice" >Mayor precio</option>
+        </select>
+    </div>
+
+    <div class="section-menu">
+        <button class="btn " [class]="menu == 1? 'active':''" (click)="GetVehiculos(id)" >Vehículos</button>
+        <button class="btn" [class]="menu == 2? 'active':''" (click)="GetRecambios(id)">Recambios</button>
+        <button class="btn" [class]="menu == 3? 'active':''" (click)="GetTalleres(id)" >Talleres</button>
+        <button class="btn" [class]="menu == 4? 'active':''" (click)="GetAlquiler(id)" >Alquileres</button>
+    </div>
+
+    <div class="section-content">
+        <div class="load"  *ngIf="loading">
+            <div class="content-car-load">
+                <div class="car-load"></div>
+            </div>
+            <div class="content-load-bar">
+                <div class="load-bar"></div>
+            </div>
+        </div>
+        <ng-container  *ngIf="menu == 1">
+            <div   *ngFor="let info of vehiculos?.data | paginate: { itemsPerPage: vehiculos?.per_page, currentPage: vehiculos?.current_page,totalItems: vehiculos?.total }; let i =index" class="card card-carousel">
+                <div class="card-carousel-img">
+                    <div class="card-carousel-top-img">
+                        <button class="btn " [class]="filterMark(info.ad_id)?'btn-bookmark-primary':'btn-bookmark'"  [id]="'btn'+i" (click)="SelectMark(info,i)"><span class="icon-bookmark text-black"></span></button>
+                    </div>
+                    <a routerLink="comprar" [queryParams]="CreateRoute(info)">
+                        <img (click)="GoShow(info)" [src]="GetThumb(info?.ad?.thumbnail)"  (error)="onImgError($event)"  alt="">
+                    </a>
+
+                    <div class="section-media">
+                        <!-- <div class="card-media">
+                            <img src="../../../../assets/img/icon-video.png" alt="">
+                        </div> -->
+
+                        <div class="card-media">
+                            <img src="../../../../assets/img/icon-photo.png" alt="">
+                            <span class="notranslate"> {{ GetLength(info?.ad)}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-carousel-body">
+                    <h3 class="title notranslate"> {{info?.ad?.title}}  </h3>
+                    <div class="content-body text-start">
+                        <h5> <span class="font-600"> Marca:</span> {{info.make?.name}}, </h5>
+                        <h5><span class="font-600"> Modelo:</span> {{info?.ad?.type != 'truck' ? info.model?.name:info?.model }},</h5>
+                        <h5 *ngIf="info?.ad?.type != 'truck'"><span class="font-600" > Carrocería:</span> {{ info.body_type?.external_name }},</h5>
+                        <h5><span class="font-600"> Año:</span> {{info.first_registration_year}},</h5>
+                        <h5><span class="font-600"> KM:</span> {{info.mileage}}, </h5>
+                        <h5><span class="font-600"> Combustible:</span> {{info.fuel_type?.external_name}},</h5>
+                    </div>
+                    <h5><span class="font-600"> Caja de cambio:</span> {{ info.transmission_type?.external_name }}</h5>
+
+                </div>
+                
+                <div class="card-carousel-footer">
+                    <div class="footer-contact">
+                        <h2 class="font-600 text-black"> {{GetPrice(info.price)}} €</h2>
+
+                        <div class="contact">
+                            <!-- <button 
+                                (click)="GoToWts(info?.dealer_show_room?.whatsapp_number)"
+                            >
+                            <img [src]="info?.dealer_show_room?.whatsapp_number?'../../../../assets/img/btn-wsp.png':'../../../../assets/img/btn-wsp-dis.png'" alt="">
+                            </button> --> 
+                            <a [attr.href]="info?.dealer_show_room?.whatsapp_number ? 'https://wa.me/' + info?.dealer_show_room?.whatsapp_number : null">
+                                <img [src]="info?.dealer_show_room?.whatsapp_number ? '/assets/img/btn-wsp.png' : '/assets/img/btn-wsp-dis.png'" alt=""> 
+                            </a> 
+                            <a [href]="'tel:'+ info?.dealer_show_room?.mobile_number"><img src="/assets/img/btn-phone.png" alt=""> </a>
+                        </div>
+                    </div>
+
+                    <div class="dealer">
+                        <img [src]="CargarThumbDealer(info?.dealer?.logo_path)" alt="">
+
+                        <div class="info-dealer">
+                            <div class="stast">
+                                <h4> {{info?.dealer?.company_name}} </h4>
+                                <span class="color-rojo"> {{info?.ad?.user?.type == 'Profesional'? info?.dealer?.review_ratings:info?.ad?.user?.review_ratings}} <span class="icon-star color-rojo"></span></span>
+                            </div>
+                            
+                            <div style="display: flex;">
+                                <h4>{{info?.dealer?.city}},{{info?.dealer?.country}}, </h4>
+                                <h4> {{info?.dealer?.zip_code}}</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+
+            
+        </ng-container>
+
+    </div>
+    <pagination-controls 
+                style="
+                    display: grid;
+                    justify-content: center;
+                "
+                *ngIf="vehiculos?.total"
+                (pageChange)="GetVehiculos(id,$event)"
+                previousLabel=""
+                nextLabel=""
+            >
+            </pagination-controls>
+
+</div>

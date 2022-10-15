@@ -1,0 +1,300 @@
+<div class="temp">
+    <!-- PERFIL DEL USUARIO -->
+    <div class="sectionProfile">
+        <button class="option" (click)="edit()" *ngIf="user.type == 'Profesional'" [disabled]="tienda?.length == 0">Editar</button>
+        <button class="option" (click)="edit()" *ngIf="user.type == 'Ocasional'" [disabled]="tienda?.length == 0">Editar</button>
+        <div class="profileRow">
+            <div class="circleProfile" *ngIf="user.type == 'Profesional'">
+                <img src="https://cdn.autosmotos.es/{{tienda?.dealer?.logo_path}}"  alt="">
+            </div>
+            <h3>{{tienda?.name}}</h3>
+            <h3 *ngIf="user.type != 'Profesional'" style="text-transform:capitalize;font-size: 24px;margin: 6px 0;">{{user.first_name}} {{user.last_name}}</h3>
+            <small *ngIf="user.type != 'Profesional'">Vendedor ocasional</small>
+        </div>
+        <div class="row" *ngIf="user.type == 'Profesional'">
+            <div class="infoProfile">
+                <h4>Nombre y apellido: {{user?.first_name}} {{user?.last_name}}</h4>
+                <h4>Email: {{tienda?.email_address}}</h4>
+                <h4>Teléfono: {{tienda?.mobile_number}}</h4>
+            </div>
+            <div class="infoProfile"> 
+                <h4>Whatsapp: {{tienda?.whatsapp_number}}</h4>
+                <h4>Dirección: {{tienda?.address}}</h4>
+            </div>
+        </div>
+        <div class="row" *ngIf="user.type == 'Ocasional'">
+            <div class="infoProfile">
+                <h4>Nombre y apellido: {{user.first_name}} {{user.last_name}}</h4>
+                <h4>Email: {{user.email}}</h4>
+            </div>
+            <div class="infoProfile">
+                <h4>Whatsapp: {{user.whatsapp_number}}</h4>
+                <h4>Teléfono: {{user.mobile_number}}</h4>
+                <!-- <h4>Dirección: {{user.address}}</h4> -->
+            </div>
+        </div>
+    </div>
+    <!-- ULTIMOS ANUNCIOS PUBLICADOS -->
+    <div>
+        <div class="headInformation">
+            <h2>Productos publicados</h2>
+            <div class="btnsBox">
+                <button class="btnInfoHead nobg"  [disabled]="user.status !== 'Aprobado' || user.email_verified_at == null" style="margin-right: 20px;" *ngIf="user.type == 'Profesional'" routerLink="/seller/importar"><span>Publicación masiva</span></button>
+                <button class="btnInfoHead noborder" (click)="crear()"><span>nuevo anuncio</span></button>
+            </div>
+        </div>
+
+        <div class="headBoxInfo">
+            <h2>Venta de vehículos</h2>
+        </div>
+
+        <div>
+            <swiper [config]="config"  *ngIf="productos.length > 0 && refreshDelete1">
+                <ng-template swiperSlide style="width: 250px!important;" class="swiper-slide" *ngFor="let item of productos">
+                    <div class="cardBox">
+                        <div class="headCard" >
+                            <img *ngIf="item?.ad?.thumbnail" [src]="'https://cdn.autosmotos.es/'+item?.ad?.thumbnail" (error)="onImgError($event)" alt="">
+
+                            <div *ngIf="!item?.ad?.thumbnail" class="req-img">
+                                    <span class="icon icon-exclamation-circle"></span>
+                                    <h3>Imagen requerida</h3>
+                            </div>
+
+                            <div class="optionsCardHead">
+                                <a routerLink="/seller/sell-vehicle/{{item?.ad?.id}}" class="optionCircle">
+                                    <img src="../../../../assets/iconos/icons-card/pencil.svg"/>
+                                </a>
+                                <a (click)="confirmdeleted(item?.ad?.id, 1)" class="optionCircle">
+                                    <img src="../../../../assets/iconos/icons-card/trash.svg"/>
+                                </a>
+                            </div>
+                            <span class="statusprod" *ngIf="item?.ad?.status == 0">Aprobación pendiente</span>
+                        </div>
+                        <div class="bodyCard">
+                            <h2 class="titleCard">{{item?.ad?.title}}</h2>
+
+                            <div class="content-body text-start">
+                                <h5> <span class="font-600"> Marca:</span> {{item?.make?.name}}, </h5>
+                                <h5><span class="font-600" > Modelo:</span> {{item?.ad?.type != 'truck'?item?.model?.name: item?.model}},</h5>
+                                <h5 *ngIf="item?.ad?.type != 'mobile-home' && item?.ad?.type != 'truck'"><span class="font-600"  > Carrocería:</span> {{ item?.body_type?.external_name }},</h5>
+                                <h5><span class="font-600"> Año:</span> {{item?.first_registration_year}},</h5>
+                                <h5><span class="font-600"> KM:</span> {{item?.mileage}}, </h5>
+                                <h5><span class="font-600"> Combustible:</span> {{item?.fuel_type?.external_name}},</h5>
+                            </div>
+                            <h5><span class="font-600"> Caja de cambio:</span> {{ item?.transmission_type?.external_name }}</h5>
+
+                            <h4> {{GetPrice(item?.price)}} €</h4>
+                            <!-- <button class="btnCard" [disabled]="item?.ad?.promoted_simple !== false || item?.ad?.promoted_front_page !== false" (click)="promocionar(item?.ad?.id, item?.ad?.title)">Promocionar</button> -->
+                            <button class="btnCard disable">Promocionar</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </swiper>
+            <div *ngIf="!loading1 && productos.length == 0">
+                <h3  style="font-size: 18px;margin: 60px auto;display: block;text-align: center;">No tienes vehículos publicados</h3>
+            </div>
+            <div class="load"  *ngIf="loading1">
+                <div class="content-car-load">
+                    <div class="car-load"></div>
+                </div>
+                <div class="content-load-bar">
+                    <div class="load-bar"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="headBoxInfo">
+            <h2>Venta de recambios</h2>
+        </div>
+        
+       <div>
+            <swiper [config]="config" *ngIf="recambios.length > 0 && refreshDelete2">
+                <ng-template swiperSlide  *ngFor="let item of recambios" style="width: 300px!important;">
+                    <div class="cardBox" >
+                        <div class="headCard" >
+                            <img *ngIf="item.thumbnail"  [src]="'https://cdn.autosmotos.es/'+item.thumbnail" (error)="onImgError($event)" alt="">
+                            <div *ngIf="!item.thumbnail" class="req-img">
+                                <span class="icon icon-exclamation-circle"></span>
+                                <h3>Imagen requerida</h3>
+                            </div>
+                            <div class="optionsCardHead">
+                                <a routerLink="/seller/recambios/{{item.id}}" class="optionCircle">
+                                    <img src="../../../../assets/iconos/icons-card/pencil.svg"/>
+                                </a>
+                                <a (click)="confirmdeleted(item.id, 2)" class="optionCircle">
+                                    <img src="../../../../assets/iconos/icons-card/trash.svg"/>
+                                </a>
+                            </div>
+                            <span class="statusprod" *ngIf="item.status == 0">Aprobación pendiente</span>
+                        </div>
+                        <div class="bodyCard" style="height: 200px;">
+                            <h2 class="titleCard">{{subString(item.title)}}</h2>
+                            <p style="margin: 10px 0;">{{item.shop_ad?.ad?.description}}</p>
+                            <!-- <h3><span>Año: {{item.shop_ad?.first_registration_year}}</span> <span class="km">Km: {{item.shop_ad?.mileage}}</span></h3> -->
+                            <h4>{{GetPrice(item.shop_ad?.price) }} €</h4>
+                            <!-- <button class="btnCard" [disabled]="item.promoted_simple !== false || item.promoted_front_page !== false" (click)="promocionar(item.id, item.title)">Promocionar</button> -->
+                            <button class="btnCard disable">Promocionar</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </swiper>
+            <div *ngIf="loading2 == false && recambios.length == 0">
+                <h3 style="font-size: 18px;margin: 60px auto;display: block;text-align: center;">No tienes anuncios publicados</h3>
+            </div>
+            <div class="load"  *ngIf="loading2">
+                <div class="content-car-load">
+                    <div class="car-load"></div>
+                </div>
+                <div class="content-load-bar">
+                    <div class="load-bar"></div>
+                </div>
+            </div>
+       </div>
+
+        <!-- SERVICIOS PUBLICADOS -->
+        <div class="headInformation">
+            <h2>Servicios publicados</h2>
+            <div class="btnsBox">
+                <button class="btnInfoHead nobg" *ngIf="user.type == 'Profesional'" [disabled]="user.status !== 'Aprobado' || user.email_verified_at == null" style="margin-right: 20px;" routerLink="/seller/importar"><span>Publicación masiva</span></button>
+                <button class="btnInfoHead noborder" (click)="crear()"><span>nuevo anuncio</span></button>
+            </div>
+        </div>
+        <!-- Alquiler de vehículos -->
+        <div class="headBoxInfo">
+            <h2>Alquiler de vehículos</h2>
+        </div>
+        <div style="padding: 0 20px;">
+            <swiper [config]="config3" *ngIf="alquilerVehiculos.length > 0 && refreshDelete3">
+                <ng-template swiperSlide style="width: 300px!important;" *ngFor="let item of alquilerVehiculos">
+                    <div class="cardService" >
+                        <div class="cardImage">
+                            <img [src]="GetThumb(item.thumbnail)" (click)=" item.rental_ad?.website_url!=null && GoPage(item.rental_ad?.website_url)" alt="thumnail-{{item.id}}">
+
+                            <!-- <img *ngIf="item.thumbnail == ''" src="../../../../assets/img/logo.svg" (click)=" item.rental_ad?.website_url!=null && GoPage(item.rental_ad?.website_url)" alt="thumnail-{{item.id}}"> -->
+                        </div>
+                        <div class="cardInfo">
+                            <div class="rowSm">
+                                <h3 (click)=" item.rental_ad?.website_url!=null && GoPage(item.rental_ad?.website_url)">{{item.title}}</h3>
+                                <div class="boxIcons">
+                                    <a routerLink="/seller/alquiler/{{item.id}}"><img src="../../../../assets/iconos/icons-card/pencil.svg" alt="" /></a>
+                                    <a (click)="confirmdeleted(item.id, 3)"><img src="../../../../assets/iconos/icons-card/trash.svg" alt="" /></a>
+                                </div>
+                            </div>
+                            <div class="rowSm">
+                                <p>{{item.rental_ad?.address}}</p>
+                            </div>
+                            <div class="rowSm">
+                                <!-- <button class="cardBotton" [disabled]="item.promoted_simple !== false || item.promoted_front_page !== false" (click)="promocionar(item.id, item.title)">promocionar</button> -->
+                                <button class="cardBotton disable" >promocionar</button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </swiper>
+            <div *ngIf="loading3 == false && alquilerVehiculos.length == 0">
+                <h3 style="font-size: 18px;margin: 60px auto;display: block;text-align: center;">No tienes anuncios publicados</h3>
+            </div>
+            <div class="load"  *ngIf="loading3">
+                <div class="content-car-load">
+                    <div class="car-load"></div>
+                </div>
+                <div class="content-load-bar">
+                    <div class="load-bar"></div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Servicios de taller -->
+        <div class="headBoxInfo">
+            <h2>Servicios de taller</h2>
+        </div>
+        <div style="padding: 0 20px;">
+            <swiper [config]="config3"  *ngIf="serviciosTaller.length > 0  && refreshDelete4">
+                <ng-template swiperSlide style="width: 300px!important;" *ngFor="let item of serviciosTaller">
+                    <div class="cardService" >
+                        <div class="cardImage">
+                            <img *ngIf="item.thumbnail != ''" src="https://cdn.autosmotos.es/{{item.thumbnail}}" (click)=" item.mechanic_ad?.website_url!=null && GoPage(item.mechanic_ad?.website_url)" alt="thumnail-{{item.id}}">
+
+                            <img *ngIf="item.thumbnail == ''" src="../../../../assets/img/logo.svg" (click)=" item.mechanic_ad?.website_url!=null && GoPage(item.mechanic_ad?.website_url)" alt="thumnail-{{item.id}}">
+                        </div>
+                        <div class="cardInfo">
+                            <div class="rowSm">
+                                <h3 (click)=" item.mechanic_ad?.website_url!=null && GoPage(item.mechanic_ad?.website_url)">{{item.title}}</h3>
+                                <div class="boxIcons">
+                                    <a routerLink="/seller/anuncio/{{item.id}}"><img src="../../../../assets/iconos/icons-card/pencil.svg" alt="" /></a>
+                                    <a (click)="confirmdeleted(item.id, 4)"><img src="../../../../assets/iconos/icons-card/trash.svg" alt="" /></a>
+                                </div>
+                            </div>
+                            <div class="rowSm">
+                                <p>{{item?.rental_ad?.address}}</p>
+                            </div>
+                            <div class="rowSm">
+                                <!-- <button class="cardBotton" [disabled]="item.promoted_simple !== false || item.promoted_front_page !== false" (click)="promocionar(item.id, item.title)">promocionar</button> -->
+                                <button class="cardBotton disable">promocionar</button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </swiper>
+            <div *ngIf="loading4 == false && serviciosTaller.length == 0">
+                <h3 style="font-size: 18px;margin: 60px auto;display: block;text-align: center;">No tienes anuncios publicados</h3>
+            </div>
+            <div class="load"  *ngIf="loading4">
+                <div class="content-car-load">
+                    <div class="car-load"></div>
+                </div>
+                <div class="content-load-bar">
+                    <div class="load-bar"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- SECCION DE RESEÑAS -->
+        <div style="width: 100%;overflow: hidden;">
+            <div class="headInformation">
+                <h2>Últimas reseñas</h2>
+                <a routerLink="resenas" class="btnInfoHeadMore"><span>ver todas</span></a>
+            </div>
+            <swiper [config]="config3"  *ngIf="resenas > 0;">
+                <ng-template swiperSlide style="width: 300px!important;" *ngFor="let item of resenas">
+                    <div class="cardService" >
+                        <div class="cardImage">
+                            <img src="../../../../assets/img/bmw.png" alt="">
+                        </div>
+                        <div class="cardInfo">
+                            <div class="rowSm">
+                                <h3>Taller de prueba de andri</h3>
+                                <div class="boxIcons">
+                                    <a><img src="../../../../assets/iconos/icons-card/pencil.svg" alt="" /></a>
+                                    <a><img src="../../../../assets/iconos/icons-card/trash.svg" alt="" /></a>
+                                </div>
+                            </div>
+                            <div class="rowSm">
+                                <p>Cl 7a #17-25</p>
+                            </div>
+                            <div class="rowSm">
+                                <!-- <button class="cardBotton" (click)="promocionar(item.id, item.title)">promocionar</button> -->
+                                <button class="cardBotton disable">promocionar</button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </swiper>
+            <div *ngIf="loading5 == false && resenas.length == 0">
+                <h3 style="font-size: 18px;margin: 60px auto;display: block;text-align: center;">No tienes anuncios publicados</h3>
+            </div>
+            <div class="load" style="margin:0px auto" *ngIf="loading5"><div class="pointer"></div></div>
+        </div>
+    </div>
+
+<app-modal-edit-tienda (success)="successUpdated($event)"></app-modal-edit-tienda>
+<app-modal-promocionar  (success)="succesPromo($event)"></app-modal-promocionar>
+<app-modal-confirmation (success)="deleted()"></app-modal-confirmation>
+
+
+<div class="modalSM" *ngIf="modal_notvalid " >
+    <a class="closed" (click)="modal_notvalid = false"  ><img src="../../../assets/iconos/close-modal.svg"/></a>
+   <h3 class="text-center" *ngIf="modal_notvalid">Confirma tu correo electrónico para crear tu primer anuncio, nuestros administradores estarán verificando en un periodo de 24h</h3>
+</div>

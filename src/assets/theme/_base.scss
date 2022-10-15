@@ -1,0 +1,384 @@
+@import 'variables';
+
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url("../font/Ubuntu-Light.ttf");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url("../font/Ubuntu-Regular.ttf");
+    font-weight: normal;
+
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url("../font/Ubuntu-Medium.ttf");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url("../font/Ubuntu-Bold.ttf");
+    font-weight: 600;
+}
+
+
+@function calculateRem($size) {
+    $remSize: calc($size / 16px);
+    @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+    font-size: $size;
+    font-size: calculateRem($size);
+    line-height: calculateRem($size)*1.5;
+}
+font{
+    color: inherit !important;
+    font-size: inherit !important;
+    font-weight:  inherit !important;
+    // display: inherit !important;
+    text-decoration: inherit !important;
+    height: inherit !important;
+    max-height: inherit !important;
+    overflow: inherit !important;
+    text-overflow: inherit !important;
+    white-space: inherit !important;
+}
+// .goog-logo-link{
+//     display:none !important;
+// }
+// .goog-te-gadget{
+//   color:transparent!important;
+// }
+// .goog-te-banner-frame{
+//     display:none !important;
+// }
+#google_translate_element select{
+    background-color:#f6edfd;
+    color:#383ffa;
+    border: none;
+    border-radius:3px;
+    padding:6px 8px
+  }
+
+.goog-te-gadget-simple {
+    border: 1.5px solid $rojo !important;
+    margin: 8px 5px;
+    padding:5px;
+    color: $rojo !important;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+
+    *{
+        color: $rojo !important;
+    }
+}
+
+* {
+    font-family: Ubuntu;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-weight: 400;
+    color: $textoGris;
+    @include font-size(14px);
+
+    scrollbar-width: thin !important;
+    scrollbar-color:  $rojo rgba(69,69,69,.09) !important;
+
+    *::-webkit-scrollbar {
+        width: 7px !important;
+        height: 7px;
+    }
+    
+    *::-webkit-scrollbar-track {
+    background: rgba(69,69,69,.09);
+    }
+    
+    *::-webkit-scrollbar-thumb {
+    background-color: $rojo;
+    border-radius: 20px;
+    // border: 3px solid rgba(69,69,69,.09);
+    }
+}
+
+html {
+    height: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100%;
+    font-family: Ubuntu;
+    @include font-size(15px);
+    color: $textoGris;
+    position: relative;
+    // top: 0px !important;
+}
+
+a{
+    text-decoration: none;
+}
+
+/* 24, 20, 18, 16, 14,   */
+h1,h2,h3,h4,h5{margin: 0px; padding: 0px;}
+h1{@include font-size(21px)}
+h2{@include font-size(19px)}
+h3{@include font-size(17px)}
+h4{@include font-size(15px)}
+h5{@include font-size(13px)}
+
+
+ul{
+    list-style: none;
+    display: grid;
+    grid-auto-flow: column;
+    max-width: max-content;
+    grid-gap:10px;
+
+    li{
+        list-style: none;
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        grid-gap:5px;
+        cursor: pointer;
+
+        ul{
+            list-style: none;
+            display: grid;
+            grid-auto-flow: row;
+        }
+    }
+}
+
+
+
+input[type=checkbox]{
+    cursor: pointer !important;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    max-width: 15px;
+    height: 15px;
+    min-width: 15px;
+    padding: 0px;
+    background-color: white;
+    border-radius: 3px;
+    outline: 2px solid #A6A6A6 !important;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+input[type=checkbox]:checked{
+    width: 15px;
+    height: 15px;
+    padding: 0px;
+    position: relative;
+    outline: 2px solid $rojo !important;
+}
+input[type=checkbox]:checked+label{
+    color: $rojo;
+}
+input[type=checkbox]:checked:before{
+    width: 15px;
+    height: 5px;
+    margin-left: 3px;
+    position: absolute;
+    top: -3px;
+    padding: 0px;
+    content: '✔';
+    font-size: 14px;
+    color: $rojo;
+}
+
+
+
+
+/* * 
+*   ###################### RANGE ##################################### 
+* */
+
+.container-range{
+    position: relative;
+    height: 10px;
+    display: grid;
+    width: 100%;
+    align-content: center;
+}
+
+.line-range{
+    width: 100%;
+    height: 6px;
+    background-color: $rojo;
+    /*position: absolute;
+    top: 0;
+    bottom: 0;
+    */border-radius: 10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+}
+
+input[type=range].range{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    position: absolute;
+    background-color: transparent;
+    pointer-events: none;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    height: 6px;
+    border: none;
+    width: 100%;
+    // background-image: linear-gradient( to right ,$primario-rosa-2 0 50%, $neutro-200 50% 100%);
+    // background-size: 60% 100%;
+    // background-repeat: no-repeat;
+}
+input[type=range]::-webkit-slider-runnable-track{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 15px;
+}
+input[type=range]::-moz-range-track{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 6px;
+}
+
+input[type=range]::-ms-track{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 6px;
+}
+
+input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    background-color: $grisClaro;
+    cursor: pointer;
+    pointer-events: auto;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+input[type=range]::-moz-range-thumb{
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    height: 17px;
+    width: 17px;
+    background-color: $grisClaro;
+    cursor: pointer;
+    pointer-events: auto;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+input[type=range]::-ms-thumb{
+    appearance: none;
+    height: 17px;
+    width: 17px;
+    background-color: $grisClaro;
+    cursor: pointer;
+    pointer-events: auto;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+
+/* * 
+*   ###################### RADIO ##################################### 
+* */
+
+.radio-group{
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    align-content: start;
+    align-items: center;
+    grid-gap: 10px;
+    margin: 4px 0px;
+}
+
+.radio-group label{
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+input[type=radio]{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    min-width: 0px !important;
+    width: 18px;
+    height: 18px;
+    padding: 0px;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    outline: 1.5px solid #A6A6A6;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+input[type=radio]:checked{
+    width: 18px;
+    height: 18px;
+    padding: 0px;
+    position: relative;
+    background-color:$rojo;
+    outline: none;
+    border: 2px solid $rojo;
+}
+input[type=radio]:checked+label{
+    color: $rojo;
+}
+
+input[type=radio]:checked:before{
+    content: '';
+    align-self: center;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    padding: 0px;
+    font-size: 14px;
+    background-color: white;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}

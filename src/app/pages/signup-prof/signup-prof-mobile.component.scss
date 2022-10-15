@@ -1,0 +1,17 @@
+@import "/src/assets/theme/variables";
+
+
+@media only screen and (max-width: 768px) {
+
+
+    .fases{
+        min-width: auto;
+
+        .content-fase{
+            grid-auto-rows: auto;
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}

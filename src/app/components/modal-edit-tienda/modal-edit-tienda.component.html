@@ -1,0 +1,88 @@
+<div class="over" *ngIf="modal" (click)="close()"></div>
+
+<div class="modalSM" *ngIf="modal">
+    <a (click)="close()"><img src="../../../assets/iconos/close-modal.svg"/></a>
+
+    <div *ngIf="user.type == 'Profesional'" style="height: 800px;display: inline-block;width: 80%;" >
+        <form [formGroup]="formTienda" (ngSubmit)="update()">
+            <div class="rowModal" *ngIf="user.type == 'Profesional'">
+                <div class="circleProfile">
+                    <div class="pencilProfile" style="cursor: pointer;" (click)="upload.click()">
+                        <img src="../../../assets/iconos/pencil-white.svg" >
+                    </div>
+    
+                    <img src="https://cdn.autosmotos.es/{{negocio?.dealer?.logo_path}}" *ngIf="imageR">
+                    <img [src]="imageBase" *ngIf="!imageR">
+    
+                    <input type="file" #upload (change)="UploadImage($event)" accept="image/*" style="display: none;">
+                </div>
+            </div>
+            <div class="rowModal">
+                <label>Nombre de la tienda</label>
+                <input type="text" formControlName="company_name">
+            </div>
+            <!-- <div class="rowModal">
+                <label>Nombre y apellido</label>
+                <input type="text" value="{{negocio.first_name}} {{negocio.last_name}}">
+            </div> -->
+            <div class="rowModal">
+                <label>Email</label>
+                <input [readonly]="true" type="email" formControlName="email_address" [ngClass]="{'error' :  g.email_address.errors?.email}">
+                <small *ngIf="g.email_address.errors?.email" [ngClass]="{'errorText' : g.email_address.errors?.email}">Ingrese un email válido</small>
+            </div>
+            <div class="rowModal">
+                <label>Teléfono de contacto</label>
+                <input type="text" formControlName="mobile_number">
+            </div>
+            <div class="rowModal">
+                <label>Whatsapp</label>
+                <input type="text" formControlName="whatsapp_number">
+            </div>
+            <div class="rowModal">
+                <label>Dirección</label>
+                <input type="text" formControlName="address">
+            </div>
+            <div class="rowModal"  style="margin-bottom: 50px;">
+                <button type="submit">
+                    <span *ngIf="!isLoading">guardar cambios</span>
+                    <span *ngIf="isLoading" class="loader"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="user.type == 'Ocasional'"  style="height: 800px;display: inline-block;width: 80%;" >
+        <form [formGroup]="formUser" (ngSubmit)="updateUser()">
+            
+            <div class="rowModal">
+                <label>Nombre</label>
+                <input type="text" formControlName="first_name">
+            </div>
+            <div class="rowModal">
+                <label>Apellido</label>
+                <input type="text" formControlName="last_name">
+            </div>
+            
+            <div class="rowModal">
+                <label>Email</label>
+                <input [readonly]="true" type="email" formControlName="email" [ngClass]="{'error' :  g.email_address.errors?.email}">
+                <small *ngIf="u.email.errors?.email" [ngClass]="{'errorText' : g.email_address.errors?.email}">Ingrese un email válido</small>
+            </div>
+            <div class="rowModal">
+                <label>Teléfono de contacto</label>
+                <input type="text" formControlName="mobile_number">
+            </div>
+            <div class="rowModal">
+                <label>Whatsapp</label>
+                <input type="text" formControlName="whatsapp_number">
+            </div>
+            
+            <div class="rowModal"  style="margin-bottom: 50px;">
+                <button type="submit">
+                    <span *ngIf="!isLoading">guardar cambios</span>
+                    <span *ngIf="isLoading" class="loader"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

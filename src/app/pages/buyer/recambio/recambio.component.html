@@ -1,0 +1,175 @@
+<div class="temp-recambio">
+
+    <!-- !SECTION HEADER ==================================== -->
+    <div class="section-header">
+        <h1 class="font-500 text-black">Encuentra los recambios que necesitas</h1>
+        <div class="group-input-icon-left">
+            <span class="icon-search small "></span>
+            <input 
+                type="text" 
+                placeholder="Buscar" 
+                class="input-circle input-search"
+                [(ngModel)]="search_bar.filter"
+                (keyup.enter)="Search()"
+            >
+        </div>
+    </div>
+
+
+    <!-- !SECTION FILTRO ==================================== -->
+    <div class="section-filtro"  *ngIf="display_filter">
+        <div class="card card-filtro">
+            <div class="grid align-content-start gap-10">
+                <button class="btn close" (click)="display_filter = !display_filter"> <span class="icon icon-x"></span> </button>
+                <h1 class="text-black font-500">Filtrar por</h1>
+                <button (click)="LimpiarFiltro()" class="btn color-rojo font-600">LIMPIAR FILTROS</button>
+            </div>
+
+            <div>
+                <div class="section">
+                    <button  (click)="dropDown('select-pais')">Ubicación <span class="icon icon-cheveron-down"></span></button>
+                    
+                    <div class="dropdown " id="select-pais">
+                        <button (click)="dropDown('pais')" class="btn-select" > {{filter.country == null? 'Seleccionar país': filter.country}} <span class="icon icon-cheveron-down"></span></button>
+
+                        <div class="content-select" id="pais">
+                            <button [class]="filter.country == null?'select':''" (click)="filter.country = null" >  Seleccione </button>
+                            <button [class]="filter.country == 'Rumania'?'select':''" (click)="filter.country = 'Rumania'" >  Rumania </button>
+                            <button [class]="filter.country == 'España'?'select':''" (click)="filter.country = 'España'" >  España </button>
+                            <button [class]="filter.country == 'Alemania'?'select':''" (click)="filter.country = 'Alemania'" >  Alemania </button>
+                            <button [class]="filter.country == 'Italia'?'select':''" (click)="filter.country = 'Italia'" >  Italia </button>
+                            <button [class]="filter.country == 'Reino Unido'?'select':''" (click)="filter.country = 'Reino Unido'" >  Reino Unido </button>
+                        </div>
+
+                        <input type="text" class="input-square" placeholder="Ciudad" [(ngModel)]="filter.city">
+                    </div>
+                </div>
+
+                <div class="section">
+                    <button  (click)="dropDown('select-detalles')">Categoría <span class="icon icon-cheveron-down"></span></button>
+
+                    <div class="dropdown " id="select-detalles">
+                        <button (click)="dropDown('categoria')" class="btn-select" > {{filter.category == null? 'Seleccionar categoria': filter.category}} <span class="icon icon-cheveron-down"></span></button>
+                        <div class="content-select" id="categoria">
+                            <button [class]="filter.category == 'auto'?'select':''" (click)="filter.category = 'auto'" >  Autos </button>
+                            <button [class]="filter.category == 'moto'?'select':''" (click)="filter.category = 'moto'" >  Motos </button>
+                            <button [class]="filter.category == 'mobile-home'?'select':''" (click)="filter.category = 'mobile-home'" >  Caravanas </button>
+                            <button [class]="filter.category == 'truck'?'select':''" (click)="filter.category = 'truck'" >  Camiones </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <button (click)="dropDown('precio')">Precio <span class="icon icon-cheveron-down"></span></button>
+
+                    <div class="dropdown" id="precio">
+
+                        <div class="container-range">
+                            <div class="line-range" id="line-precio"></div>
+                            <input type="range" (mousemove)="PintarRango('price')" [(ngModel)]="filter.from_price" id="rango-precio-min" class="range" min="500" max="5000000" value="500">
+                            <input type="range" (mousemove)="PintarRango('price')" [(ngModel)]="filter.to_price" id="rango-precio-max" class="range"min="500" max="5000000" value="5000000">
+                        </div>
+                        <div class="display-km">
+                            <input type="text" (keypress)="SoloNumero($event)" (keyup)="PintarRango('price')" maxlength="7" [(ngModel)]="filter.from_price" >
+                            <input type="text" (keypress)="SoloNumero($event)" (keyup)="PintarRango('price')" maxlength="7" style="text-align: end;"  [(ngModel)]="filter.to_price" >
+                            <!-- <span>{{filter.from_price}}€</span> -->
+                        </div>
+
+                    </div>
+                </div>
+                <button class="btn btn-block btn-primary" style="margin-top: 10px;" (click)="Filtrar(0)" >FILTRAR</button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- !SECTION CONTENT ==================================== -->
+    <div class="section-content">
+        <div class="grid gc-2x-g align-items-center">
+            <h3  *ngIf="!mobile" >{{shops?.total}} Resultados</h3>
+            <button *ngIf="mobile" class="btn-secondary btn-filter" (click)="display_filter = !display_filter" > <span class="icon icon-adjustments"></span> Filtrar</button>
+
+            <select class="justify-self-end" (change)="OrderBy(orderBy.value,0)" #orderBy name="" id="">
+                <option value="0" selected  >Ordenar</option>
+                <option value="created_new" >Más nuevos</option>
+                <option value="created_old" >Más antiguos</option>
+                <option value="lowprice" >Menor precio</option>
+                <option value="hightprice" >Mayor precio</option>
+            </select>
+        </div>
+
+        <div class="content">
+            <h1 class="font-600 text-black" *ngIf="shops?.total == 0 || shops?.count == 0"  >No encontramos resultados para la búsqueda, <br> inténtalo de nuevo</h1>
+
+            <div class="card-v" *ngFor="let item of shops?.data | paginate: { itemsPerPage: shops?.per_page, currentPage: shops?.current_page,totalItems: shops?.total }; let i =index">
+                <div class="section-img">
+                    <img  (click)="GoShow(item)" [src]="CargarThumb(item?.ad?.thumbnail)"  (error)="onImgError($event)" alt="">
+                    <button class="btn"  [class]="filterMark(item?.ad_id)?'btn-bookmark-primary':'btn-bookmark'" (click)="SelectMark(item,i)" [id]="'btn'+i"><span class="icon-bookmark text-black"></span></button>
+
+                </div>
+
+                <div class="section-body">
+                    <h2 class="title notranslate"> {{item?.ad?.title}} </h2>
+
+                    <div class="grid gc-2x-g">
+                        <div class="grid gap-10">
+                            <h4> <span class="font-600">Marca:</span> {{item?.make?.name}} </h4>
+
+                            <h4> <span class="font-600">Categoría:</span> {{item?.category}} </h4>
+                        </div>
+
+                        <div class="grid gap-10">
+                            <h4> <span class="font-600">Estado:</span> {{item?.condition}} </h4>
+                        </div>
+
+                    </div>
+
+                    <h1 class="title notranslate"> {{GetPrice(item.price)}} € </h1>
+
+                    <div class="footer">
+                        <!-- <button (click)="item?.whatsapp_number&&GoToWts(item?.whatsapp_number)"  ><img  [src]="item?.whatsapp_number?'../../../../assets/img/btn-wsp.png':'../../../../assets/img/btn-wsp-dis.png'" alt=""></button> 
+                        <button (click)="item?.mobile_number&&GoToCall(item?.mobile_number)"  ><img [src]="item?.mobile_number?'../../../../assets/img/btn-phone.png':'../../../../assets/img/btn-phone-dis.png'" alt=""> </button> --> 
+                        <a [attr.href]="item?.whatsapp_number ? 'https://wa.me/' + item?.whatsapp_number : null">
+                            <img class="phone-img" [src]="item?.whatsapp_number ? '/assets/img/btn-wsp.png' : '/assets/img/btn-wsp-dis.png'" alt=""> 
+                        </a> 
+                        <a [href]="'tel:'+ item?.mobile_number"><img class="phone-img" src="/assets/img/btn-phone.png" alt=""> </a>
+                        <div class="grid gap-10">
+                            <h4>Vendedor</h4>
+                            <span class="color-rojo"> {{item?.ad?.user?.review_ratings}} <span class="icon-star color-rojo"></span></span>  
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="load"  *ngIf="loading">
+            <div class="content-car-load">
+                <div class="car-load"></div>
+            </div>
+            <div class="content-load-bar">
+                <div class="load-bar"></div>
+            </div>
+        </div>
+
+        <pagination-controls 
+                style="
+                    display: grid;
+                    justify-content: center;
+                "
+                *ngIf="shops.total"
+                (pageChange)="pageChanged($event)"
+                previousLabel=""
+                nextLabel=""
+                [autoHide]="true"
+                [responsive]="true"
+                [maxSize]="4"
+            >
+            </pagination-controls>
+
+    </div>
+
+</div>

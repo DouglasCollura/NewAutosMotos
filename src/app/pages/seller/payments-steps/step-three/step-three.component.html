@@ -1,0 +1,74 @@
+<div *ngIf="isVisible">
+    <div class="body"*ngIf="isVisible && information.typePayment == '1'" >
+        <div class="boxInfo">
+            <h2>Datos de tarjeta</h2>
+    
+            <div style="margin-top: 100px;">
+                <div class="payment-box">
+                    <div class="form-group">
+                        <label>Número de tarjeta</label>
+                        <div id="card-number" class="inputCard"></div>
+                    </div>
+                   
+                    <div style="display: flex; flex-wrap: wrap;width: 100%;">
+                        <div class="form-group" style="width: 50%;">
+                            <label>Vencimiento</label>
+                            <div id="card-exp" class="inputMin"></div>
+                        </div>
+                        <div class="form-group" style="width: 50%;">
+                            <label>CVV</label>
+                            <div id="card-cvc" class="inputMin"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="card-errors" role="alert"></div>
+                </div>
+                <small *ngIf="error">{{textError}}</small>
+            </div>
+    
+    
+    
+            <div class="foot" style="padding: 0 10px;">
+                <button class="red" id="button" [disabled]="!loading">
+                    <span *ngIf="loading">continuar</span>
+                    <span class="loader" *ngIf="!loading"></span>
+                </button>
+                <button class="light" (click)="back()">cancelar</button>
+            </div>
+        </div>
+    </div>
+    <div class="body" *ngIf="isVisible && information.typePayment == '2'">
+        <div class="boxInfo">
+            <h2>Datos de transferencia</h2>
+    
+            <div class="row" style="margin-top: 50px;">
+              <div class="bodyWhite">
+                <h3>A continuación copia los datos para realizar la transferencia</h3>
+                <p style="margin-top: 35px;">Nombre de la cuenta: xxxxxxxxxxxx</p>
+                <p>ID: xxxxxxxxxxxx</p>
+                <p>Número de cuenta: xxxxxxxxxxxx</p>
+                <p>CBU: xxxxxxxxxxxx</p>
+                <!-- <a>Copiar</a> -->
+              </div>
+              <div class="bodyNoBg">
+                <h3>Una vez realizada la transferencia, adjunta el comprobante</h3>
+                <button (click)="image.click()"><span><img src="../../../../assets/iconos/upload.svg"> {{textbtn}}</span></button>
+                <input type="file" accept="image/*" style="display: none;" #image (change)="changeImage($event)">
+                <p>Una vez que comprobemos la acreditación en nuestra cuenta, se habilitará tu paquete de promoción</p>
+              </div>
+            </div>
+    
+            <div class="foot">
+                <button class="red" (click)="save()" [disabled]="file === undefined || buttonDis">
+                    <span *ngIf="!loadingComprobante">continuar</span>
+                    <span class="loader" *ngIf="loadingComprobante"></span>
+                </button>
+                <button class="light" (click)="back()">cancelar</button>
+            </div>
+            <small *ngIf="error" style="color: #ED1C24;margin-top:10px; display:inline-block">Ocurrio un error al enviar el comprobante.</small>
+        </div>
+    </div>
+
+
+    <div class="load" style="margin:0px auto" *ngIf="loadingPaypal"><div class="pointer"></div></div>
+</div>

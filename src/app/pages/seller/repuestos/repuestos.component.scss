@@ -1,0 +1,104 @@
+@import "/src/assets/theme/variables";
+
+.temp-signup{
+    min-height: 100%;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    align-content: space-between;
+}
+
+.content{
+    max-width: 830px;
+    width: 100%;
+    display: grid;
+    margin: 0px auto;
+    justify-items: center;
+    align-content: start;
+    grid-gap: 30px;
+}
+
+
+.group-fases{   
+    display: grid;
+    grid-auto-flow: column;
+    position: relative;
+    height: max-content;
+    width: 150px;
+    justify-content: space-between;
+    justify-self: center;
+    .circle{
+        width: 24px;
+        height: 24px;
+        background-color: $grisClaro;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+    }
+
+    .line{
+        width: 100%;
+        height: 2px;
+        align-self: center;
+        background-color: $grisClaro;
+        position: absolute;
+        z-index: -1;
+        &-1{
+            @extend .line;
+            width: 80px;
+        }
+        &-2{
+            @extend .line;
+            width: 60px;
+            left: 80px;
+        }
+
+        
+    }
+    .active{
+        background-color: $rojo !important;
+
+        *{
+            color: white !important;
+        }
+    }
+}
+
+.footer{
+    display: grid;
+
+    .btn-primary{
+        padding: 8px 80px;
+    }
+
+    .login{
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: center;
+        align-items: center;
+
+        button{
+            color: black;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+    }
+}
+
+
+.content-img{
+    width: 150px;
+    height: 110px;
+
+
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: scale-down;
+    }
+}

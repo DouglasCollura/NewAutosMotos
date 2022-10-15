@@ -1,0 +1,17 @@
+<div class="over" *ngIf="modal" ></div>
+
+<div class="modalSM" *ngIf="modal">
+    
+    <a (click)="close()"  *ngIf="valor === 0"><img src="../../../assets/iconos/close-modal.svg"/></a>
+    <a (click)="close1()" *ngIf="valor === 1"><img src="../../../assets/iconos/close-modal.svg"/></a>
+    <a (click)="close2()" *ngIf="valor === 2"><img src="../../../assets/iconos/close-modal.svg"/></a>
+
+    <div class="boxBottns">
+        <img src="../../../assets/iconos/modal-success.svg" *ngIf="type == 1"/>
+        <img src="../../../assets/iconos/modal-error.svg" *ngIf="type == 2"/>
+        <h2>{{text}}</h2>
+
+        <button (click)="tienda()" *ngIf="valor === 0 || valor === 1">volver a mi tienda</button>
+        <button (click)="close2()" *ngIf="valor === 2">volver</button>
+    </div>
+</div>

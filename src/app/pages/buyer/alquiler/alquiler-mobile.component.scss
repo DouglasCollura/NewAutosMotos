@@ -1,0 +1,42 @@
+@import "/src/assets/theme/variables";
+
+@media only screen and (max-width: 768px) {
+
+    .temp-alquiler{
+        min-height: 100%;
+        display: grid;
+        grid-template: 
+            "section-header"  90px
+            "section-content" auto/
+            auto;
+        grid-gap: 10px;
+        padding:40px 5px;
+        max-width: 1600px;
+        margin: 0px auto;
+        position: relative;
+    }
+
+    .btn-filter{
+        border-radius: 8px;
+        padding: 4px 12px !important;
+    }
+
+    .section-filtro{
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 5;
+        margin-top: 0px;
+        min-width: 100%;
+        display: grid;
+        background-color: #fff;
+        height: 100%;
+
+        .close{
+            display: flex;
+            position: absolute;
+            right: 10px;
+        }
+    }
+
+}

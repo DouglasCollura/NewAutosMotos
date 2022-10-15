@@ -1,0 +1,15 @@
+@media only screen and (max-width: 768px) {
+
+    .temp-signup{
+        grid-gap: 25px;
+    }
+
+    .content-cards{
+        grid-auto-flow: row
+    }
+
+    .card-signup{
+        width: 90vw;
+    }
+
+}

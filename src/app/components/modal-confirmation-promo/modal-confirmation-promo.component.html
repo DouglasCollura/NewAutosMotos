@@ -1,0 +1,11 @@
+<div class="over" *ngIf="modal" (click)="close()"></div>
+
+<div class="modalSM" *ngIf="modal">
+    <a (click)="close()"><img src="../../../assets/iconos/close-modal.svg"/></a>
+
+    <div class="boxBottns">
+        <h2>¿Seguro deseas dejar de promocionar este anuncio?</h2>
+        <button (click)="aceptar()">Si</button>
+        <button (click)="close()" class="nbgbtn">No</button>
+    </div>
+</div>

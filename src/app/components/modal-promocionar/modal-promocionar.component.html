@@ -1,0 +1,17 @@
+<div class="over" *ngIf="modal" (click)="close()"></div>
+
+<div class="modalSM" *ngIf="modal">
+    <a (click)="close()"><img src="../../../assets/iconos/close-modal.svg"/></a>
+
+    <div class="boxBottns">
+        <h2>¿Cómo desea promocionar este anuncio?</h2>
+        <button (click)="emiter(1)" [disabled]="!loading1 || !loading2">
+            <span *ngIf="loading1">promoción simple</span>
+            <span *ngIf="!loading1" class="loader"></span>
+        </button>
+        <button (click)="emiter(2)" [disabled]="!loading2 || !loading1">
+            <span *ngIf="loading2">en primera página</span>
+            <span *ngIf="!loading2" class="loader"></span>
+        </button>
+    </div>
+</div>

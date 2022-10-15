@@ -1,0 +1,83 @@
+<div class="temp-recovery">
+
+    <img src="../../../assets/img/logo.svg" alt="">
+
+    <!--* FASE 1 ****************** -->
+    <div class="content" *ngIf="fase == 1" >
+
+        <h1 class="text-black title">¿Olvidaste tu contraseña?</h1>
+
+        <p>Te ayudamos a recuperarla. Completa tu correo electrónico y te enviaremos las indicaciones para restablecerla.</p>
+        
+        <div class="form-group">
+            <input type="text" [(ngModel)]="user.email" class="input-square" placeholder="Email">
+        </div>
+
+        <p *ngIf="error == 1" class="color-rojo" >*El formato del correo es incorrecto.*</p>
+        <p *ngIf="error == 2" class="color-rojo" >*El correo ingresado no está registrado.*</p>
+        <p *ngIf="error == 3" class="color-rojo" >*Complete los campos.*</p>
+
+        <button class="btn-primary btn-block" (click)="SendEmail()">CONTINUAR <span *ngIf="loading" class="icon icon-refresh loader"></span></button>
+    </div>
+
+    <!--* FASE 2 ******************  -->
+    <div class="content" *ngIf="fase == 2" >
+
+        <h1 class="text-black title">Revisa tu correo</h1>
+
+        <p>Por cuestiones de seguridad hemos enviado un código de acceso a tu correo {{user.email}}</p>
+        
+        <div class="content-code">
+            <p>Introducir código</p>
+            <div class="group-code">
+                <input type="text" [(ngModel)]="code1" class="input-square" inputmode="numeric" name="code1" pattern="[-+]?[0-9]*[.,]?[0-9]+" (keyup)="nextInput($event,'code2')" (keypress)="SoloNumero($event)" maxlength="1" placeholder="0">
+                <input type="text" [(ngModel)]="code2" class="input-square" inputmode="numeric" name="code2" pattern="[-+]?[0-9]*[.,]?[0-9]+" (keyup)="nextInput($event,'code3')" (keypress)="SoloNumero($event)" maxlength="1" placeholder="0">
+                <input type="text" [(ngModel)]="code3" class="input-square" inputmode="numeric" name="code3" pattern="[-+]?[0-9]*[.,]?[0-9]+" (keyup)="nextInput($event,'code4')" (keypress)="SoloNumero($event)" maxlength="1" placeholder="0">
+                <input type="text" [(ngModel)]="code4" class="input-square" inputmode="numeric" name="code4" pattern="[-+]?[0-9]*[.,]?[0-9]+" (keypress)="SoloNumero($event)" maxlength="1" placeholder="0">
+            </div>
+        </div>
+        <p *ngIf="error == 3" class="color-rojo" >*Complete los campos.*</p>
+        <p *ngIf="error == 1" class="color-rojo" >*El código es inválido.*</p>
+
+        <button class="btn-primary btn-block" (click)="SendCode()">CONTINUAR <span *ngIf="loading" class="icon icon-refresh loader"></span></button>
+    </div>
+
+    <!--* FASE 3 ****************** -->
+    <div class="content" *ngIf="fase == 3" >
+
+        <h1 class="text-black title">Ingresa una nueva contraseña</h1>
+
+        <div class="form-group">
+            <div class="group-input-icon-right">
+                <span class="icon" [ngClass]="viewPass?'icon-eye':'icon-eye-off'" (click)="tooglePass(true)" ></span>
+                <input 
+                    [type]="viewPass ? 'text' : 'password'"
+                    [placeholder]="'Contraseña'"
+                    class="input-square"
+                    [(ngModel)]="user.password"
+                    maxlength="25"
+                >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="group-input-icon-right">
+                <span class="icon" [ngClass]="viewRePass?'icon-eye':'icon-eye-off'" (click)="tooglePass(false)" ></span>
+                <input 
+                    [type]="viewRePass ? 'text' : 'password'"
+                    placeholder="Repetir contraseña"
+                    class="input-square"
+                    [(ngModel)]="user.password_confirmation"
+                    maxlength="25"
+                >
+            </div>
+        </div>
+        <p *ngIf="error == 1" class="color-rojo" >*Complete los campos.*</p>
+        <p *ngIf="error == 2" class="color-rojo" >*Las contraseñas no coinciden.*</p>
+        <h4 *ngIf="error == 3" class="text-center color-rojo">La contraseña es menor de 8 caracteres.</h4>
+
+
+        <button class="btn-primary btn-block" (click)="SendPass()" >CONTINUAR <span *ngIf="loading" class="icon icon-refresh loader"></span></button>
+    </div>
+
+</div>

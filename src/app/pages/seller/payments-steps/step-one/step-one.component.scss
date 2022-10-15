@@ -1,0 +1,111 @@
+.body{
+    height: 100%;
+    display: flex;
+}
+.boxInfo{
+    width: 60%;
+    padding: 50px 40px;
+    h2{
+        margin-top: 30px;
+        font-size: 24px;
+        color: #1c1c1c;
+        font-weight: 500;
+    }
+    .inputBox{
+      margin: 20px 0;
+      input{
+        width: 100%;
+        max-width: 100%;
+        font-size: 15px;
+        width: 100%;
+        font-weight: 400;
+        height: 50px;
+        border: 1px solid #787878;
+        border-radius: 8px;
+        padding: 0 20px;
+        &.error{
+          border: 1px solid #ED1C24;
+        }
+      }
+      small{
+        color: #ED1C24;
+        font-size: 12px;
+      }
+      select{
+        width: 100%;
+        max-width: 100%;
+        font-size: 15px;
+        width: 100%;
+        height: 50px;
+        font-weight: 400;
+        border: 1px solid #787878;
+        border-radius: 8px;
+        padding: 0 20px;
+        &.error{
+          border: 1px solid #ED1C24;
+        }
+      }
+      label{
+        display: block;
+        font-size: 14px;
+      }
+    }
+   
+    .foot{
+        width: 90%;
+        max-width: 917px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 120px;
+        button{
+            width: 40%;
+            max-width: 290px;
+            height: 50px;
+            border-radius: 100px;
+            border: 0;
+            outline: 0;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            span{
+              font-weight: 700;
+              font-size: 16px;
+              color: #fff;
+            }
+            &:disabled{
+              opacity: .3;
+            }
+            &.red{
+                color: #fff;
+                background-color: #ED1C24;
+            }
+            &.light{
+                background: rgba(#ED1C24, .2);
+                color: #ED1C24;
+            }
+        }
+    }
+}
+
+.row1{
+  display: flex;
+  flex-direction: row;
+  grid-gap: 20px;
+}
+.loader {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #FFF;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

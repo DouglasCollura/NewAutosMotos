@@ -1,0 +1,31 @@
+.temp-login{
+    display: grid;
+    height: 100%;
+    grid-template-rows: 100px auto;
+    padding: 50px;
+    justify-items: center;
+}
+
+
+.content{
+    display: grid;
+    align-content: space-around;
+    max-height: 420px;
+    justify-items: center;
+
+    .btn-iniciar{
+        margin-top: 25px;
+    }
+
+    .footer-session{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin-top: 15px;
+        button{
+            padding: 0px !important;
+            color: black;
+            text-decoration: underline;
+        }
+    }
+}

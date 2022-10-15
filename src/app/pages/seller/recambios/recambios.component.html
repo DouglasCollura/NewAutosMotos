@@ -1,0 +1,302 @@
+<div class="temp-signup">
+    <h2 class="redVolver" routerLink="/seller/tienda">VOLVER A TIENDA</h2>
+    <div class="content">
+        <!-- <img src="../../../assets/img/logo.svg" alt=""> -->
+
+        <div class="group-fases fasesGoup">
+            <div class="circle" [class]="fase >=1?'active':''" > <span class="notranslate">1</span></div>
+            <hr class="hrNumber"> 
+            <div class="circle" [class]="fase >=2?'active':''"> <span class="notranslate">2</span> </div>
+            <hr class="hrNumber"> 
+            <div class="circle" [class]="fase ==3?'active':''"> <span class="notranslate">3</span> </div>
+            <div class="line-1" [class]="fase >=2?'active':''"></div>
+            <div class="line-2" [class]="fase ==3?'active':''"></div>
+        </div>
+
+        
+
+
+        <!-- ! FASE 1 ################ -->
+        <div class="grid" style="min-width:700px" >
+       
+            <h1 *ngIf="fase==1" class="text-black font-500" style="margin-right: auto;margin-bottom: 10px;">Datos del vehículo</h1>
+            <h1 *ngIf="fase==2" class="text-black font-500" style="margin-right: auto;margin-bottom: 10px;">Detalles del anuncio</h1>
+            <h1 *ngIf="fase==3" class="text-black font-500" style="margin-right: auto;margin-bottom: 10px;">Información de contacto</h1>
+            <!-- <h2 class="text-black font-500" style="margin-right: auto;">Datos del vehiculo</h2> -->
+<!--bloque 2-->
+
+<form [formGroup]="formDatosVehiculos">
+<div class="grid gc-2x-g gap-10" *ngIf="fase==1">
+ 
+    <div>   
+
+   
+
+        <div class="form-group">
+            <label>Tipo de vehículo</label>
+            <select class="select-square" formControlName="category"  [ngClass]="{ 'errorCampos': a.category.errors }" (change)="cargarTipo($event)" name="" id="">
+                <option value="" selected>  Selecciona tipo de vehículo </option>
+                <option value="Auto" >  Auto </option>
+                <option value="Moto" >  Moto </option>
+                <option value="truck" >  Camión </option>
+                <option value="MOBILE-HOME" >  Caravana </option>
+
+                
+ 
+            </select>
+        </div>
+
+      
+
+        <!-- <div class="form-group">
+            <label>Modelo </label>
+            <select class="select-square" formControlName="model_id" [ngClass]="{ 'errorCampos': a.model_id.errors }" name="" id="" >
+                 <option value="">Selecciona el modelo</option>
+                <option [value]="modelo.id" *ngFor="let modelo of modelos">  {{modelo.name}} </option>
+           
+ 
+            </select>
+        </div> -->
+        <div class="form-group">
+            <label>Modelo</label>
+            <select class="select-square"  [ngClass]="{ 'errorCampos': a.model_id.errors }" *ngIf="!is_camion && !is_caravana" formControlName="model_id"  name="" id="" >
+                <option value="" >  Selecciona el modelo</option>
+                <option [value]="modelo.id" *ngFor="let modelo of modelos">  {{modelo.name}} </option>
+           
+ 
+            </select>
+            <input type="text" [ngClass]="{ 'errorCampos': a.model_id.errors }" *ngIf="is_camion || is_caravana" class="input-square"  formControlName="model" >
+        </div>
+
+        <div class="form-group ">
+            <label>Código (Opcional)</label>
+            <input type="text" class="input-square" formControlName="code"  placeholder="Código">
+        </div>
+
+        <!-- <div class="form-group ">
+            <button class="btn color-rojo" (click)="[SelectImg()]"> SUBIR LOGO </button>
+
+            <div class="content-img">
+                <img [src]="user_imagen_show.img" *ngIf="user_imagen_show?.img" alt="">
+                <input type="file" id="img" (change)="[CargarImagen($event)]" style="display:none" accept="image/png, image/gif, image/jpeg">
+            </div>
+        </div> -->
+
+        
+    </div>
+
+    <div>
+        <div class="form-group">
+            <label>Marca</label>
+            <select class="select-square" formControlName="make_id" [ngClass]="{ 'errorCampos': a.make_id.errors }" name="" id="" (change)="obtenerModelo($event)">
+                <option value="">Selecciona la marca</option>
+                <option [value]="marca.id" *ngFor="let marca of marcas">  {{marca.name}} </option>
+           
+ 
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Fabricante</label>
+            <input type="text" class="input-square" formControlName="manufacturer" [ngClass]="{ 'errorCampos': a.manufacturer.errors }"  placeholder="Fabricante">
+        </div>
+        
+        <div class="form-group">
+            <label>Estado</label>
+            <select class="select-square" formControlName="condition" [ngClass]="{ 'errorCampos': a.condition.errors }"  name="" id="">
+                <option value="" >  Selecciona el estado del recambio </option>
+                <option value="new" >  Nuevo </option>
+                <option value="used" >  Usado </option>
+            </select>
+        </div>
+
+
+    </div>
+</div>
+</form>
+<form [formGroup]="formDetallesAnuncio">
+            <!--bloque 3-->
+            <h2  style="color: black;" *ngIf="fase==2">Contenido</h2>
+            <div class="grid  gap-10" *ngIf="fase==2">
+                <div>   
+                    <div class="form-group ">
+                        <label>Título</label><br>
+                        <input type="text" class="input-square" formControlName="title" [ngClass]="{ 'errorCampos': g.title.errors }" placeholder="Título">
+                    </div>
+                    <div class="form-group ">
+                        <label>Descripción</label>
+                        <textarea class="input-square" formControlName="description" [ngClass]="{ 'errorCampos': g.description.errors }"   placeholder="Escribir aquí"  name="" id="" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="form-group ">
+                        <label>Precio</label><br>
+
+
+                        <input type="text" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8" min="1" max="99999999" (keypress)="validateNo($event)" class="input-square" formControlName="price" [ngClass]="{ 'errorCampos': g.title.errors }"  placeholder="precio">
+
+                    </div>
+                    <div class="form-group " >
+                        
+                        <input type="checkbox" style="    vertical-align: bottom;" [checked]="g.price_contains_vat.value" class="input-square" formControlName="price_contains_vat"   placeholder="Precio">
+                        <label style="    margin-left: 10px;">IVA incluido</label>
+                    </div><br>
+                    <h2 style="color:black">Multimedia</h2>
+                    <br>
+                    <div class="form-group ">
+                        <label>Link youtube (opcional)</label><br>
+                        <input type="text" class="input-square" formControlName="youtube_link"   placeholder="Pegar link">
+                    </div>
+                        <div class="form-group ">
+                            <h6 class="color-rojo">Subir imágenes (3 mínimo)</h6>
+                            <button class="btn color-negro" (click)="SelectImg(img)" *ngIf="user_imagen_show.length < 30 "><i class="icon icon-upload"></i> SUBIR IMÁGENES </button>
+    <!--                         <button class="btn color-rojo" (click)="[SelectImg()]" *ngIf="!user_imagen_show?.img"><i class="icon icon-upload"></i> SUBIR IMAGENES </button>
+     -->
+                            <div class="content-img">
+                                <div class="img" *ngIf="thumbnail">
+                                    <i class="icon icon-trash" (click)="delete(thumbnail, 1)"></i>
+                                    <img [src]="'https://cdn.autosmotos.es/' + thumbnail" alt="">
+                                </div>
+                                <div class="img" *ngFor="let image of user_imagen_show2" >
+                                    <i class="icon icon-trash" (click)="delete(image, 2)"></i>
+                                    <img *ngIf="image.path" [src]=" 'https://cdn.autosmotos.es/' + image.path" alt="">
+                                </div>
+                                <div class="img" *ngFor="let image of user_imagen_show" >
+                                    <i class="icon icon-trash" (click)="delete(image)"></i>
+                                    <img *ngIf="image.img" [src]="image.img" alt="">
+                                </div>
+    <!--                        <i class="icon icon-trash papeleraFoto" style="color: red !important;" (click)="delete()" *ngIf="user_imagen_show?.img"></i>
+                                <img [src]="user_imagen_show.img" *ngIf="user_imagen_show?.img" alt="">
+                                <img [src]="user_imagen_show2" *ngIf="user_imagen_show2" alt=""> -->
+                                <input #img type="file" id="img" (change)="CargarImagen($event)" style="display:none" accept="image/png, image/gif, image/jpeg" multiple="multiple">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+</form>
+<form [formGroup]="formDetallesContacto">
+            <!--bloque 4-->
+
+            <div class="grid gc-2x-g gap-10" *ngIf="fase==3">
+                <div>   
+                    <div class="form-group ">
+                        <label>Nombre</label>
+                        <input type="text" class="input-square" formControlName="first_name"  [ngClass]="{ 'errorCampos': b.first_name.errors }"   placeholder="Nombre de contacto">
+                    </div>
+               
+    
+                    <div class="form-group ">
+                        <label>Dirección de correo</label>
+                        <input type="text" class="input-square" formControlName="email_address" [ngClass]="{ 'errorCampos': b.email_address.errors }"    placeholder="Direccion de correo">
+                    </div>
+    
+                    <div class="form-group ">
+                        <label>Número de Whatsapp</label>
+                        <input type="text" class="input-square" formControlName="whatsapp_number" (keydown)="SoloNumero($event)"  placeholder="Número de Whatsapp">
+                    </div>
+    
+                    <div class="form-group ">
+                        <label>Código postal</label>
+                        <input type="text" class="input-square" formControlName="zip_code" [ngClass]="{ 'errorCampos': b.zip_code.errors }"   placeholder="Código postal">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ciudad</label>
+                        <input type="text" class="input-square" formControlName="city" [ngClass]="{ 'errorCampos': b.city.errors }"   placeholder="Ciudad">
+                  
+                    </div>
+                
+
+                    <!-- <div class="form-group ">
+                        <button class="btn color-rojo" (click)="[SelectImg()]"> SUBIR LOGO </button>
+
+                        <div class="content-img">
+                            <img [src]="user_imagen_show.img" *ngIf="user_imagen_show?.img" alt="">
+                            <input type="file" id="img" (change)="[CargarImagen($event)]" style="display:none" accept="image/png, image/gif, image/jpeg">
+                        </div>
+                    </div> -->
+    
+                    
+                </div>
+    
+                <div>
+                    <div class="form-group ">
+                        <label>Apellido</label>
+                        <input type="text" class="input-square" formControlName="last_name" [ngClass]="{ 'errorCampos': b.last_name.errors }"    placeholder="Apellido">
+                    </div>
+    
+            
+    
+                    <div class="form-group ">
+                        <label>Número de Teléfono</label>
+                        <input type="text" class="input-square" formControlName="mobile_number" (keydown)="SoloNumero($event)" [ngClass]="{ 'errorCampos': b.mobile_number.errors }"   placeholder="Número de telefono">
+                    </div>
+
+                    <div class="form-group ">
+                        <label>Dirección</label>
+                        <input type="text" class="input-square" formControlName="address"  [ngClass]="{ 'errorCampos': b.address.errors }"   placeholder="Dirección">
+                    </div>
+
+                
+
+                    <div class="form-group">
+                        <label>País</label>
+                        
+                        <select class="select-square" formControlName="market_id" [ngClass]="{ 'errorCampos': b.market_id.errors }"   name="" id="" >
+                            <option value="" selected>Selecciona tu ciudad</option>
+                            <option [value]="marke.id"  *ngFor="let marke of market">  {{marke.nombre}} </option>
+              
+                        </select>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </form>
+
+
+
+        </div>
+
+        <h4 *ngIf="error == 1" class="text-center color-rojo">Complete todos los campos.</h4>
+        <h4 *ngIf="error == 2" class="text-center color-rojo">Ha ocurrido un error.</h4>
+        <h4 *ngIf="error == 3" class="text-center color-rojo">Debe subir al menos 3 imágenes</h4>
+    
+        <div class="footer espacioBoton" style="display: flex;padding-right: 68px;">
+    
+            <button *ngIf="fase == 1" 
+                    [class]="formDatosVehiculos.valid ? 'btn-primary justify-self-center' : 'btn-primary disable' " 
+                    [attr.disabled]="formDatosVehiculos.valid ? null : '' " 
+                    style="margin-left: auto;" 
+                    (click)="guardarPaso1('2')" >
+                    CONTINUAR 
+                    <span *ngIf="loading" class="icon icon-refresh loader"></span>
+            </button>
+    
+            <button *ngIf="fase == 2" class="btn-primary justify-self-center" (click)="cambiofase('1')" >ANTERIOR </button>
+            <button *ngIf="fase == 2" 
+                    [class]="formDetallesAnuncio.valid ? 'btn-primary justify-self-center' : 'btn-primary disable' " 
+                    [attr.disabled]="formDetallesAnuncio.valid ? null : '' " 
+                    class="btn-primary justify-self-center" 
+                    (click)="guardarPaso2('3')"  
+                    style="margin-left: auto;"> 
+                    CONTINUAR 
+                    <span *ngIf="loading" class="icon icon-refresh loader"></span>
+            </button>
+
+    
+    
+            <!-- <button *ngIf="fase == 3" class="btn-primary justify-self-center" (click)="fase(3)" >SIGUIENTE <span *ngIf="loading" class="icon icon-refresh loader"></span> </button> -->
+            <button *ngIf="fase == 3" class="btn-primary justify-self-center" (click)="cambiofase('2')" >ANTERIOR  </button>
+            <button *ngIf="fase == 3"  class="btn-primary justify-self-center" (click)="guardarPaso3()" style="margin-left: auto;" >{{editar ? 'GUARDAR CAMBIOS' : 'PUBLICAR ANUNCIO'}} <span *ngIf="loading" class="icon icon-refresh loader"></span> </button> 
+    
+    
+        </div>
+
+    </div>
+
+    
+
+  
+
+</div>

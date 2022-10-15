@@ -1,0 +1,85 @@
+@import "/src/assets/theme/variables";
+
+.temp-deseo{
+    min-height: 100%;
+    display: grid;
+    grid-template: 
+        "section_header"  110px
+        "section-content" auto/
+        100%;
+    grid-gap: 10px;
+    padding:40px 25px;
+}
+
+.section_header{
+    display: grid;
+    grid-area:section_header; 
+    grid-gap: 20px;
+    justify-content: start;
+    .section-top{
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        grid-gap: 10px;
+
+        h1{
+            font-weight: 600;
+            color: black;
+            font-size: 22px;
+        }
+    }
+    
+}
+
+.section-content{
+    display: grid;
+    grid-area:section-content; 
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: flex-start;
+    align-content: flex-start;
+    gap: 20px;
+}
+
+
+.card-carousel-top-img button.btn{
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 20px;
+    color: black;
+    font-weight: 500;
+}
+
+.btn-bookmark{
+    padding: 5px !important;
+
+    &-primary{
+        @extend .btn-bookmark;
+        background: $rojo !important;
+        color: white !important;
+    }
+}
+.btn-bookmark span{
+    font-size: 18px;
+}
+
+button, a{
+    cursor: pointer !important;
+}
+
+
+.section-menu{
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+
+    button{
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .active{
+        color: $rojo;
+        text-decoration: underline;
+        font-weight: 600;
+    }
+}

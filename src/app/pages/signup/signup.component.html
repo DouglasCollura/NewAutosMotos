@@ -1,0 +1,115 @@
+<div class="temp-signup" *ngIf="!display_reg">
+    
+    <img class="align-self-end" src="../../../assets/img/logo.svg" alt="">
+    
+
+    <div class="content-cards">
+        
+        <div class="card-signup">
+            <h1 class="text-black font-600">Conviértete en Vendedor ocasional</h1>
+            <h3>Esta cuenta es para ti, si quieres vender tu auto usado, algún recambio. O quieres vender de forma ocasional.</h3>
+            <button class="btn-primary btn-block" (click)="OpenOcasional()" > REGISTRARSE</button>
+        </div>
+
+        <div class="card-signup">
+            <h1 class="text-black font-600">Conviértete en Vendedor profesional</h1>
+            <h3>Esta cuenta es para ti, si tienes una agencia, un taller, o te dedicas a la venta de vehículos o de recambios.</h3>
+
+            <button class="btn-primary btn-block" routerLink="../signup_pro" > REGISTRARSE</button>
+        </div>
+
+    </div>
+</div>
+
+<div class="temp-reg" *ngIf="display_reg">
+    
+    <div class="header">
+        <img src="../../../assets/img/logo.svg" alt="">
+        <h1 class="text-black">Registrate como Vendedor ocasional</h1>
+    </div>
+
+    <div class="content-form">
+        <div class="form-group ">
+            <input type="text" class="input-square" [(ngModel)]="usuario.first_name" placeholder="Nombre">
+        </div>
+
+        <div class="form-group ">
+            <input type="text" class="input-square" [(ngModel)]="usuario.last_name" placeholder="Apellido">
+        </div>
+
+        <div class="form-group ">
+            <input type="text" class="input-square" [(ngModel)]="usuario.email" placeholder="Email">
+        </div>
+
+        <div class="form-group ">
+            <input type="text"
+                class="input-square"
+                placeholder="Teléfono"
+                [(ngModel)]="usuario.mobile_number"
+                (keydown)="SoloNumero($event)" 
+                maxlength="14"
+            >
+        </div>
+
+        <div class="form-group ">
+            <input type="text"
+                class="input-square"
+                placeholder="Número de Whatsapp"
+                [(ngModel)]="usuario.whatsapp_number"
+                (keydown)="SoloNumero($event)" 
+                maxlength="14"
+            >
+        </div>
+
+        <div class="form-group">
+            <div class="group-input-icon-right">
+                <span class="icon" [ngClass]="viewPass?'icon-eye':'icon-eye-off'" (click)="tooglePass(true)" ></span>
+                <label for="">Contraseña</label>
+                <input 
+                    [type]="viewPass ? 'text' : 'password'"
+                    [placeholder]="'Contraseña'"
+                    class="input-square"
+                    [(ngModel)]="usuario.password"
+                    maxlength="25"
+                >
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="group-input-icon-right">
+                <span class="icon" [ngClass]="viewRePass?'icon-eye':'icon-eye-off'" (click)="tooglePass(false)" ></span>
+                <label for="">Repetir contraseña</label>
+                <input 
+                    [type]="viewRePass ? 'text' : 'password'"
+                    placeholder="Repetir contraseña"
+                    class="input-square"
+                    [(ngModel)]="usuario.password_confirmation"
+                    maxlength="25"
+                >
+            </div>
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" name="term" [(ngModel)]="acc_term" >
+            <label for="term">Acepto las <a class="links" routerLink="../terminos" target="_blank" > condiciones de uso</a> y las <a class="links" target="_blank"routerLink="../politicas" >políticas de privacidad</a></label>
+        </div>
+        
+    </div>
+
+    <div class="grid gap-10 justify-items-center" style="width: 100%;">
+
+        <h4 *ngIf="error == 1" class="text-center color-rojo">Complete todos los campos.</h4>
+        <h4 *ngIf="error == 2" class="text-center color-rojo">Las contraseñas no coinciden.</h4>
+        <h4 *ngIf="error == 3" class="text-center color-rojo">La contraseña es menor de 8 caracteres.</h4>
+        <h4 *ngIf="error == 4" class="text-center color-rojo">Ha ocurrido un error.</h4>
+        <h4 *ngIf="error == 5" class="text-center color-rojo">El formato del correo es incorrecto.</h4>
+        <h4 *ngIf="error == 6" class="text-center color-rojo">Este correo ya está registrado, intente otro.</h4>
+
+        <button class=" btn-block" [class]="CanSignUp()?'btn-primary':'btn-disable'" (click)="SignUp()"> CREAR CUENTA <span *ngIf="loading" class="icon icon-refresh loader"></span></button>
+
+        <div class="footer-session">
+           <p>¿Ya tienes cuenta? </p> <button class="btn" routerLink="/login" > Inicia sesión </button>
+        </div>
+    </div>
+
+</div>

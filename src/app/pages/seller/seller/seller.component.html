@@ -1,0 +1,137 @@
+<div class="temp">
+    <div style="width: 100%;overflow: hidden;z-index: 0;">
+        <div class="headBoxInfo">
+            <h2>Últimos anuncios publicados</h2>
+            <a class="btnInfoHead" (click)="modalOpen()"><span>nuevo anuncio</span></a>
+        </div>
+        <owl-carousel-o [options]="customOptions" *ngIf="anuncios.length > 0; else NoAnuncios"   style="background-color: #fff;">
+            <ng-template carouselSlide *ngFor="let item of anuncios" style="background-color: #fff;">
+                <div>
+                    <div class="cardBox">
+                        <div class="headCard" 
+                            style="background-image: url('../../../../assets/img/Autos/auto1.jpg'); 
+                            background-size: cover; 
+                            background-position: center;">
+                            <div class="optionsCardHead">
+                                <a href="" class="optionCircle">
+                                    <img src="../../../../assets/iconos/icons-card/pencil.svg"/>
+                                </a>
+                                <a href="" class="optionCircle">
+                                    <img src="../../../../assets/iconos/icons-card/trash.svg"/>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bodyCard">
+                            <h2 class="titleCard">{{subString(item.title)}}</h2>
+                            <h3><span>Año: 2022</span> <span class="km">Km: {{item.auto_ad.mileage}}</span></h3>
+                            <h4>{{item.auto_ad.price}}</h4>
+                            <a class="btnCard">Promocionar</a>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>  
+        </owl-carousel-o>
+        <ng-template #NoAnuncios>
+            <h3 style="font-size: 18px;margin: 60px auto;display: block;text-align: center;">No tienes anuncios publicados</h3>
+        </ng-template>
+    </div>
+    <div style="width: 100%;overflow: hidden;">
+        <div class="headBoxInfo">
+            <h2>Últimas reseñas</h2>
+            <a routerLink="resenas" class="btnInfoHeadMore"><span>ver todas</span></a>
+        </div>
+        <owl-carousel-o [options]="customOptionsresena" [options]="customOptions" *ngIf="resenas.length > 0; else NoResenas" style="width:100%;background-color: #fff;display: inline-block;margin-left: 20px;">
+            <ng-template carouselSlide *ngFor="let item of [1,2,3,4,5,6,7,8]" style="background-color: #fff;">
+                <div>
+                    <div class="cardBoxResena">
+                        <div class="headCard">
+                            <h2>Nombre</h2>
+                            <h3>Hora</h3>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum eu lacus purus morbi. Velit urna, sed urna id turpis gravida. </p>
+                        <div class="footCard">
+                            <h4>Valoró con <span>5.0 <img src="../../../../assets/iconos/icons-card/star-red.svg"></span></h4>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>  
+        </owl-carousel-o>
+        <ng-template #NoResenas>
+            <h3 style="font-size: 18px;margin: 60px auto;display: block;text-align: center;">No tienes reseñas aún</h3>
+        </ng-template>
+    </div>
+    <div style="width: 100%;overflow: hidden;margin-top: 30px;">
+        <div class="headBoxInfo">
+            <div>
+                <h2>Mis anuncios en la página</h2>
+                <p>Aquí puedes visualizar como los usuarios ven tus anuncios en la página</p>
+            </div>
+        </div>
+        <owl-carousel-o [options]="customOptions"  style="background-color: #fff;" *ngIf="anuncios.length > 0; else NoAnuncios"> 
+            <ng-template carouselSlide *ngFor="let item of anuncios" style="background-color: #fff;">
+                <div>
+                    <div class="cardBoxLarge">
+                        <div class="headCard" 
+                            style="background-image: url('../../../../assets/img/Autos/auto1.jpg'); 
+                            background-size: cover; 
+                            background-position: center;">
+                            <div class="optionsCardHead">
+                                <a href="" class="optionCircle">
+                                    <span _ngcontent-ygx-c63="" class="icon-bookmark text-black"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bodyCard">
+                            <h2 class="titleCard">{{subString(item.title)}}</h2>
+                            <div class="line">
+                                <div class="col-line">
+                                    <h3><span>Marca: {{item.auto_ad?.make?.name}}</span></h3>
+                                </div>
+                                <div class="col-line">
+                                    <h3><span>Modelo: {{item.auto_ad?.model?.name}}</span></h3>
+                                </div>
+                            </div>
+                            <div class="line">
+                                <div class="col-line">
+                                    <h3><span>Carrocería: {{ item.auto_ad?.body_type?.external_name }}</span></h3>
+                                </div>
+                                <div class="col-line">
+                                    <h3><span>Año: {{item.auto_ad?.first_registration_year}}</span></h3>
+                                </div>
+                            </div>
+                            <div class="line">
+                                <div class="col-line">
+                                    <h3><span>KM:</span></h3>
+                                </div>
+                                <div class="col-line">
+                                    <h3><span>Diesel: {{item.auto_ad?.fuel_type.external_name}}</span></h3>
+                                </div>
+                            </div>
+                            <div class="line">
+                                <div class="col-line">
+                                    <h3><span>Caja manual: {{item.auto_ad.transmission_type.external_name}} </span></h3>
+                                </div>
+                            </div>
+                            <h4>{{item.auto_ad?.price}}</h4>
+                            <div class="line">
+                                <div class="col-line justify">
+                                    <a class="btn-circle">
+                                        <img src="../../../../assets/iconos/icons-card/btn-whatsapp.svg"/>
+                                    </a>
+                                    <a class="btn-circle">
+                                        <img src="../../../../assets/iconos/icons-card/btn-llamar.svg"/>
+                                    </a>
+                                </div>
+                                <div class="col-line noflex">
+                                    <p>Vendedor</p>
+                                    <span class="point">5.0 <img src="../../../../assets/iconos/icons-card/star-red.svg"/></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>  
+        </owl-carousel-o>
+    </div>
+</div>
+

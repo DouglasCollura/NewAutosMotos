@@ -1,0 +1,196 @@
+<div class="temp-main-comprador">
+    
+    <div class="section-nav"  *ngIf="!mobile" >
+       
+        <div class="section-nav-left">
+            <img src="../../../../assets/img/logo.svg"routerLink="/" alt="">
+
+            <div class="group-input-icon-left">
+                <span class="icon-search small"></span>
+                <!-- <input type="text" id="place-google" placeholder="Busca cursos o programas" class="input-circle"> -->
+                <input class="input-circle" (keydown.enter)="GoTo('compra?search='+search)" [(ngModel)]="search" placeholder="Buscar" />
+            </div>
+        </div>
+
+        <div class="section-nav-right">
+            
+            <button class="btn  color-rojo" routerLink="deseos" > <span class="icon icon-bookmark"></span> </button>
+            
+            <button  *ngIf="!user" routerLink="landing" class="btn btn-secondary font-600">SOY VENDEDOR</button>
+
+            <div class="user" *ngIf="user?.image" >
+                <div class="content" (click)="main = !main">
+                    <div class="cont-img">
+                        <img src="https://cdn.autosmotos.es/{{user.image}}" *ngIf="user.image" alt="">
+                    </div>
+                    <button class="options"> <span class="icon icon-cheveron-down"></span> </button>
+                </div>
+
+                <div class="main-float" *ngIf="main">
+                    <ul>
+                        <li>
+                            <a routerLink="seller">Mi panel</a>
+                        </li>
+                        <!-- <li>
+                            <a href="">Historial de pagos</a>
+                        </li> -->
+                        <li>
+                            <a (click)="logout()">Cerrar sesión</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <nav class="align-self-end nav-main">
+            <ul>    
+                <li class="drop-container">
+                    Buscar vehículos 
+                    <span class="icon-cheveron-down small"></span>
+                    <div class="drop-content">
+                        <span></span>
+                        <div>
+                            <button class="btn" (click)="GoTo('compra?type=auto')">Autos</button>
+                            <button class="btn" (click)="GoTo('compra?type=moto')">Motos</button>
+                            <button class="btn" (click)="GoTo('compra?type=mobile-home')">Caravanas</button>
+                            <button class="btn" (click)="GoTo('compra?type=truck')">Camiones</button>
+                        </div>
+
+                    </div>
+                </li>
+                <li routerLink="alquiler">Alquilar vehículos</li>
+                <li routerLink="talleres" >Talleres</li>
+                <li routerLink="recambio">Recambios</li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <div class="section-nav-mobile" *ngIf="mobile">
+
+        <div class="nav">
+            <button class="btn" (click)="menu = !menu"  [class]="menu?'color-rojo':''" > <span class="icon icon-menu-alt-1"></span> </button>
+            <button class="btn  color-rojo" routerLink="deseos" > <span class="icon icon-bookmark"></span> </button>
+        </div>
+
+        <div class=" section-search">
+            <div class="group-input-icon-left" >
+                <span class="icon-search small"></span>
+                <input class="input-circle" (keydown.enter)="GoTo('compra?search='+search)" [(ngModel)]="search" placeholder="Buscar" />
+            </div>
+        </div>
+
+
+        <div class="menu" *ngIf="menu">
+            <button class="btn color-rojo inicio" (click)="menu = !menu" routerLink="" >Inicio</button>
+
+            <div class="section">
+                <button (click)="dropDown(1)" class="btn">Buscar vehículos <span class="icon icon-cheveron-down"></span></button>
+
+                <div class="dropdown" id="1">
+                    <button class="btn" (click)="GoTo('compra?type=auto')">Autos</button>
+                    <button class="btn" (click)="GoTo('compra?type=moto')">Motos</button>
+                    <button class="btn" (click)="GoTo('compra?type=mobile-home')">Caravanas</button>
+                    <button class="btn" (click)="GoTo('compra?type=truck')">Camiones</button>
+                </div>
+            </div>
+
+            <button class="btn" (click)="menu = !menu" routerLink="alquiler">Alquiler de vehículos</button>
+            <button class="btn" (click)="menu = !menu" routerLink="talleres">Talleres </button>
+            <button class="btn" (click)="menu = !menu" routerLink="recambio">Recambios </button>
+            
+
+            <div class="section-user">
+                <button  *ngIf="!user" routerLink="landing" class="btn btn-secondary font-600">SOY VENDEDOR</button>
+                <div class="user" *ngIf="user?.image" >
+                    <div class="content" (click)="main = !main">
+                        <div class="cont-img">
+                            <img src="https://cdn.autosmotos.es/{{user.image}}" *ngIf="user.image" alt="">
+                        </div>
+                        <button class="options"> <span class="icon icon-cheveron-down"></span> </button>
+                    </div>
+    
+                    <div class="main-float" *ngIf="main">
+                        <ul>
+                            <li>
+                                <a routerLink="seller">Mi tienda</a>
+                            </li>
+                            <!-- <li>
+                                <a href="">Historial de pagos</a>
+                            </li> -->
+                            <li>
+                                <a (click)="logout()">Cerrar sesión</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="section-main">
+        <router-outlet></router-outlet>
+    </div>
+
+    <div class="footer">
+        
+        <div class="section-mid">
+            <div class="grid align-items-center justify-items-center">
+                <img src="../../../assets/img/logo-white.svg" alt="">
+            </div>
+
+            <div class="grid justify-items-center align-content-center gap-10">
+                <div class="form-icon">
+                    <span class="icon "> <img src="../../../assets/img/icon-wts.png" alt=""> </span>
+                    <h2>+34 600 299 505</h2>
+                </div>
+
+                <div class="form-icon">
+                    <span class="icon "> <img src="../../../assets/img/icon-phone.png" alt=""> </span>
+                    <h2>+34 600 299 505</h2>
+                </div>
+
+                <div class="form-icon">
+                    <span class="icon icon-mail" style="font-size: 24px;">  </span>
+                    <h2>info@autosmotos.es</h2>
+                </div>
+            </div>
+
+            <div class="grid align-content-center gap-10">
+                <h2>Síguenos en:</h2>
+
+                <div class="form-icon">
+                    <a href="https://www.instagram.com/autosmotos.es/" target="_blank" class="foot-link">
+                        <span class="icon "> <img src="../../../assets/img/instagram-white.png" alt=""> </span>
+                        autosmotos.es
+                    </a>
+                </div>
+
+                <div class="form-icon">
+                    <a href="https://www.facebook.com/autosmotos.es" target="_blank" class="foot-link">
+                        <span class="icon "> <img src="../../../assets/img/facebook-white.png" alt=""> </span>
+                        autosmotos.es
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-bottom">
+            <h4>©Copyright 2022 AutosMotos</h4>
+
+            <div class="section-bottom-right">
+                <a routerLink="cookies" target="_blank" >Política de cookies</a>
+                <a routerLink="politicas" target="_blank">Política de privacidad</a>
+                <a routerLink="terminos" target="_blank" > Términos y condiciones</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<app-comparar></app-comparar>
+<!-- <app-landing></app-landing> -->

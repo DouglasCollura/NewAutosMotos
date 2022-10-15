@@ -1,0 +1,47 @@
+{
+    "lang":"es",
+
+    "layout":{
+        
+        "head":{
+
+            "ph_input":"Buscar",
+            "btn_login":"SOY VENDEDOR",
+            "user_menu":{
+                "panel":"Mi panel",
+                "logout":"Cerrar sesión"
+            },
+
+            "vehiculos":{
+                "title":"Comprar vehículos",
+                "auto":"Autos",
+                "moto":"Motos",
+                "caravana":"Caravanas",
+                "camion":"Camiones"
+            },
+            "alquiler":"Alquilar vehículos",
+            "taller":"Talleres",
+            "recambio":"Recambios"
+        },
+
+        "footer":{
+            "redes":"Síguenos en",
+            "cookies":"Política de cookies",
+            "privacidad":"Política de privacidad",
+            "terminos":"Términos y condiciones"
+        }
+
+    },
+
+    "layout_seller":{
+        "inicio":"Inicio",
+        "tienda":"Tienda",
+        "crear":"NUEVO ANUNCIO",
+        "panel":"Panel de promociones",
+        "perfil":"Mi perfil"
+    },
+
+    "buyer":{
+
+    }
+}

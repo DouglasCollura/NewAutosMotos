@@ -1,0 +1,38 @@
+<div class="info">
+    <div class="centerInfo">
+        <div class="row between">
+            <p class="greenHead">¡Planilla descargada!</p>
+            <a routerLink="/seller/tienda">volver a tienda</a>
+        </div>
+        <div class="row">
+            <h2>Ya puedes empezar a completar la planilla</h2>
+        </div>
+        <div class="boxWhite">
+            <ul>
+                <li><span></span> El archivo Planilla.csv ya está en tu computadora.</li>
+                <!-- <li><span></span> Podrás crear hasta xx.xxx publicaciones por día</li> -->
+            </ul>
+            <h3>¿La descarga no comenzó automáticamente? <a (click)="download()">Vuelve a intentarlo</a></h3>
+            <h3>¿No tienes Microsoft excel? <a target="_blank" href="https://www.microsoft.com/es-co/microsoft-365">Descargalo aquí</a></h3>
+        </div>
+        <div class="row">
+            <button class="btnLarge" (click)="upload.click()">
+                <svg width="53" height="53" viewBox="0 0 53 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="26.5" cy="26.5" r="26.5" fill="#CECECE"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5 34.5C16.5 36.1569 17.8431 37.5 19.5 37.5L34.5 37.5C36.1569 37.5 37.5 36.1569 37.5 34.5L37.5 33C37.5 32.1716 38.1716 31.5 39 31.5C39.8284 31.5 40.5 32.1716 40.5 33L40.5 34.5C40.5 37.8137 37.8137 40.5 34.5 40.5L19.5 40.5C16.1863 40.5 13.5 37.8137 13.5 34.5L13.5 33C13.5 32.1716 14.1716 31.5 15 31.5C15.8284 31.5 16.5 32.1716 16.5 33L16.5 34.5ZM19.9393 22.0607C19.3536 21.4749 19.3536 20.5251 19.9393 19.9393L25.9393 13.9393C26.2206 13.658 26.6022 13.5 27 13.5C27.3978 13.5 27.7794 13.658 28.0607 13.9393L34.0607 19.9393C34.6464 20.5251 34.6464 21.4749 34.0607 22.0607C33.4749 22.6464 32.5251 22.6464 31.9393 22.0607L28.5 18.6213L28.5 33C28.5 33.8284 27.8284 34.5 27 34.5C26.1716 34.5 25.5 33.8284 25.5 33L25.5 18.6213L22.0607 22.0607C21.4749 22.6464 20.5251 22.6464 19.9393 22.0607Z" fill="#1C1C1C"/>
+                </svg>
+                    
+                <span>{{name}}</span>
+            </button>
+            <input type="file" hidden="true" #upload (change)="ChangeFile($event)">
+        </div>
+
+        <div class="row">
+            <button class="btnRed" (click)="sendFile()" [disabled]="fileToUpload == null">
+                <span *ngIf="!isLoading">Enviar planilla</span>
+                <span *ngIf="isLoading" class="loader"></span>
+            </button>
+        </div>
+
+    </div>
+</div>

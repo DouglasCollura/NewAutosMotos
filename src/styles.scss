@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+.between{
+    justify-content: space-between;
+}
+
+.redVolver{
+    margin-left: auto;
+    margin-bottom: 20px;
+    color: red;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.hrNumber{
+    transform: rotate(89deg);
+    height: 38px;
+    position: relative;
+    top: -5px;
+ 
+}
+.fasesGoup{
+    margin-right: auto;
+    margin-left: 55px;
+}
+
+.espacioBoton{
+    width: 100%;
+    padding-left: 68px;
+}
+
+.hrNumber2 {
+    transform: rotate(89deg);
+    height: 25px;
+    position: relative;
+    top: 1px;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.fasesGoup2 {
+    margin-right: auto;
+    /* margin-left: 55px; */
+}
+
+.papeleraFoto{
+    margin-left: 130px;
+    margin-top: 5px;
+    position: absolute;
+    font-size: 15px;
+    color: red !important;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+// @import "~swiper/swiper-bundle";

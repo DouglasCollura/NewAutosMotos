@@ -1,0 +1,182 @@
+<div class="temp">
+    <div class="row" style="margin-top: 50px;">
+        <div class="informationHead">
+            <div class="row"><h2>{{plan?.name}}</h2></div>
+            <div class="row" style="justify-content: center;">
+                <div class="cardInfo2">
+                    <h3>Anuncios promocionados</h3>
+                    <h4>{{info.promoted_ads?.total}}</h4>
+                </div>
+                <div class="cardInfo2">
+                    <h3>Anuncios restantes</h3>
+                    <h4>{{info.vehicle_ads?.total}}</h4>
+                </div>
+                <div class="cardInfo2">
+                    <h3>Anuncios en primera página</h3>
+                    <h4>{{info.front_page_promotion?.total}}</h4>
+                </div>
+                <div class="cardInfo2">
+                    <h3>Anuncios de recambios restantes</h3>
+                    <h4>{{info.shop_ads?.total}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Anuncios promocionados -->
+    <div>
+        <div class=" headBoxInfo">
+            <h2>Anuncios promocionados</h2>
+        </div>
+
+        <!-- ULTIMOS ANUNCIOS PUBLICADOS -->
+        <div style="width: 100%;overflow: hidden;z-index: 0;">
+            <swiper [config]="config" *ngIf="anunciosPromo.length > 0 && !loading1">
+                <ng-template swiperSlide style="width: 300px!important;" *ngFor="let item of anunciosPromo">
+                    <div class="cardBox">
+                        <div class="headCard" >
+                            <img [src]="'https://cdn.autosmotos.es/'+item.thumbnail" (error)="onImgError($event)" alt="">
+                            <div class="optionsCardHead">
+                                <a routerLink="/seller/anuncio/{{item.id}}" class="optionCircle">
+                                    <img src="../../../../assets/iconos/icons-card/pencil.svg"/>
+                                </a>
+                                <a (click)="confirmdeleted(item.id, 1)" class="optionCircle">
+                                    <img src="../../../../assets/iconos/icons-card/trash.svg"/>
+                                </a>
+                            </div>
+                            <span class="statusprod" *ngIf="item.status == 0">Aprobación pendiente</span>
+                        </div>
+                        <div class="bodyCard">
+                            <h2 class="titleCard">{{subString(item.title)}}</h2>
+                            <h3><span>Año: {{item.auto_ad?.first_registration_year}}</span> <span class="km">Km: {{item.auto_ad?.mileage}}</span></h3>
+                            <h4>{{item.auto_ad?.price}} €</h4>
+                            <a class="btnCard" (click)="deletePromo(1, item.id, 1)">Dejar dePromocionar</a>
+                        </div>
+                    </div>
+                </ng-template>
+            </swiper>
+            <div *ngIf="loading1 == false && anunciosPromo.length == 0">
+                <h3 style="font-size: 18px;margin: 60px auto;display: block;text-align: center;">No tienes anuncios publicados</h3>
+            </div>
+            <div class="load" style="margin:0px auto" *ngIf="loading1"><div class="pointer"></div></div>
+        </div>
+    </div>
+    <!-- Anuncios promocionados en primera página -->
+    <div>
+        <div class=" headBoxInfo">
+            <h2>Anuncios promocionados en primera página</h2>
+        </div>
+
+        <!-- ULTIMOS ANUNCIOS PUBLICADOS -->
+        <div style="width: 100%;overflow: hidden;z-index: 0;">
+            <swiper [config]="config" *ngIf="anunciosPage.length > 0 && !loading2">
+                <ng-template swiperSlide style="width: 300px!important;" *ngFor="let item of anunciosPage">
+                    <div class="cardBox">
+                        <div class="headCard" >
+                            <img [src]="'https://cdn.autosmotos.es/'+item.thumbnail" (error)="onImgError($event)" alt="">
+                            <div class="optionsCardHead">
+                                <a routerLink="/seller/anuncio/{{item.id}}" class="optionCircle">
+                                    <img src="../../../../assets/iconos/icons-card/pencil.svg"/>
+                                </a>
+                                <a (click)="confirmdeleted(item.id, 1)" class="optionCircle">
+                                    <img src="../../../../assets/iconos/icons-card/trash.svg"/>
+                                </a>
+                            </div>
+                            <span class="statusprod" *ngIf="item.status == 0">Aprobación pendiente</span>
+                        </div>
+                        <div class="bodyCard">
+                            <h2 class="titleCard">{{subString(item.title)}}</h2>
+                            <h3><span>Año: {{item.auto_ad?.first_registration_year}}</span> <span class="km">Km: {{item.auto_ad?.mileage}}</span></h3>
+                            <h4>{{item.auto_ad?.price}} €</h4>
+                            <a class="btnCard" (click)="deletePromo(2, item.id, 2)">Dejar dePromocionar</a>
+                        </div>
+                    </div>
+                </ng-template>
+            </swiper>
+            <div *ngIf="loading2 == false && anunciosPage.length == 0">
+                <h3 style="font-size: 18px;margin: 60px auto;display: block;text-align: center;">No tienes anuncios publicados</h3>
+            </div>
+            <div class="load" style="margin:0px auto" *ngIf="loading2"><div class="pointer"></div></div>
+        </div>
+    </div>
+
+    <!-- Servicios promocionados-->
+    <div>
+        <div class=" headBoxInfo">
+            <h2>Servicios promocionados</h2>
+        </div>
+        <div style="width: 100%;overflow: hidden;z-index: 0;">
+            <swiper [config]="config3"  *ngIf="serviciosPromo.length > 0  && !loading3">
+                <ng-template swiperSlide style="width: 300px!important;" *ngFor="let item of serviciosPromo">
+                    <div class="cardService" >
+                        <div class="cardImage">
+                            <img *ngIf="item.thumbnail != ''" src="https://cdn.autosmotos.es/{{item.thumbnail}}" alt="thumnail-{{item.id}}">
+
+                            <img *ngIf="item.thumbnail == ''" src="../../../../assets/img/logo.svg" alt="thumnail-{{item.id}}">
+                        </div>
+                        <div class="cardInfo">
+                            <div class="rowSm">
+                                <h3>{{item.title}}</h3>
+                                <div class="boxIcons">
+                                    <a routerLink="/seller/anuncio/{{item.id}}"><img src="../../../../assets/iconos/icons-card/pencil.svg" alt="" /></a>
+                                    <a (click)="confirmdeleted(item.id, 4)"><img src="../../../../assets/iconos/icons-card/trash.svg" alt="" /></a>
+                                </div>
+                            </div>
+                            <div class="rowSm">
+                                <p>{{item?.rental_ad?.address}}</p>
+                            </div>
+                            <div class="rowSm">
+                                <button class="cardBotton" (click)="deletePromo(1, item.id, 3)">dejar de promocionar</button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </swiper>
+            <div *ngIf="loading3 == false && serviciosPromo.length == 0">
+                <h3 style="font-size: 18px;margin: 60px auto;display: block;text-align: center;">No tienes anuncios publicados</h3>
+            </div>
+            <div class="load" style="margin:0px auto" *ngIf="loading3"><div class="pointer"></div></div>
+        </div>
+    </div>
+
+    <!-- Servicios promocionados en primera pagina -->
+    <div>
+        <div class=" headBoxInfo">
+            <h2>Servicios promocionados en primera página</h2>
+        </div>
+        <div style="width: 100%;overflow: hidden;z-index: 0;">
+            <swiper [config]="config3"  *ngIf="serviciosPage.length > 0  && !loading4">
+                <ng-template swiperSlide style="width: 300px!important;" *ngFor="let item of serviciosPage">
+                    <div class="cardService" >
+                        <div class="cardImage">
+                            <img *ngIf="item.thumbnail != ''" src="https://cdn.autosmotos.es/{{item.thumbnail}}" alt="thumnail-{{item.id}}">
+
+                            <img *ngIf="item.thumbnail == ''" src="../../../../assets/img/logo.svg" alt="thumnail-{{item.id}}">
+                        </div>
+                        <div class="cardInfo">
+                            <div class="rowSm">
+                                <h3>{{item.title}}</h3>
+                                <div class="boxIcons">
+                                    <a routerLink="/seller/anuncio/{{item.id}}"><img src="../../../../assets/iconos/icons-card/pencil.svg" alt="" /></a>
+                                    <a (click)="confirmdeleted(item.id, 4)"><img src="../../../../assets/iconos/icons-card/trash.svg" alt="" /></a>
+                                </div>
+                            </div>
+                            <div class="rowSm">
+                                <p>{{item?.rental_ad?.address}}</p>
+                            </div>
+                            <div class="rowSm">
+                                <button class="cardBotton" (click)="deletePromo(2, item.id, 4)">dejar de promocionar</button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </swiper>
+            <div *ngIf="loading4 == false && serviciosPage.length == 0">
+                <h3 style="font-size: 18px;margin: 60px auto;display: block;text-align: center;">No tienes anuncios publicados</h3>
+            </div>
+            <div class="load" style="margin:0px auto" *ngIf="loading4"><div class="pointer"></div></div>
+        </div>
+    </div>
+</div>
+
+<app-modal-confirmation-promo (success)="confirmDeletePromo()"></app-modal-confirmation-promo>

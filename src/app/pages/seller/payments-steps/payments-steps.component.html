@@ -1,0 +1,16 @@
+
+<!-- procesos de pasos a paso para procesar el pago de un paquete o plan -->
+
+
+<!-- paso 1 rellenar formulario de datos de facturacion -->
+
+
+<app-step-one (emitOne)="emitReceipOne($event)"></app-step-one>
+
+<!-- paso 2 seleccionar tipo de pago -->
+<app-step-two (emitTwo)="emitReceipTwo($event)"></app-step-two>
+
+<!-- paso 3 realizar pago segun el tipo -->
+<app-step-three (emitThree)="emitReceipOne($event)" *ngIf="three"></app-step-three>
+
+<app-modals-success></app-modals-success>

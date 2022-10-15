@@ -1,0 +1,12 @@
+<div class="over" *ngIf="modal" (click)="close()"></div>
+
+<div class="modalSM" *ngIf="modal">
+    <a (click)="close()"><img src="../../../assets/iconos/close-modal.svg"/></a>
+
+    <div class="boxBottns">
+        <h2>¿Quieres actualizar tu plan de anuncios?</h2>
+        <p>El cambio de plan se aplicará al iniciar el siguiente mes. </p>
+        <button (click)="aceptar()">Continuar</button>
+        <button (click)="close()" class="nbgbtn"><span>Cancelar</span></button>
+    </div>
+</div>

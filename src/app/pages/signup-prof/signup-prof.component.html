@@ -1,0 +1,276 @@
+<div class="temp-signup">
+
+    <div class="content">
+        <img src="../../../assets/img/logo.svg" alt="">
+
+        <div class="group-fases">
+            <div class="circle" [class]="fase >=1?'active':''" > <span>1</span> </div>
+            <div class="circle" [class]="fase >=2?'active':''"> <span>2</span> </div>
+            <div class="circle" [class]="fase ==3?'active':''"> <span>3</span> </div>
+            <div class="line-1" [class]="fase >=2?'active':''"></div>
+            <div class="line-2" [class]="fase ==3?'active':''"></div>
+        </div>
+
+        <h1 class="text-black font-500">Registrate como Vendedor profesional</h1>
+
+
+        <!-- ! FASE 1 ################ -->
+        <div class="fases"  *ngIf="fase == 1">
+            <h2 class="text-black font-500">Información de la empresa</h2>
+
+            <form [formGroup]="FormDealer"  class="content-fase">
+                <div>   
+                    <div class="form-group ">
+                        <input 
+                            type="text" 
+                            class="input-square"  
+                            placeholder="Nombre de la empresa"
+                            formControlName="company_name" [ngClass]="{ 'error': Val? ValFormDealer.company_name.errors: null }"  
+                        >
+                    </div>
+    
+                    <div class="form-group ">
+                        <input type="text"
+                            class="input-square"
+                            placeholder="CIF/NIF"
+                            (keydown)="SoloNumero($event)" 
+                            maxlength="14"
+                            formControlName="vat_number" 
+                            [ngClass]="{ 'error': Val? ValFormDealer.vat_number.errors: null }"
+                        >
+                    </div>
+    
+                    <div class="form-group">
+                        <select class="select-square" formControlName="country"   [ngClass]="{ 'error': Val? ValFormDealer.country.errors: null }" name="" id="">
+                            <option value="" disabled selected>  Seleccione </option>
+                            <option value="Rumania" >  Rumania </option>
+                            <option value="España" >  España </option>
+                            <option value="Alemania" >  Alemania </option>
+                            <option value="Italia" >  Italia </option>
+                            <option value="Reino Unido" >  Reino Unido </option>
+                        </select>
+                    </div>
+    
+                    <div class="form-group ">
+                        <input type="text" class="input-square" formControlName="address"  [ngClass]="{ 'error': Val? ValFormDealer.address.errors: null }"  placeholder="Dirección">
+                    </div>
+    
+                    <div class="form-group ">
+                        <input type="text"
+                            class="input-square"
+                            placeholder="Código postal"
+                            formControlName="zip_code" 
+                            [ngClass]="{ 'error': Val? ValFormDealer.zip_code.errors: null }" 
+                            maxlength="14"
+                        >
+                    </div>
+    
+                    <div class="form-group ">
+                        <input type="text" class="input-square" formControlName="city" [ngClass]="{ 'error': Val? ValFormDealer.city.errors: null }"   placeholder="Ciudad">
+                    </div>
+                </div>
+    
+                <div>
+                    <div class="form-group ">
+                        <input type="text" class="input-square" formControlName="email_address"  [ngClass]="{ 'error': Val? ValFormDealer.email_address.errors: null }"  placeholder="Correo electrónico">
+                    </div>
+    
+                    <div class="form-group ">
+                        <input type="text"
+                            class="input-square"
+                            placeholder="Teléfono"
+                            (keydown)="SoloNumero($event)" 
+                            maxlength="14"
+                            formControlName="phone_number" 
+                            [ngClass]="{ 'error': Val? ValFormDealer.phone_number.errors: null }"  
+                        >
+                    </div>
+    
+                    <div class="form-group ">
+                        <textarea class="input-square" formControlName="description" [ngClass]="{ 'error': Val? ValFormDealer.description.errors: null }" placeholder="Descripción"  name="" id="" cols="30" rows="5"></textarea>
+                    </div>
+
+                    <div class="form-group ">
+                        <button class="btn color-rojo" (click)="[SelectImg()]"> SUBIR LOGO </button>
+
+                        <div class="content-img">
+                            <img [src]="user_imagen_show.img" *ngIf="user_imagen_show?.img" alt="">
+                            <input type="file" id="img" (change)="[CargarImagen($event)]" style="display:none" accept="image/png, image/gif, image/jpeg">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+
+        <!-- ! FASE 2 ################ -->
+        <div class="fases" *ngIf="fase == 2">
+            <h2 class="text-black font-500">Información de la tienda</h2>
+
+            <form  [formGroup]="FormDealerShowRoom" class="content-fase">
+                <div>   
+                    <div class="form-group ">
+                        <input type="text" 
+                            class="input-square" 
+                            placeholder="Nombre de la empresa"
+                            formControlName="name" [ngClass]="{ 'error': Val? ValFormDealerShowRoom.name.errors: null }" 
+                        >
+                    </div>
+    
+                    <div class="form-group">
+                        <select class="select-square" formControlName="country" [ngClass]="{ 'error': Val? ValFormDealerShowRoom.country.errors: null }" name="" id="">
+                            <option value="" disabled selected>  Seleccione </option>
+                            <option value="Rumania" >  Rumania </option>
+                            <option value="España" >  España </option>
+                            <option value="Alemania" >  Alemania </option>
+                            <option value="Italia" >  Italia </option>
+                            <option value="Reino Unido" >  Reino Unido </option>
+                        </select>
+                    </div>
+    
+                    <div class="form-group ">
+                        <input type="text" class="input-square" formControlName="address" [ngClass]="{ 'error': Val? ValFormDealerShowRoom.address.errors: null }"   placeholder="Dirección">
+                    </div>
+    
+                    <div class="form-group ">
+                        <input type="text"
+                            class="input-square"
+                            placeholder="Código postal"
+                            formControlName="zip_code" [ngClass]="{ 'error': Val? ValFormDealerShowRoom.zip_code.errors: null }"
+                            (keypress)="SoloNumero($event)" 
+                            maxlength="14"
+                        >
+                    </div>
+    
+                    
+                </div>
+    
+                <div>
+                    <div class="form-group ">
+                        <input type="text" class="input-square" formControlName="city" [ngClass]="{ 'error': Val? ValFormDealerShowRoom.city.errors: null }"  placeholder="Ciudad">
+                    </div>
+    
+                    <div class="form-group ">
+                        <input type="text" class="input-square"  formControlName="email_address" [ngClass]="{ 'error': Val? ValFormDealerShowRoom.email_address.errors: null }" placeholder="Correo electrónico">
+                    </div>
+    
+                    <div class="form-group ">
+                        <input type="text"
+                            class="input-square"
+                            placeholder="Teléfono"
+                            formControlName="mobile_number" [ngClass]="{ 'error': Val? ValFormDealerShowRoom.mobile_number.errors: null }"
+                            (keydown)="SoloNumero($event)" 
+                            maxlength="14"
+                        >
+                    </div>
+
+                    <div class="form-group ">
+                        <input type="text"
+                            class="input-square"
+                            placeholder="Número de Whatsapp"
+                            formControlName="whatsapp_number" [ngClass]="{ 'error': Val? ValFormDealerShowRoom.whatsapp_number.errors: null }"
+                            (keydown)="SoloNumero($event)"  
+                            maxlength="14"
+                        >
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+
+        <!-- ! FASE 3 ################ -->
+        <div class="fases"  *ngIf="fase == 3">
+            <h2 class="text-black font-500">Información de cuenta</h2>
+
+            <form  [formGroup]="FormUser"  class="content-fase">
+                <div>   
+                    <div class="form-group ">
+                        <input type="text" class="input-square"  formControlName="first_name" [ngClass]="{ 'error': Val? ValFormUser.first_name.errors: null }"  placeholder="Nombre">
+                    </div>
+    
+                    <div class="form-group ">
+                        <input type="text" class="input-square"   formControlName="last_name" [ngClass]="{ 'error': Val? ValFormUser.last_name.errors: null }"  placeholder="Apellido">
+                    </div>
+    
+                    <div class="form-group ">
+                        <input type="text" class="input-square" formControlName="email" [ngClass]="{ 'error': Val? ValFormUser.email.errors: null }" placeholder="Dirección de correo electrónico">
+                    </div>
+                </div>
+    
+                <div>
+                    <div class="form-group ">
+                        <input type="text"
+                            class="input-square"
+                            placeholder="Código postal"
+                            formControlName="zip_code" [ngClass]="{ 'error': Val? ValFormUser.zip_code.errors: null }"
+                            (keypress)="SoloNumero($event)" 
+                            maxlength="14"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <div class="group-input-icon-right">
+                            <span class="icon" [ngClass]="viewPass?'icon-eye':'icon-eye-off'" (click)="tooglePass(true)" ></span>
+                            <input 
+                                [type]="viewPass ? 'text' : 'password'"
+                                [placeholder]="'Contraseña'"
+                                class="input-square"
+                                formControlName="password" [ngClass]="{ 'error': Val? ValFormUser.password.errors: null }"
+                                maxlength="25"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="group-input-icon-right">
+                            <span class="icon" [ngClass]="viewRePass?'icon-eye':'icon-eye-off'" (click)="tooglePass(false)" ></span>
+                            <input 
+                                [type]="viewRePass ? 'text' : 'password'"
+                                placeholder="Repetir contraseña"
+                                class="input-square"
+                                formControlName="password_confirmation" [ngClass]="{ 'error': Val? ValFormUser.password_confirmation.errors: null }"
+                                maxlength="25"
+                            >
+                        </div>
+                    </div>
+    
+                </div>
+            </form>
+
+            <div class="checkbox-group">
+                <input type="checkbox" name="term" [(ngModel)]="acc_term" >
+                <label for="term">Acepto las <a class="links" routerLink="../terminos" target="_blank" > condiciones de uso</a> y las <a class="links" target="_blank"routerLink="../politicas" >políticas de privacidad</a></label>
+            </div>
+
+        </div>
+
+    </div>
+
+    <h4 *ngIf="error == 1" class="text-center color-rojo">Complete todos los campos.  </h4>
+    <h4 *ngIf="error == 8" class="text-center color-rojo">Debe subir un logo</h4>
+    <h4 *ngIf="error == 7" class="text-center color-rojo">Debe aceptar los términos y condiciones para continuar.  </h4>
+    <h4 *ngIf="error == 2" class="text-center color-rojo">Ha ocurrido un error al enviar sus datos.</h4>
+    <h4 *ngIf="error == 3" class="text-center color-rojo">El nombre de la empresa ya existe.</h4>
+    <h4 *ngIf="error == 4" class="text-center color-rojo">El formato del correo es incorrecto.</h4>
+    <h4 *ngIf="error == 5" class="text-center color-rojo">Este correo ya está registrado, intente otro.</h4>
+    <h4 *ngIf="error == 6" class="text-center color-rojo">Las contraseñas no coinciden.</h4>
+
+    <div class="footer" >
+
+        <div class="group-btn">
+            <button  *ngIf="fase >1" class="btn-secondary justify-self-center" (click)="fase=fase-1; error =0" >ATRÁS </button>
+            <button *ngIf="fase == 1" class="btn-primary justify-self-center" (click)="SignUpDealer()" >SIGUIENTE <span *ngIf="loading" class="icon icon-refresh loader"></span> </button>
+            <button *ngIf="fase == 2" class="btn-primary justify-self-center" (click)="SignUpDealerShowRooms()" >SIGUIENTE <span *ngIf="loading" class="icon icon-refresh loader"></span> </button>
+            <button *ngIf="fase == 3" class="btn-primary justify-self-center" (click)="SignUp()" >SIGUIENTE <span *ngIf="loading" class="icon icon-refresh loader"></span> </button>
+        </div>
+        
+        <div class="login">
+            <p>¿Ya tienes cuenta?</p>
+            <button class="btn" routerLink="/login" >Inicia sesión</button>
+        </div>
+
+    </div>
+
+</div>

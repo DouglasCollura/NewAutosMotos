@@ -1,0 +1,80 @@
+<div class="container" *ngIf="Display" >
+    <div class="card card-comparar">
+        <button class="btn justify-self-end btn-close" (click)="Close()" >  <span class="icon icon-x"></span> </button>
+        <div class="header">
+            <h1>Compara los modelos</h1>
+            <button class="btn" (click)="Reestablecer()" >RESTABLECER</button>
+        </div>
+
+        <div class="section-img"  >
+
+            <div>
+                <h4 class="font-500" > {{vehiculos[0].ad.title }} </h4>
+
+                <div class="img">
+                    <img [src]="CargarThumb(vehiculos[0].ad.thumbnail)" alt="">
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-500" > {{vehiculos[1].ad.title}} </h4>
+
+                <div class="img">
+                    <img [src]="CargarThumb(vehiculos[1].ad.thumbnail)" alt="">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section-content">
+            <div class="section">
+                <h3>Marca</h3>
+                 <div class="grid gc-2x-g">
+                     <h4> {{vehiculos[0].make?.name}} </h4>
+                     <h4>{{vehiculos[1].make?.name}}</h4>
+                 </div>
+             </div>
+     
+             <div class="section">
+                 <h3>Modelo</h3>
+                 <div class="grid gc-2x-g">
+                     <h4> {{vehiculos[0].model?.name}} </h4>
+                     <h4> {{vehiculos[1].model?.name}} </h4>
+                 </div>
+             </div>
+     
+             <div class="section">
+                 <h3>Año</h3>
+                 <div class="grid gc-2x-g">
+                     <h4> {{vehiculos[0].first_registration_year}} </h4>
+                     <h4> {{vehiculos[1].first_registration_year}} </h4>
+                 </div>
+             </div>
+     
+             <div class="section">
+                 <h3>Kilometraje</h3>
+                 <div class="grid gc-2x-g">
+                     <h4> {{vehiculos[0].mileage}} </h4>
+                     <h4> {{vehiculos[1].mileage}} </h4>
+                 </div>
+             </div>
+     
+             <div class="section">
+                 <h3>Condición</h3>
+                 <div class="grid gc-2x-g">
+                     <h4> {{vehiculos[0].condition}} </h4>
+                     <h4> {{vehiculos[1].condition}} </h4>
+                 </div>
+             </div>
+
+             <div class="section">
+                <h3>Precio</h3>
+                <div class="grid gc-2x-g">
+                    <h4> {{GetPrice(vehiculos[0].price)}}€</h4>
+                    <h4> {{GetPrice(vehiculos[1].price)}}€</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

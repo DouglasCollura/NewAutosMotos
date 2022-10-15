@@ -1,0 +1,249 @@
+<div class="temp-signup">
+
+    <div class="content">
+        <!-- <img src="../../../assets/img/logo.svg" alt=""> -->
+
+        <div class="group-fases">
+            <div class="circle" [class]="fase >=1?'active':''" > <span>1</span> </div>
+            <div class="circle" [class]="fase >=2?'active':''"> <span>2</span> </div>
+            <div class="circle" [class]="fase ==3?'active':''"> <span>3</span> </div>
+            <div class="line-1" [class]="fase >=2?'active':''"></div>
+            <div class="line-2" [class]="fase ==3?'active':''"></div>
+        </div>
+
+        
+
+
+        <!-- ! FASE 1 ################ -->
+        <div class="grid" style="min-width:700px" >
+       
+            <h1 *ngIf="fase==1" class="text-black font-500" style="margin-right: auto;">Datos del vehiculo</h1>
+            <h1 *ngIf="fase==2" class="text-black font-500" style="margin-right: auto;">Detalles del anuncio</h1>
+            <h1 *ngIf="fase==3" class="text-black font-500" style="margin-right: auto;">Informacion de contacto</h1>
+            <!-- <h2 class="text-black font-500" style="margin-right: auto;">Datos del vehiculo</h2> -->
+<!--bloque 2-->
+<div class="grid gc-2x-g gap-10" *ngIf="fase==1">
+ 
+    <div>   
+
+   
+
+        <div class="form-group">
+            <label>Tipo de vehiculo</label>
+            <select class="select-square" name="" id="">
+                <option value="" >  Seleccione </option>
+                <option value="Auto" >  Auto </option>
+                <option value="Moto" >  Moto </option>
+ 
+            </select>
+        </div>
+
+        <div class="form-group ">
+            <label>Modelo (Opcional)</label>
+            <input type="text" class="input-square"  placeholder="Modelo">
+        </div>
+
+        <div class="form-group ">
+            <label>Código (Opcional)</label>
+            <input type="text" class="input-square"  placeholder="Código">
+        </div>
+
+        <!-- <div class="form-group ">
+            <button class="btn color-rojo" (click)="[SelectImg()]"> SUBIR LOGO </button>
+
+            <div class="content-img">
+                <img [src]="user_imagen_show.img" *ngIf="user_imagen_show?.img" alt="">
+                <input type="file" id="img" (change)="[CargarImagen($event)]" style="display:none" accept="image/png, image/gif, image/jpeg">
+            </div>
+        </div> -->
+
+        
+    </div>
+
+    <div>
+        <div class="form-group">
+            <label>Marca</label>
+            <select class="select-square" name="" id="">
+                <option value="" >  Seleccione </option>
+                <option value="Auto" >  1 </option>
+                <option value="Moto" >  2 </option>
+ 
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Fabricante</label>
+            <select class="select-square" name="" id="">
+                <option value="" >  Seleccione </option>
+                <option value="Romania" >  Romania </option>
+                <option value="España" >  España </option>
+                <option value="Alemania" >  Alemania </option>
+                <option value="Italia" >  Italia </option>
+                <option value="Reino Unido" >  Reino Unido </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Estado</label>
+            <select class="select-square" name="" id="">
+                <option value="" >  Seleccione </option>
+                <option value="Romania" >  Romania </option>
+                <option value="España" >  España </option>
+                <option value="Alemania" >  Alemania </option>
+                <option value="Italia" >  Italia </option>
+                <option value="Reino Unido" >  Reino Unido </option>
+            </select>
+        </div>
+
+
+    </div>
+</div>
+
+
+            <!--bloque 3-->
+            <div class="grid  gap-10" *ngIf="fase==2">
+                <div>   
+                    <div class="form-group ">
+                        <label>Empresa</label><br>
+                        <input type="text" class="input-square"  placeholder="empresa">
+                    </div>
+                    <div class="form-group ">
+                        <label>Descripción</label>
+                        <textarea class="input-square"   placeholder="Descripción"  name="" id="" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="form-group ">
+                        <label>Precio</label><br>
+                        <input type="text" class="input-square"  placeholder="precio">
+                    </div>
+                    <h2 style="color:black">Multimedia</h2>
+                    <br>
+                    <div class="form-group ">
+                        <label>Link youtube (opcional)</label><br>
+                        <input type="text" class="input-square"  placeholder="pergar link">
+                    </div>
+                        <div class="form-group ">
+                        <button class="btn color-rojo" (click)="[SelectImg()]"> SUBIR IMAGENES </button>
+
+                        <div class="content-img">
+                            <img [src]="user_imagen_show.img" *ngIf="user_imagen_show?.img" alt="">
+                            <input type="file" id="img" (change)="[CargarImagen($event)]" style="display:none" accept="image/png, image/gif, image/jpeg">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--bloque 4-->
+
+            <div class="grid gc-2x-g gap-10" *ngIf="fase==3">
+                <div>   
+                    <div class="form-group ">
+                        <label>Nombre</label>
+                        <input type="text" class="input-square"   placeholder="nombre de contacto">
+                    </div>
+               
+    
+                    <div class="form-group ">
+                        <label>Dirección de correo</label>
+                        <input type="text" class="input-square"  placeholder="direccion de correo">
+                    </div>
+    
+                    <div class="form-group ">
+                        <label>Número de Whatsapp</label>
+                        <input type="text" class="input-square"  placeholder="Número de Whatsapp">
+                    </div>
+    
+                    <div class="form-group ">
+                        <label>Código postal</label>
+                        <input type="text" class="input-square"  placeholder="Código postal">
+                    </div>
+                    <div class="form-group">
+                        <label>Ciudad</label>
+                        <select class="select-square" name="" id="">
+                            <option value="" >  Seleccione </option>
+                            <option value="Romania" >  Romania </option>
+                            <option value="España" >  España </option>
+                            <option value="Alemania" >  Alemania </option>
+                            <option value="Italia" >  Italia </option>
+                            <option value="Reino Unido" >  Reino Unido </option>
+                        </select>
+                    </div>
+
+                    <!-- <div class="form-group ">
+                        <button class="btn color-rojo" (click)="[SelectImg()]"> SUBIR LOGO </button>
+
+                        <div class="content-img">
+                            <img [src]="user_imagen_show.img" *ngIf="user_imagen_show?.img" alt="">
+                            <input type="file" id="img" (change)="[CargarImagen($event)]" style="display:none" accept="image/png, image/gif, image/jpeg">
+                        </div>
+                    </div> -->
+    
+                    
+                </div>
+    
+                <div>
+                    <div class="form-group ">
+                        <label>Apellido</label>
+                        <input type="text" class="input-square"   placeholder="apellido">
+                    </div>
+    
+            
+    
+                    <div class="form-group ">
+                        <label>Número de Teléfono</label>
+                        <input type="text" class="input-square"  placeholder="Número de telefono">
+                    </div>
+
+                    <div class="form-group ">
+                        <label>Dirección</label>
+                        <input type="text" class="input-square"  placeholder="Dirección">
+                    </div>
+
+                    <div class="form-group">
+                        <label>País</label>
+                        <select class="select-square" name="" id="">
+                            <option value="" >  Seleccione </option>
+                            <option value="Romania" >  Romania </option>
+                            <option value="España" >  España </option>
+                            <option value="Alemania" >  Alemania </option>
+                            <option value="Italia" >  Italia </option>
+                            <option value="Reino Unido" >  Reino Unido </option>
+                        </select>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+        <h4 *ngIf="error == 1" class="text-center color-rojo">Complete todos los campos.</h4>
+        <h4 *ngIf="error == 2" class="text-center color-rojo">Ha ocurrido un error.</h4>
+    
+        <div class="footer" style="display: flex;">
+    
+            <button *ngIf="fase == 1" class="btn-primary justify-self-center" (click)="cambiofase('2')" >CONTINUAR <span *ngIf="loading" class="icon icon-refresh loader"></span> </button>
+    
+            <button *ngIf="fase == 2" class="btn-primary justify-self-center" (click)="cambiofase('1')" >ANTERIOR <span *ngIf="loading" class="icon icon-refresh loader"></span> </button>
+            <button *ngIf="fase == 2" class="btn-primary justify-self-center" (click)="cambiofase('3')" >CONTINUAR <span *ngIf="loading" class="icon icon-refresh loader"></span> </button>
+
+    
+    
+            <!-- <button *ngIf="fase == 3" class="btn-primary justify-self-center" (click)="fase(3)" >SIGUIENTE <span *ngIf="loading" class="icon icon-refresh loader"></span> </button> -->
+            <button *ngIf="fase == 3" class="btn-primary justify-self-center" (click)="cambiofase('2')" >ANTERIOR <span *ngIf="loading" class="icon icon-refresh loader"></span> </button>
+            <button *ngIf="fase == 3"  class="btn-primary justify-self-center" (click)="SignUp()" >PUBLICAR ANUNCIO <span *ngIf="loading" class="icon icon-refresh loader"></span> </button> 
+    
+    
+        </div>
+
+    </div>
+
+    
+
+  
+
+</div>

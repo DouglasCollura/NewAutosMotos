@@ -1,0 +1,66 @@
+@media only screen and (max-width: 768px) {
+
+
+    .temp-buyer{
+        display: grid;
+        min-height: 100%;
+        grid-template: 
+        "section-banner" auto
+        "section-filtro" auto
+        "section-content" auto/
+        100% !important;
+        max-width: 1600px;
+        margin: 0px auto;
+
+        .content-p1{
+            grid-template-columns: none !important;
+        }
+    }
+
+    .section-banner{
+        .select-carrusel{
+            position: initial;
+        }
+    }
+
+    .carousel-container{
+        max-width: 100vw !important;
+    }
+
+    .card-filtro{
+        justify-self: center !important;
+        height: auto !important;
+        width: 95vw !important;
+        position: relative;
+        .top{
+            h1{
+                font-size: 16px !important;
+            }
+            grid-auto-flow: initial !important;
+            grid-template-columns: repeat(2,1fr) !important;
+            button{
+                max-width: 100% !important;
+            }
+        }
+        .bottom{
+            grid-auto-flow: row !important;
+            select{
+                max-width: 100% !important;
+            }
+            .form-group{
+                display: grid !important;
+            }
+        }
+    }
+
+    .section-filtro{
+        padding: 30px 20px !important;
+    }
+
+    .section-content{
+         padding: 30px 10px;
+    }
+
+
+}
+

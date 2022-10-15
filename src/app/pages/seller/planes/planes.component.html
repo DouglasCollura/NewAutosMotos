@@ -1,0 +1,41 @@
+<div class="body">
+    <div class="rowPlans" [ngStyle]="{'height': user.type === 'Profesional' ? '490px':'560px'}" *ngIf="user.type === 'Profesional' && !loading && !error">
+        <div class="cardPlan" *ngFor="let item of plans">
+            <div class="row">
+                <h5 *ngIf="actualPlan?.id === item.id">Plan actual</h5>
+                <h2>{{item.name}}</h2>
+                <h3>{{item.price}} /mes</h3>
+            </div>
+            
+            <div class="row">
+                <ul >
+                    <li *ngFor="let list of item?.items">{{list.data}}</li>
+                </ul>
+            </div>
+            <button (click)="onShop(item.id)" *ngIf="actualPlan?.id != item.id">Comprar</button>
+        </div>
+    </div>
+
+    <div class="load" style="margin:50px auto" *ngIf="loading"><div class="pointer"></div></div>
+    <h3 *ngIf="!loading && error">Ocurrio un error al obtener los planes.</h3>
+
+    <div class="rowPlans" [ngStyle]="{'height': user.type === 'Profesional' ? '490px':'560px'}" *ngIf="user.type != 'Profesional' && !loading">
+        <div class="cardPlan1" *ngFor="let item of plans">
+            <div class="row">
+                <h5>{{item.name}}</h5>
+                <h3>{{item.price}} /mes</h3>
+            </div>
+
+            <div class="row">
+                <ul>
+                    <li *ngFor="let list of item?.items">{{list.data}}</li>
+                </ul>
+            </div>
+
+            <button (click)="onShop(item.id)">Comprar</button>
+        </div>
+    </div>
+</div>
+
+
+<app-modal-confirm-plan (success)="emitonShop()"></app-modal-confirm-plan>

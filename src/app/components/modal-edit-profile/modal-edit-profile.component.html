@@ -1,0 +1,28 @@
+<div class="over" *ngIf="modal" (click)="close()"></div>
+
+<div class="modalSM" *ngIf="modal">
+    <a (click)="close()"><img src="../../../assets/iconos/close-modal.svg"/></a>
+
+    <form [formGroup]="form" (ngSubmit)="update()" style="display: inline-block;width: 80%;">
+        <h3>Editar datos personales</h3>
+        <div class="rowModal">
+            <label>Email</label>
+            <input [readonly]="true" type="email" formControlName="email" [ngClass]="{'error' : g.email.errors?.email}">
+            <small *ngIf="g.email.errors?.email" [ngClass]="{'errorText' : g.email.errors?.email}">Ingrese un email válido</small>
+        </div>
+        <div class="rowModal">
+            <label>Teléfono</label>
+            <input type="text" formControlName="mobile_number" (keydown)="SoloNumeroTelf($event)">
+        </div>
+        <!-- <div class="rowModal">
+            <label>Dirección</label>
+            <input type="text">
+        </div> -->
+        <div class="rowModal"  style="margin-bottom: 50px;">
+            <button type="submit">
+                <span *ngIf="!isLoading">guardar cambios</span>
+                <span *ngIf="isLoading" class="loader"></span>
+            </button>
+        </div>
+    </form>
+</div>

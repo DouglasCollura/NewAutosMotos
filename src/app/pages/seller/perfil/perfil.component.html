@@ -1,0 +1,65 @@
+<div class="body">
+    <div class="infoCenterIni">
+        <a *ngIf="edit" (click)="save()" >guardar cambios</a>
+
+        <div class="row center">
+            <div style="margin: auto">
+                <div class="circleProfile">
+                    <div class="pencilProfile" (click)="upload.click()">
+                        <img src="../../../assets/iconos/pencil-white.svg">
+                    </div>
+                    <div class="savingDiv" *ngIf="saving">
+                        <span class="loader1"></span>
+                    </div>
+
+                    <img src="https://cdn.autosmotos.es/{{user.image}}" class="centerImG" *ngIf="imager || !damagedImg" alt="">
+                    <img [src]="imageBase" *ngIf="!imager" class="centerImG" alt="">
+
+                    <input type="file"  #upload (change)="changeImage($event)" style="display: none;">
+                </div>
+                <h3 *ngIf="!edit">{{user.first_name}} {{user.last_name}}  
+                    <div class="pencilProfile2"  (click)="edit = !edit">
+                        <img src="../../../assets/iconos/pencil-white.svg">
+                    </div>
+                </h3>
+            </div>
+        </div>
+        <div class="row" *ngIf="edit">
+            <input type="text" placeholder="Nombre" [(ngModel)]="userName">
+            <input type="text" placeholder="Apellido" [(ngModel)]="lastName">
+        </div>
+    </div>
+    <div class="infoCenter">
+        <div class="row whiteBox">
+            <div class="row between">
+                <h3>Datos personales</h3>
+                <a style="cursor: pointer" (click)="editShow()">Editar</a>
+            </div>
+            <div class="row">
+                <p>Email: {{user.email}}</p>
+                <p>Teléfono: {{user.mobile_number}}</p>
+                <!-- <p>Dirección: {{user.email}}</p> -->
+            </div>
+        </div>
+        <div class="row whiteBox" style="display: none;">
+            <div class="row between">
+                <h3>Plan de promoción</h3>
+                <a routerLink="/seller/planes">Cambiar</a>
+            </div>
+            <div class="row">
+                <p >{{plan?.name}}</p>
+            </div>
+        </div>
+        <div class="row whiteBox" style="display: none;">
+            <div class="row between">
+                <h3>Método de pago</h3>
+            </div>
+            <div class="row">
+                <p>{{user.last_pay_method}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<app-modal-edit-profile (success)="getUpdated($event)"></app-modal-edit-profile>

@@ -1,0 +1,59 @@
+<div class="temp-layout">
+    
+    <div class="section-nav" >
+
+        <div  class="nav" >
+            <img src="../../../../assets/img/logo.svg" alt="">
+
+            <button class="btn " routerLinkActive="active"
+             [routerLink]="['../']" [routerLinkActiveOptions]="{ exact: true }" >Inicio</button>
+            <button class="btn" routerLinkActive="active"  routerLink="tienda">Tienda</button>
+            <!-- <button class="btn">Soporte</button> -->
+            <button class="btn disable" >Panel de promociones</button>
+            <!-- <button class="btn" routerLinkActive="active"  routerLink="promociones">Panel de promociones</button> -->
+            <button class="btn anuncio"  (click)="modal()">NUEVO ANUNCIO</button>
+        </div>
+
+        <div class="user">
+            <button class="btn" > <span class="icon icon-bell"></span> </button>
+            <div class="content" (click)="main = !main">
+                <div class="cont-img">
+                    <img src="https://cdn.autosmotos.es/{{user.image}}" *ngIf="user.image" alt="">
+                </div>
+                <button class="options"> <span class="icon icon-cheveron-down"></span> </button>
+            </div>
+        </div>
+
+        <div class="main-float" *ngIf="main">
+            <ul>
+                <li>
+                    <a routerLink="perfil">Mi perfil</a>
+                </li>
+                <!-- <li>
+                    <a href="">Historial de pagos</a>
+                </li> -->
+                <li>
+                    <a (click)="logout()">Cerrar sesión</a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    <div class="">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<app-modals></app-modals>
+<app-modals-success></app-modals-success>
+
+
+<div class="modalSM" *ngIf="modal_notvalid || modal_token" >
+    <a class="closed" *ngIf="modal_notvalid" (click)="modal_notvalid = false;modal_token = false;"  ><img src="../../../assets/iconos/close-modal.svg"/></a>
+    <a class="closed" *ngIf="modal_token" (click)="logout()"  ><img src="../../../assets/iconos/close-modal.svg"/></a>
+
+   <h3 class="text-center" *ngIf="modal_notvalid">Confirma tu correo electrónico para crear tu primer anuncio, nuestros administradores estarán verificando en un periodo de 24h</h3>
+   <h3 class="text-center" *ngIf="modal_token">Su sesión ha expirado, por favor inicie sesión nuevamente</h3>
+   <button *ngIf="modal_token" class="btn-primary" (click)="login()" >Iniciar sesión</button>
+</div>

@@ -1,0 +1,290 @@
+    <div class="temp-comprar">
+        <button class="btn btn-back" (click)="backClicked()" > <span class="icon icon-cheveron-left"></span> </button>
+        <div class="section-info">
+
+            <div class="section-photo">
+                <div class="photo-select">
+                    <div class="chevron-left" (click)="imgLeft()" > <span class="icon icon-cheveron-left"></span> </div>
+                    <img [src]="image_select" (error)="onImgError($event)"  alt="">
+                    <div class="chevron-rigth" (click)="imgRight()" ><span class="icon icon-cheveron-right"></span> </div>
+                </div>
+
+                <div class="group-photo"  >
+                    <div class="photo" (click)="SelectImg(i)" [id]="i" *ngFor="let item of ads?.images; let i = index">
+                        <img  [src]="CargarThumb(item?.path)" (error)="onImgError($event)"  alt="">
+                        <div class="filter" [ngStyle]="{'display':i ==0 ? 'block' : 'none' }" ></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info">
+
+                <div class="grid gap-10" >
+                    <h1 class="titulo"> {{vehiculo?.ad?.title}} </h1> 
+
+                    <div class="calificacion">
+                        <h4> {{vehiculo?.dealer?.company_name}} / Calificación de vendedor</h4>
+        
+                        <h4 class="color-rojo"> {{ads?.user?.review_ratings}} <span class="icon icon-star color-rojo"></span> </h4>
+                    </div>
+                </div>
+
+                <h1 class="color-rojo" style="font-weight: 500" > {{GetPrice(vehiculo?.price)}}€ </h1>
+
+                <div class="grid gap-20" id="contacto">
+                    <!-- <a class="btn-primary btn-block" *ngIf="vehiculo?.dealerShowRoom?.whatsapp_number"  [href]="'https://wa.me/'+vehiculo?.dealerShowRoom?.whatsapp_number">CONTACTAR POR WPP</a>  -->
+                    <button 
+                        class="btn btn-block" 
+                        (click)="GoToWts(vehiculo?.dealer_show_room?.whatsapp_number ? vehiculo?.dealer_show_room?.whatsapp_number : vehiculo?.whatsapp_number)"  
+                        [class]="( vehiculo?.dealer_show_room?.whatsapp_number ? vehiculo?.dealer_show_room?.whatsapp_number : vehiculo?.whatsapp_number) ?'btn-wts':'btn-disable'"
+                    >CONTACTAR POR WPP</button> 
+
+                    <button 
+                        class="btn btn-block" 
+                        [class]="( vehiculo?.dealer_show_room?.mobile_number ? vehiculo?.dealer_show_room?.mobile_number : vehiculo?.mobile_number) ?'btn-phone':'btn-disable'"
+
+                        (click)="GoToCall(vehiculo?.dealer_show_room?.mobile_number ? vehiculo?.dealer_show_room?.mobile_number : vehiculo?.mobile_number) "
+                    >CONTACTAR POR TEL</button>
+                </div>
+
+                <div class="card-comentario">
+                    <div class="grid gap-10">
+                        <h3 (click)="GoDealer()" style="cursor: pointer;"> <span class="title-info" >Vendedor:</span> {{vehiculo?.dealer?.company_name?vehiculo?.dealer?.company_name: vehiculo?.first_name + ' '+ vehiculo?.last_name}} </h3>
+                        <div class="column-space-between">
+                            <h3> <span class="title-info">Ubicación:</span> {{vehiculo?.dealer?.address ? vehiculo?.dealer?.address: vehiculo?.address }} </h3>
+
+                            <button *ngIf="vehiculo?.latitude" (click)="GoToMap()" class="btn vermas">Ver mapa</button>
+                        </div>
+
+                        <img (click)="GoDealer()" [src]="CargarThumb(vehiculo?.dealer?.logo_path)" class="logo-dealer" alt="">
+                        
+                        <!-- <h3><span class="title-info">Web:</span> <span class="color-rojo"> www.xxxxx.com</span></h3> -->
+                        
+                        <h3 class="title-info">Otros modos de contacto:</h3>
+
+                        <a class="form-icon mail"
+                            [href]="'mailto:'+vehiculo?.dealer?.email_address?vehiculo?.dealer?.email_address : vehiculo?.email_address"
+                        > 
+                            <span class="icon icon-mail" style="font-size: 16px" ></span> 
+                            <h3>{{vehiculo?.dealer?.email_address?vehiculo?.dealer?.email_address : vehiculo?.email_address}}</h3>
+                        </a>
+                    </div>
+                    <h4><span class="color-rojo"> {{ads?.user?.review_ratings}} <span class="icon icon-star color-rojo"></span> </span> </h4>
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="section-body">
+
+            <div class="section">
+                <h2>Descripción</h2>
+                <p class="description" > 
+                    {{vehiculo?.ad?.description}}
+                </p> 
+            </div>
+
+            <div class="section">
+                <h2>Características técnicas</h2>
+
+                <div class="caracteristicas">
+                    <div>
+                        <h4> <span class="title-info"> Tipo de vehículo:</span> {{vehiculo?.ad?.type? vehiculo?.ad?.type : 'NO POSEE'}}</h4>
+                        <h4> <span class="title-info">Marca:</span> {{vehiculo?.make?.name? vehiculo?.make?.name: 'NO POSEE'  }} </h4>
+                        <h4> <span class="title-info">Modelo:</span> {{vehiculo?.model?.name ? vehiculo?.model?.name : 'NO POSEE'}}</h4>
+                        <h4> <span class="title-info">Condición:</span> {{vehiculo?.condition?  vehiculo?.condition: 'NO POSEE'}} </h4>
+                        <h4><span class="title-info">Kilometraje:</span> {{vehiculo?.mileage? vehiculo?.mileage : 'NO POSEE' }} </h4>
+                        <h4><span class="title-info">Combustible:</span>{{vehiculo?.fuel_type?.external_name? vehiculo?.fuel_type?.external_name : 'NO POSEE' }} </h4>
+                        <h4><span class="title-info">Transmisión:</span>{{vehiculo?.transmission_type?.external_name? vehiculo?.transmission_type?.external_name : 'NO POSEE'}} </h4>
+                        <h4><span class="title-info">Tracción /Drivetrain:</span>  {{vehiculo?.drive_type? vehiculo?.drive_type : 'NO POSEE'}}</h4>
+                        <h4><span class="title-info">Potencia (HP):</span> {{vehiculo?.power_hp? vehiculo?.power_hp : 'NO POSEE'}}</h4>
+                        <h4><span class="title-info">Capacidad cilíndrica:</span> {{vehiculo?.engine_displacement? vehiculo?.engine_displacement : 'NO POSEE'}} </h4>
+                    </div>
+
+                    <div>
+                        <h4><span class="title-info">Color exterior:</span> {{vehiculo?.exterior_color}} </h4>
+                        <h4><span class="title-info">Color interior:</span> {{vehiculo?.interior_color}}</h4>
+                        <h4><span class="title-info">Vendedor:</span> {{vehiculo?.dealer?.company_name}}</h4>
+                        <h4><span class="title-info">Inspección validada:</span> {{vehiculo?.inspection_valid_until_year? vehiculo?.inspection_valid_until_year+'/'+vehiculo?.inspection_valid_until_month : 'NO POSEE'}}</h4>
+                        <h4><span class="title-info">Puertas:</span> {{vehiculo?.doors? vehiculo?.doors : 'NO POSEE'}}  </h4>                   
+                        <h4><span class="title-info">Plazas:</span> {{vehiculo?.seats? vehiculo?.seats : 'NO POSEE'}}</h4>                   
+                        <h4><span class="title-info" *ngIf="this.filter.type=='mobile-home'" >Lugares para dormir:</span> {{vehiculo?.sleeping_places? vehiculo?.sleeping_places : 'NO POSEE'}}</h4>                   
+                        <h4><span class="title-info">Engranajes:</span>{{vehiculo?.gears? vehiculo?.gears : 'NO POSEE'}}</h4>                   
+                        <h4><span class="title-info">Cilindros:</span>{{vehiculo?.cylinders? vehiculo?.cylinders : 'NO POSEE'}}</h4>                   
+                        <h4><span class="title-info">Consumo de combustible:</span>{{vehiculo?.fuel_consumption? vehiculo?.fuel_consumption : 'NO POSEE'}}</h4>                   
+                    </div>
+
+                    
+                </div>
+
+
+
+            </div>
+
+            <div class="section-comentario">
+                <h3 class="titulo">Reseñas sobre el vendedor</h3>
+
+                <div class="card-comentario" *ngFor="let item of reviews?.data">
+
+                    <div class="card-comentario-content" >
+                        <h3 class="titulo"> {{item?.name}} </h3>
+
+                        <p>
+                            {{item?.testimony}} 
+                        </p>
+
+                        <h4>Valoró con  <span class="color-rojo">{{item?.score}} <span class="icon icon-star color-rojo"></span> </span> </h4>
+                    </div>
+                    <h4>Hora</h4>
+                </div>
+
+                <button class="btn" [class]="reviews?.next_page_url != null? 'btn-vermas':'btn-vermas-dis'" >Ver más</button>
+            </div>
+
+
+            <div class="section-opinion" *ngIf="CanRev">
+                <h2 class="titulo">Deja una reseña sobre el vendedor</h2>
+
+                <input type="text" placeholder="Nombre" [(ngModel)]="review.name">
+
+                <textarea name="" id="" cols="30" rows="5" [(ngModel)]="review.testimony" placeholder="Reseña"></textarea>
+
+                <h4>Valoración</h4>
+                <div class="puntuacion">
+                    <img [src]="review.score >= 1.00?'../../../../assets/img/star-red.svg':'../../../../assets/img/star-blue.svg'" (mouseover)="Puntuar($event,1.00,true)"  alt="">
+                    <img [src]="review.score >= 2.00?'../../../../assets/img/star-red.svg':'../../../../assets/img/star-blue.svg'" (mouseover)="Puntuar($event,2.00,true)" alt="">
+                    <img [src]="review.score >= 3.00?'../../../../assets/img/star-red.svg':'../../../../assets/img/star-blue.svg'" (mouseover)="Puntuar($event,3.00,true)"  alt="">
+                    <img [src]="review.score >= 4.00?'../../../../assets/img/star-red.svg':'../../../../assets/img/star-blue.svg'" (mouseover)="Puntuar($event,4.00,true)"  alt="">
+                    <img [src]="review.score >= 5.00?'../../../../assets/img/star-red.svg':'../../../../assets/img/star-blue.svg'" (mouseover)="Puntuar($event,5.00,true)"  alt="">
+                </div>
+
+                <button [class]="CanReview()?'btn-primary':'btn-disable'" style="width: 200px;" (click)="CanReview() && EnviarReview()" >ENVIAR <span *ngIf="load_rev" class="icon icon-refresh loader"></span> </button>
+            </div>
+
+
+            
+
+        </div>
+
+        <div class="relacionados">
+            <h3 class="titulo">Anuncios relacionados</h3>
+
+            <div class="section-anuncios">
+
+                <div class="carousel-container">
+                    <button class="carousel__anterior" (click)="moveLeft('destacados')" aria-label="anterior">
+                        <span class="icon icon-cheveron-left"></span>
+                    </button>
+
+                    <div class="load" *ngIf="load_rel" >
+                        <div class="content-car-load">
+                            <div class="car-load"></div>
+                        </div>
+                        <div class="content-load-bar">
+                            <div class="load-bar"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="content" id="destacados">
+
+                        <div  *ngFor="let info of anuncios?.data; let i =index" class="card card-carousel">
+                            <div class="card-carousel-img">
+                                <div class="card-carousel-top-img">
+                                    <button class="btn"  [class]="filterMark(info.ad.id)?'btn-bookmark-primary':'btn-bookmark'"  (click)="SelectMark(info, $event)" ><span class="icon-bookmark text-black"></span></button>
+                                </div>
+                                <img (click)="GoShow(info)" [src]="GetThumb(info?.ad?.thumbnail)"  (error)="onImgError($event)"  alt="">
+                            
+                                <div class="section-media">
+                                    <!-- <div class="card-media">
+                                        <img src="../../../../assets/img/icon-video.png" alt="">
+                                    </div> -->
+        
+                                    <div class="card-media">
+                                        <img src="../../../../assets/img/icon-photo.png" alt="">
+                                        <span class="notranslate"> {{ GetLength(info?.ad)}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-carousel-body">
+                                <h3 class="font-500 text-black title"> {{info?.ad?.title}}  </h3>
+                                <div class="body">
+                                    <h5> <span class="font-600"> Marca:</span> {{info.make?.name}}, </h5>
+                                    <h5><span class="font-600"> Modelo:</span> {{info.model?.name }},</h5>
+                                    <h5><span class="font-600"> Carrocería:</span> {{ info.body_type?.external_name }},</h5>
+                                    <h5><span class="font-600"> Año:</span> {{info.first_registration_year}},</h5>
+                                    <h5><span class="font-600"> KM:</span> {{info.mileage}}, </h5>
+                                    <h5><span class="font-600"> Combustible:</span> {{info.fuel_type?.external_name}},</h5>
+                                </div>
+                                <h5><span class="font-600"> Caja de cambio:</span> {{ info.transmission_type?.external_name }}</h5>
+
+                
+                                <h2 class="font-600 text-black"> {{GetPrice(info.price)}} €</h2>
+        
+                            </div>
+                            
+                            <div class="card-carousel-footer">
+                                <div class="footer-contact">
+                                    <h1 class="text-black font-500"> {{GetPrice(info.price)}}€</h1>
+        
+                                    <div class="contact">
+                                        <!-- <button 
+                                            class="btn"
+                                            (click)="GoToWts(info?.dealer_show_room?.whatsapp_number)"
+                                        >
+                                        <img [src]="info?.dealer_show_room?.whatsapp_number?'../../../../assets/img/btn-wsp.png':'../../../../assets/img/btn-wsp-dis.png'" alt="">
+                                        </button> -->
+                                        <a [attr.href]="info?.dealer_show_room?.whatsapp_number ? 'https://wa.me/' + info?.dealer_show_room?.whatsapp_number : null">
+                                            <img [src]="info?.dealer_show_room?.whatsapp_number ? '/assets/img/btn-wsp.png' : '/assets/img/btn-wsp-dis.png'" alt=""> 
+                                        </a> 
+                                        <a [href]="'tel:'+ info?.dealer_show_room?.mobile_number"><img src="/assets/img/btn-phone.png" alt=""> </a>
+                                    </div>
+                                </div>
+        
+                                <div class="dealer">
+                                    <img [src]="CargarThumbDealer(info?.dealer?.logo_path)" alt="">
+        
+                                    <div class="info-dealer">
+                                        <div class="stast">
+                                            <h4> {{info?.dealer?.company_name}} </h4>
+                                            <span class="color-rojo"> {{info?.ad?.user?.type == 'Profesional'? info?.dealer?.review_ratings:info?.ad?.user?.review_ratings}} <span class="icon-star color-rojo"></span></span>
+                                        </div>
+                                        
+                                        <div style="display: flex;">
+                                            <h4>{{info?.dealer?.city}},{{info?.dealer?.country}}, </h4>
+                                            <h4> {{info?.dealer?.zip_code}}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        
+
+                    </div>
+
+                    <button class="carousel__siguiente" (click)="moveRight('destacados')" aria-label="siguiente">
+                        <span class="icon icon-cheveron-right"></span>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="bg-load" *ngIf="loading">
+            <div class="load"  >
+                <div class="content-car-load">
+                    <div class="car-load"></div>
+                </div>
+                <div class="content-load-bar">
+                    <div class="load-bar"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>

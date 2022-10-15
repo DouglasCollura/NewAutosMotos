@@ -1,0 +1,34 @@
+<div class="over" *ngIf="modal" (click)="close()"></div>
+
+<div class="modalSM" *ngIf="modal">
+    <a class="closed" (click)="close()"><img src="../../../assets/iconos/close-modal.svg"/></a>
+
+    <div class="boxBottns">
+        <h2>¿Cómo publicar masivamente?</h2>
+ <!--        <h3>Paso 1:  Descarga la planilla CSV para poder completar los datos de tus publicaciones (Tienes que tener el programa Microsoft Excel en tu computadora). <a target="_blank" href="https://www.microsoft.com/es-co/microsoft-365">Descargar Microsoft Excel</a></h3>
+        <h3>Paso 2:  Completa los datos de tus publicaciones en la planilla. Una vez terminado tienes que subir el archivo CSV. Nosotros lo revisaremos y te notificaremos una vez que esté aprobado. </h3>
+        <h4>Puedes descargar un archivo de ejemplo para ver como se completan los datos.</h4> -->
+        <h4> Paso 1: Descarga la planilla CSV (Debes contar con Microsoft Excel, sino posees Descarga <a target="_blank" href="https://www.microsoft.com/es-co/microsoft-365">aquí</a>)</h4>
+        
+        <h4> Paso 2: Ingresa los datos de tus anuncios en la planilla CSV </h4>
+        
+        <h4> Paso 3: Sube el CSV con los datos de tus anuncios </h4> 
+        
+        <h4> El archivo tendrá un proceso de verificación, nos comunicaremos a tu correo al ser aprobado</h4>
+        <h2>  Instrucciones para cargar datos en el CSV:</h2>
+        <h3> -Dejar vacías las columnas con nombre space </h3>     
+        
+        <h3> -Las columnas con nombre <em>first_registration_month_year</em> e <em>inspection_valid_until_month_year</em> deben cumplir con el formato mm.yyyy ejemplo: 06.2016 </h3> 
+        
+        <h3>-La Columna <em>price_contains_vat</em>  solo recibe valor numérico de 0 y 1
+            0 Para indicar que el precio no posee iva 
+            1 Para indicar que el precio contiene iva
+        </h3>
+            
+        <h3>- Las siguientes columnas deben contener números enteros (ej: 1,1000,1500) son:
+            <em>price</em>, <em>mileage</em>, <em>doors</em>, <em>seats</em>, <em>engine_displacement</em>, <em>power_hp</em> 
+        </h3>
+                
+        <button (click)="download()">Descargar archivo de ejemplo</button>
+            </div>
+        </div>

@@ -1,0 +1,48 @@
+.temp-recovery{
+    display: grid;
+    height: 100%;
+    grid-template-rows: 130px auto;
+    padding: 20px 50px;
+    justify-items: center;
+}
+
+
+.content{
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    grid-gap: 10px;
+
+    max-width: 320px;
+    text-align: center;
+
+    input, .form-group{
+        width: 100%;
+        max-width: none;
+    }
+}
+
+.title{
+    font-weight: 600;
+    font-size: 22px;
+}
+
+.content-code{
+    text-align: start;
+    margin: 13px 0px;
+
+    .group-code{
+        display: flex;
+        gap: 10px;
+        input{
+            min-width: 70px;
+            font-size: 16px;
+            text-align: center;
+        }
+    }
+
+}
+
+.icon{
+    font-size: 20px;
+}

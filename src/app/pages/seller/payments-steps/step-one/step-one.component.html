@@ -1,0 +1,42 @@
+<div class="body" *ngIf="isVisible">
+    <div class="boxInfo">
+        <img src="../../../../../assets/steps/step-1.svg" alt="step-1">
+        <h2>Datos de facturación</h2>
+
+        <form [formGroup]="form" (ngSubmit)="continue()" style="margin-top: 50px;">
+            
+            <div class="inputBox">
+                <label>Nombre y apellido</label>
+                <input type="text" [ngClass]="{'error': submitted && g.name.errors?.required}" formControlName="name" placeholder="Nombre y apellido">
+                <small *ngIf="submitted && g.name.errors?.required">Este campo es requerido</small>
+            </div>
+            <div class="inputBox">
+                <label>Email</label>
+                <input type="email" [ngClass]="{'error': submitted && g.email.errors?.required || g.email.errors?.email}" formControlName="email" placeholder="xxxxxx@gmail.com">
+                <small *ngIf="submitted && g.email.errors?.required">Este campo es requerido</small>
+                <small *ngIf="submitted && g.email.errors?.email">Ingrese un Email valido</small>
+            </div>
+            <div class="inputBox">
+                <label>Número de contacto </label>
+                <input type="text"  [ngClass]="{'error': submitted && g.phone.errors?.required}" formControlName="phone" placeholder="xxxxxxx-xxxxxxx">
+                <small *ngIf="submitted && g.phone.errors?.required">Este campo es requerido</small>
+            </div>
+            <div class="inputBox">
+                <label>País de residencia</label>
+                <select formControlName="country" autocomplete="off" [ngClass]="{'error': submitted && g.country.errors?.required}">
+                    <option value="">Selecciona tu país de residencia</option>
+                    <option [value]="item.id" *ngFor="let item of market">{{item.nombre}} </option>
+                </select>
+                <small *ngIf="submitted && g.country.errors?.required">Este campo es requerido</small>
+            </div>
+
+            <div class="foot">
+                <button class="red" type="submit" id="button" [disabled]="!loading">
+                    <span *ngIf="loading">continuar</span>
+                    <span class="loader" *ngIf="!loading"></span>
+                </button>
+                <button class="light" type="button" routerLink="/seller/planes" >cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>

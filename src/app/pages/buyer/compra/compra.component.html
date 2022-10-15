@@ -1,0 +1,563 @@
+    <div class="temp-compra">
+
+        
+
+        <!-- !SECTION HEADER ==================================== -->
+        <div class="section-header">
+            <h1 class="font-500 text-black">Encuentra el vehículo que estás buscando</h1>
+            <div class="group-input-icon-left">
+                <span class="icon-search small "></span>
+                <input 
+                    type="text" 
+                    [(ngModel)]="search_bar.filter" 
+                    placeholder="Buscar  ej: Audi" 
+                    class="input-circle input-search"
+                    (keyup.enter)="res=[];Search(1)"
+                >
+            </div>
+        </div>
+
+
+        <!-- !SECTION FILTRO ==================================== -->
+        <div class="section-filtro" *ngIf="display_filter">
+            <div class="card card-filtro">
+                <div class="grid align-content-start gap-10">
+                    <button class="btn close" (click)="display_filter = !display_filter"> <span class="icon icon-x"></span> </button>
+                    <h1 class="text-black font-500">Filtrar por</h1>
+                    <button (click)="LimpiarFiltro()" class="btn color-rojo font-600">LIMPIAR FILTROS</button>
+                </div>
+
+                <div>
+                    <div class="section">
+                        <button (click)="dropDown(1)" >Tipo de vehículo <span class="icon icon-cheveron-down"></span></button>
+
+                        <div class="dropdown" id="1">
+                            <div class="radio-group">
+                                <input type="radio" [(ngModel)]="types_fil.type" (input)="SelectType('auto')" value="auto" name="tipo" id="0">
+                                <label for="0" class="form-icon" > <span class="icon icon-time_to_leave"></span> Auto</label>
+                            </div>
+
+                            <div class="radio-group">
+                                <input type="radio" [(ngModel)]="types_fil.type"  (input)="SelectType('moto')" value="moto"  name="tipo" id="2">
+                                <label for="2"  class="form-icon"> <span class="icon icon-moped"></span> Moto</label>
+                            </div>
+
+                            <div class="radio-group">
+                                <input type="radio"  [(ngModel)]="types_fil.type" (input)="SelectType('mobile-home')" value="mobile-home"  name="tipo" id="3">
+                                <label for="3"  class="form-icon"> <span class="icon icon-airport_shuttle"></span> Caravana</label>
+                            </div>
+
+                            <div class="radio-group">
+                                <input type="radio"  [(ngModel)]="types_fil.type"  (input)="SelectType('truck')" value="truck" name="tipo" id="4">
+                                <label for="4"  class="form-icon"> <span class="icon icon-truck"></span> Camión</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- * CARROCERIA -->
+                    <div class="section" *ngIf="filter.type !='truck'  && filter.type !='mobile-home'" >
+                        <button (click)="dropDown('body_type')" >Carrocería <span class="icon icon-cheveron-down"></span></button>
+
+                        <div class="dropdown" id="body_type">
+                            <button (click)="dropDown('select-body_type')" class="btn-select" > {{sel_body_type_name == ""? 'Cualquiera': sel_body_type_name}} <span class="icon icon-cheveron-down"></span></button>
+                            
+                            <div class="content-select " id="select-body_type">
+                                <div class="select-marca">
+                                    <div class="img">
+                                        <img loading="lazy"  [src]="'../../../assets/img/logo.svg'"(error)="onImgError($event)" alt="">
+                                    </div>
+                                    <button  [class]="filter.body_type_id == null?'select':''" (click)="sel_body_type_name = '';filter.body_type_id=null" > Cualquiera </button>
+                                </div>
+                                <div class="select-marca" *ngFor="let item of body_types; let i = index">
+                                    <div class="img">
+                                        <img loading="lazy"  [src]="CargarLogoBody(item)"(error)="onImgError($event)" alt="">
+                                    </div>
+                                    <button  [class]="filter.body_type_id == item.id?'select':''" (click)="filter.body_type_id = item.id;sel_body_type_name=item.external_name?item.external_name:item.internal_name;dropDown('select-body_type')" > {{item.external_name?item.external_name:item.internal_name}} </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- * CATEGORIA -->
+                    <div class="section" *ngIf="filter.type =='truck' ">
+                        <button (click)="dropDown('categoria')" >Categoría <span class="icon icon-cheveron-down"></span></button>
+
+                        <div class="dropdown" id="categoria">
+                            <button (click)="dropDown('select-categoria')" class="btn-select" > {{sel_category_name == ""? 'Cualquiera': sel_category_name}} <span class="icon icon-cheveron-down"></span></button>
+                            
+                            <div class="content-select " id="select-categoria">
+                                <div class="select-marca">
+                                    <button  [class]="sel_category_name == ''?'select':''" (click)="sel_category_name = '';filter.category=null" > Cualquiera </button>
+                                </div>
+                                <div class="select-marca" *ngFor="let item of categorias; let i = index">
+                                    <button class="notranslate"  [class]="sel_category_name == item.category?'select':''" (click)="sel_category_name=item.category;filter.category=item.category;GetSubCategoria();dropDown('select-categoria')" > {{item.category}} </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!-- * SUBCATEGORIA -->
+                    <div class="section" *ngIf="filter.type =='truck' || filter.type =='mobile-home'">
+                        <button (click)="dropDown('subcategoria')" > {{filter.type =='truck'? 'Sub Categoría':'Categoría'}} <span class="icon icon-cheveron-down"></span></button>
+
+                        <div class="dropdown" id="subcategoria">
+                            <button (click)="dropDown('select-subcategoria')" class="btn-select" > {{sel_subcategory_name == ""? 'Cualquiera': sel_subcategory_name}} <span class="icon icon-cheveron-down"></span></button>
+                            
+                            <div class="content-select " id="select-subcategoria">
+                                <div class="select-marca">
+                                    <button  [class]="sel_subcategory_name == ''?'select':''" (click)="sel_subcategory_name = '';filter.vehicle_category_id=null" > Cualquiera </button>
+                                </div>
+                                <div class="select-marca" *ngFor="let item of subcategorias; let i = index">
+                                    <button class="notranslate"  [class]="filter.vehicle_category_id == item.id?'select':''" (click)="sel_subcategory_name=item.internal_name;filter.vehicle_category_id=item.id; dropDown('select-subcategoria')" > {{item.internal_name}} </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- * MARCA -->
+                    <div class="section">
+                        <button (click)="dropDown('marca')" >Marca <span class="icon icon-cheveron-down"></span></button>
+
+                        <div class="dropdown" id="marca">
+                            <button (click)="dropDown('select-marca')" class="btn-select" > {{sel_marca_name == ""? 'Cualquiera': sel_marca_name}} <span class="icon icon-cheveron-down"></span></button>
+                            
+                            <div class="content-select " id="select-marca">
+                                <div class="select-marca">
+                                    <div class="img">
+                                        <img loading="lazy"  [src]="'../../../assets/img/logo.svg'"(error)="onImgError($event)" alt="">
+                                    </div>
+                                    <button  [class]="sel_marca == null?'select':''" (click)="sel_marca_name = '';sel_marca = null;modelos=[]" > Cualquiera </button>
+                                </div>
+                                <div class="select-marca" *ngFor="let item of marcas; let i = index">
+                                    <div class="img">
+                                        <img loading="lazy" [src]="CargarLogoMarca(item)"(error)="onImgError($event)" alt="">
+                                    </div>
+                                    <button class="notranslate" [class]="sel_marca == i?'select':''" (click)="GetModelos(item); sel_marca = i;dropDown('select-marca')" > {{item.name}} </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- * MODELO -->
+                    <div class="section">
+                        <button (click)="dropDown('modelo')">Modelo <span class="icon icon-cheveron-down"></span></button>
+                        <div class="dropdown" id="modelo">
+                            <button (click)="dropDown('select-modelo')" class="btn-select" > {{sel_modelo_name == ''? 'Cualquiera': sel_modelo_name}} <span class="icon icon-cheveron-down"></span></button>
+                            
+                            <div class="content-select" id="select-modelo">
+                                <button  [class]="sel_modelo == null?'select':''" (click)="sel_modelo_name='';sel_modelo = null" >  Cualquiera</button>
+                                <button class="notranslate" *ngFor="let item of modelos; let i = index" [class]="sel_modelo == i?'select':''" (click)="SelectModel(item);sel_modelo = i;dropDown('select-modelo')" > {{item.name}} </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- * PAIS -->
+                    <div class="section">
+                        <button (click)="dropDown('pais')">País <span class="icon icon-cheveron-down"></span></button>
+
+                        <div class="dropdown" id="pais">
+                            <button (click)="dropDown('select-pais')" class="btn-select" > {{filter.country == null? 'Cualquiera': filter.country}} <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="content-select" id="select-pais">
+                                <button [class]="filter.country == null?'select':''" (click)="filter.country = null;dropDown('select-pais')" >  Cualquiera </button>
+                                <button [class]="filter.country == 'Rumania'?'select':''" (click)="filter.country = 'Rumania';dropDown('select-pais')" >  Rumania </button>
+                                <button [class]="filter.country == 'España'?'select':''" (click)="filter.country = 'España';dropDown('select-pais')" >  España </button>
+                                <button [class]="filter.country == 'Alemania'?'select':''" (click)="filter.country = 'Alemania';dropDown('select-pais')" >  Alemania </button>
+                                <button [class]="filter.country == 'Italia'?'select':''" (click)="filter.country = 'Italia';dropDown('select-pais')" >  Italia </button>
+                                <button [class]="filter.country == 'Reino Unido'?'select':''" (click)="filter.country = 'Reino Unido';dropDown('select-pais')" >  Reino Unido </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- * CIUDAD -->
+                    <div class="section">
+                        <button (click)="dropDown('ciudad')">Ciudad <span class="icon icon-cheveron-down"></span></button>
+
+                        <div class="dropdown" id="ciudad">
+                            <input type="text" class="input-square" placeholder="Ciudad" [(ngModel)]="filter.city">
+
+                        </div>
+                    </div>
+                    
+                    <!-- * AÑO -->
+                    <div class="section">
+                        <button (click)="dropDown('anio')">Año <span class="icon icon-cheveron-down"></span></button>
+
+                        <div class="dropdown" id="anio">
+
+                            <!-- <input type="text" id="anio_desde" (blur)="SetAnio('anio_desde')" placeholder="Desde"  autocomplete="off" class="fecha" >
+                            <input type="text" id="anio_hasta" (blur)="SetAnio('anio_hasta')" placeholder="Hasta"  autocomplete="off" class="fecha" > -->
+                            <input type="text" placeholder="Desde" class="fecha" [(ngModel)]="filter.from_first_registration_year" (keypress)="SoloNumero($event)" (blur)="ValFormatAnio(1,true)" maxlength="4" >
+                            <input type="text" placeholder="Hasta" class="fecha" [(ngModel)]="filter.to_first_registration_year" (keypress)="SoloNumero($event)" (blur)="ValFormatAnio(1,false)" maxlength="4" >
+                            <span class="color-rojo" *ngIf="error_anio == 1" >*El año no puede ser menor a 4 dígitos *</span>
+                            <span class="color-rojo" *ngIf="error_anio == 2" >*Complete ambos campos*</span>
+                        </div>
+                    </div>
+
+                    <!-- * KILOMETRAJE -->
+                    <div class="section" >
+                        <button (click)="dropDown('distancia')">Kilometraje <span class="icon icon-cheveron-down"></span></button>
+
+                        <div class="dropdown" id="distancia">
+
+                            <div class="container-range">
+                                <div class="line-range" id="line-distancia"></div>
+                                <input type="range" (mousemove)="PintarRango('km')" [(ngModel)]="filter.from_mileage" id="rango-distancia-min" class="range" min="0" max="500000" value="0">
+                                <input type="range" (mousemove)="PintarRango('km')" [(ngModel)]="filter.to_mileage"   id="rango-distancia-max" class="range"min="0" max="500000" value="500000">
+                            </div>
+
+                            <div class="display-km">
+                                <input type="text" (keypress)="SoloNumero($event)" (keyup)="PintarRango('km')" maxlength="6" [(ngModel)]="filter.from_mileage" >
+                                <input type="text" (keypress)="SoloNumero($event)" (keyup)="PintarRango('km')" maxlength="6" style="text-align: end;"  [(ngModel)]="filter.to_mileage" >
+                                <!-- <span>{{filter.to_mileage}}</span>
+                                <span>{{filter.from_mileage}}</span> -->
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- * CONDICIÓN -->
+                    <div class="section">
+                        <button (click)="dropDown('condicion')">Condición <span class="icon icon-cheveron-down"></span></button>
+                        <div class="dropdown" id="condicion">
+                            <button (click)="dropDown('select-condicion')" class="btn-select" > {{filter.condition == null? 'Cualquiera': sel_condicion_name}} <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="content-select" id="select-condicion">
+                                <button  [class]="filter.condition == null?'select':''" (click)="filter.condition = null;dropDown('select-condicion')" > Cualquiera </button>
+                                <button  [class]="filter.condition == 'new'?'select':''" (click)="filter.condition = 'new';dropDown('select-condicion');sel_condicion_name = 'Nuevo'" > Nuevo </button>
+                                <button  [class]="filter.condition == 'used'?'select':''" (click)="filter.condition = 'used';sel_condicion_name = 'Usado';dropDown('select-condicion')"> Usado </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ng-container *ngIf="avanzada" >
+
+                        <!-- * PRECIO -->
+                        <div class="section">
+                            <button (click)="dropDown('precio')">Precio <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="dropdown" id="precio">
+
+                                <div class="container-range">
+                                    <div class="line-range" id="line-precio"></div>
+                                    <input type="range" (mousemove)="PintarRango('price')" [(ngModel)]="filter.from_price" id="rango-precio-min" class="range" min="500" max="5000000" value="500">
+                                    <input type="range" (mousemove)="PintarRango('price')" [(ngModel)]="filter.to_price" id="rango-precio-max" class="range"min="500" max="5000000" value="5000000">
+                                </div>
+                                <div class="display-km">
+                                    <input type="text" (keypress)="SoloNumero($event)" (keyup)="PintarRango('price')" maxlength="7" [(ngModel)]="filter.from_price" >
+                                    <input type="text" (keypress)="SoloNumero($event)" (keyup)="PintarRango('price')" maxlength="7" style="text-align: end;"  [(ngModel)]="filter.to_price" >
+                                    <!-- <span>{{filter.from_price}}€</span> -->
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- * COMBUSTIBLE -->
+                        <div class="section">
+                            <button (click)="dropDown('combustible')">Combustible <span class="icon icon-cheveron-down"></span></button>
+                            <div class="dropdown" id="combustible">
+                                <button (click)="dropDown('select-combustible')" class="btn-select" > {{filter.fuel_type_id == null? 'Cualquiera': sel_combustible_name}} <span class="icon icon-cheveron-down"></span></button>
+
+                                <div class="content-select" id="select-combustible">
+                                    <button [class]="filter.fuel_type_id == null?'select':''" (click)="filter.fuel_type_id = null;dropDown('select-combustible')" >  Cualquiera </button>
+                                    <button *ngFor="let item of types_fuel" [class]="filter.fuel_type_id == item.id?'select':''" (click)="filter.fuel_type_id = item.id;sel_combustible_name=item.external_name?item.external_name:item.internal_name;dropDown('select-combustible')" >  {{item.external_name?item.external_name:item.internal_name}} </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- * TRANSMISION -->
+                        <div class="section">
+                            <button (click)="dropDown('transmision')">Transmisión <span class="icon icon-cheveron-down"></span></button>
+                            <div class="dropdown" id="transmision">
+                                <button (click)="dropDown('select-transmision')" class="btn-select" > {{filter.transmission_type_id == null? 'Cualquiera': sel_transmision_name}} <span class="icon icon-cheveron-down"></span></button>
+
+                                <div class="content-select" id="select-transmision">
+                                    <button [class]="filter.transmission_type_id == null?'select':''" (click)="filter.transmission_type_id = null;dropDown('select-transmision')" >  Cualquiera </button>
+                                    <button *ngFor="let item of types_trans" [class]="filter.transmission_type_id == item.id?'select':''" (click)="filter.transmission_type_id = item.id;sel_transmision_name =item.external_name?item.external_name:item.internal_name ;dropDown('select-transmision')" >  {{item.external_name?item.external_name:item.internal_name}} </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- * TRACCION -->
+                        <div class="section">
+                            <button (click)="dropDown('traccion')">Tracción <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="dropdown" id="traccion">
+                                <button (click)="dropDown('select-traccion')" class="btn-select" > {{filter.drive_type_id == null? 'Cualquiera': sel_traccion_name}} <span class="icon icon-cheveron-down"></span></button>
+
+                                <div class="content-select" id="select-traccion">
+                                    <button [class]="filter.drive_type_id == null?'select':''" (click)="filter.drive_type_id = null;dropDown('select-traccion')" >  Cualquiera </button>
+                                    <button *ngFor="let item of types_tracc" [class]="filter.drive_type_id == item.id?'select':''" (click)="filter.drive_type_id = item.id;sel_traccion_name = item.external_name?item.external_name:item.internal_name;dropDown('select-traccion') " >  {{item.external_name?item.external_name:item.internal_name}} </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- * POTENCIA -->
+                        <div class="section">
+                            <button (click)="dropDown('potencia')">Potencia (HP) <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="dropdown" id="potencia">
+
+                                <input type="text" placeholder="Potencia (HP) desde" (keypress)="SoloNumero($event)" (blur)="ValFormatAnio(2,true)" [(ngModel)]="filter.from_power_hp" autocomplete="off" class="fecha" >
+                                <input type="text" placeholder="Potencia (HP) hasta" (keypress)="SoloNumero($event)" (blur)="ValFormatAnio(2,false)" [(ngModel)]="filter.to_power_hp"  autocomplete="off" class="fecha" >
+                                <span class="color-rojo" *ngIf="error_pot == 2" >*Complete ambos campos*</span>
+                            </div>
+                        </div>
+
+                        <!-- * CAPACIDAD CILINDRICA -->
+                        <div class="section">
+                            <button (click)="dropDown('cilindro')">Capacidad cilíndrica <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="dropdown" id="cilindro">
+                                <input type="text" placeholder="Capacidad cilíndrica desde" (keypress)="SoloNumero($event)" (blur)="ValFormatAnio(3,true)" [(ngModel)]="filter.from_engine_displacement" autocomplete="off" class="fecha" >
+                                <input type="text" placeholder="Capacidad cilíndrica hasta" (keypress)="SoloNumero($event)" (blur)="ValFormatAnio(3,false)" [(ngModel)]="filter.to_engine_displacement"  autocomplete="off" class="fecha" >
+                                <span class="color-rojo" *ngIf="error_cil == 2" >*Complete ambos campos*</span>
+                            </div>
+                        </div>
+
+                        <!-- * COLOR EXT -->
+                        <div class="section">
+                            <button (click)="dropDown('color_ext')">Color exterior <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="dropdown" id="color_ext">
+                                <input type="text" placeholder="Color" (keypress)="SoloLetra($event)" [(ngModel)]="filter.exterior_color" autocomplete="off" class="fecha" >
+                            </div>
+                        </div>
+
+                        <!-- * COLOR INT -->
+                        <div class="section">
+                            <button (click)="dropDown('color_int')">Color interior <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="dropdown" id="color_int">
+                                <input type="text" placeholder="Color" (keypress)="SoloLetra($event)" [(ngModel)]="filter.interior_color" autocomplete="off" class="fecha" >
+                            </div>
+                        </div>
+
+
+                        <div class="section">
+                            <button (click)="dropDown('dealer')">Vendedor <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="dropdown" id="dealer">
+                                <input type="text" class="input-square" placeholder="Vendedor" [(ngModel)]="filter.dealer">
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <button (click)="dropDown('inspeccion')">Inspección validada <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="dropdown" id="inspeccion">
+                                <input type="text" placeholder="Año ej: 2010" maxlength="4" [(ngModel)]="filter.inspection_valid_until_year" value="" (keypress)="SoloNumero($event)" class="input-circle">
+                                <select type="text" placeholder="Mes ej: 04" maxlength="2" [(ngModel)]="filter.inspection_valid_until_month" (keypress)="SoloNumero($event)"  class="input-circle">
+                                    <option [value]="null">Cualquiera</option>
+                                    <option [value]="01">Enero</option>
+                                    <option [value]="02">Febrero</option>
+                                    <option [value]="03">Marzo</option>
+                                    <option [value]="04">Abril</option>
+                                    <option [value]="05">Mayo</option>
+                                    <option [value]="06">Junio</option>
+                                    <option [value]="07">Julio</option>
+                                    <option [value]="08">Agosto</option>
+                                    <option [value]="09">Septiembre</option>
+                                    <option [value]="10">Octubre</option>
+                                    <option [value]="11">Noviembre</option>
+                                    <option [value]="12">Diciembre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <button (click)="dropDown('puertas')">Puertas <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="dropdown" id="puertas">
+                                <button (click)="dropDown('select-puertas')" class="btn-select" > {{filter.doors == null? 'Cualquiera': sel_puertas_name}} <span class="icon icon-cheveron-down"></span></button>
+
+                                <div class="content-select" id="select-puertas">
+                                    <button  [class]="filter.doors == null?'select':''" (click)="filter.doors = null;sel_puertas_name='Cualquiera';dropDown('select-puertas')" >  Cualquiera</button>
+                                    <button [class]="filter.doors == 3?'select':''" (click)="filter.doors = 3;sel_puertas_name='2/3';dropDown('select-puertas')" > 2/3 </button>
+                                    <button [class]="filter.doors == 5?'select':''" (click)="filter.doors = 5;sel_puertas_name='4/5';dropDown('select-puertas')" > 4/5 </button>
+                                    <button [class]="filter.doors == 7?'select':''" (click)="filter.doors = 7;sel_puertas_name='6/7';dropDown('select-puertas')" > 6/7 </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="section">
+                            <button (click)="dropDown('plazas')">Plazas <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="dropdown" id="plazas">
+                                <input type="text" placeholder="Plazas" maxlength="2" dataType="numeric" (keypress)="SoloNumero($event)" [(ngModel)]="filter.seats" autocomplete="off" class="fecha" >
+                            </div>
+                        </div>
+
+                        <div class="section">
+
+                            <button (click)="dropDown('consumo')" >Consumo de combustible <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="dropdown" id="consumo">
+                                <button (click)="dropDown('select-consumo')" class="btn-select" > {{sel_consumo_name == ""? 'Cualquiera': sel_consumo_name}} <span class="icon icon-cheveron-down"></span></button>
+                                
+                                <div class="content-select " id="select-consumo">
+                                    <div class="select-consumo">
+                                        <button  [class]="filter.fuel_consumption == null?'select':''" (click)="sel_consumo_name = '';filter.fuel_consumption = null" > Cualquiera </button>
+
+                                        <button  [class]="filter.fuel_consumption == 3?'select':''" (click)="filter.fuel_consumption = 3;sel_consumo_name='Hasta 3 l/100km';dropDown('select-consumo')"  > Hasta 3 l/100km</button>
+                                        <button  [class]="filter.fuel_consumption == 5?'select':''" (click)="filter.fuel_consumption = 5;sel_consumo_name='Hasta 5 l/100km';dropDown('select-consumo')"  > Hasta 5 l/100km</button>
+                                        <button  [class]="filter.fuel_consumption == 6?'select':''" (click)="filter.fuel_consumption = 6;sel_consumo_name='Hasta 6 l/100km';dropDown('select-consumo')"  > Hasta 6 l/100km</button>
+                                        <button  [class]="filter.fuel_consumption == 7?'select':''" (click)="filter.fuel_consumption = 7;sel_consumo_name='Hasta 7 l/100km';dropDown('select-consumo')"  > Hasta 7 l/100km</button>
+                                        <button  [class]="filter.fuel_consumption == 8?'select':''" (click)="filter.fuel_consumption = 8;sel_consumo_name='Hasta 8 l/100km';dropDown('select-consumo')"  > Hasta 8 l/100km</button>
+                                        <button  [class]="filter.fuel_consumption == 9?'select':''" (click)="filter.fuel_consumption = 9;sel_consumo_name='Hasta 9 l/100km';dropDown('select-consumo')"  > Hasta 9 l/100km</button>
+                                        <button  [class]="filter.fuel_consumption == 10?'select':''" (click)="filter.fuel_consumption = 10;sel_consumo_name='Hasta 10 l/100km';dropDown('select-consumo')" > Hasta 10 l/100km</button>
+                                        <button  [class]="filter.fuel_consumption == 11?'select':''" (click)="filter.fuel_consumption = 11;sel_consumo_name='Hasta 11 l/100km';dropDown('select-consumo')" > Hasta 11 l/100km</button>
+                                        <button  [class]="filter.fuel_consumption == 12?'select':''" (click)="filter.fuel_consumption = 12;sel_consumo_name='Hasta 12 l/100km';dropDown('select-consumo')"  > Hasta 12 l/100km</button>
+                                        <button  [class]="filter.fuel_consumption == 15?'select':''" (click)="filter.fuel_consumption = 15;sel_consumo_name='Hasta 15 l/100km';dropDown('select-consumo')"  > Hasta 15 l/100km</button>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section"  *ngIf="filter.type =='mobile-home'" >
+                            <button (click)="dropDown('sleep')">Lugares para dormir <span class="icon icon-cheveron-down"></span></button>
+
+                            <div class="dropdown" id="sleep">
+                                <input type="text" maxlength="2" (keypress)="SoloNumero($event)" class="input-square" placeholder="Lugares para dormir" [(ngModel)]="filter.sleeping_places">
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <button class="btn btn-block btn-primary" (click)="avanzada = !avanzada" >{{avanzada?'BÚSQUEDA SENCILLA':'BÚSQUEDA AVANZADA'}}</button>
+                <button class="btn btn-block btn-filtrar" (click)="Filtrar(1)" >FILTRAR</button>
+
+
+            </div>
+
+            <div class="card card-comparar">
+                <button (click)="openComparar()" class="btn btn-block btn-secondary">COMPARAR</button>
+
+                <h4>{{length_comparar}} artículos agregados <span *ngIf="length_comparar == 2" >(full)</span> </h4>
+
+            </div>
+        </div>
+
+
+        <!-- !SECTION CONTENT ==================================== -->
+        <div class="section-content">   
+            
+            <div class="grid gc-2x-g align-items-center">
+                <h3 *ngIf="!mobile">{{ res.total }} Resultados</h3>
+                <button *ngIf="mobile" class="btn-secondary btn-filter" (click)="display_filter = !display_filter" > <span class="icon icon-adjustments"></span> Filtrar</button>
+                <select class="justify-self-end" (change)="OrderBy(orderBy.value,0)" #orderBy name="" id="">
+                    <option value="0"  >Ordenar</option>
+                    <option value="created_new" selected >Más nuevos</option>
+                    <option value="created_old" >Más antiguos</option>
+                    <option value="lowprice" >Menor precio</option>
+                    <option value="hightprice"  >Mayor precio</option>
+                </select>
+            </div>
+            <h3 *ngIf="mobile">{{ count }} Resultados</h3>
+
+            <div class="content">
+                <h1 class="font-600 text-black" *ngIf="res?.total == 0 || res?.count == 0" >No encontramos resultados para la búsqueda, <br> inténtalo de nuevo</h1>
+
+                <div   *ngFor="let info of res.data | paginate: { itemsPerPage: res?.per_page, currentPage: res?.current_page,totalItems: res?.total }; let i =index" class="card card-carousel">
+                    <div class="card-carousel-img">
+                        <div class="card-carousel-top-img">
+                            <button class="btn" (click)="AddComparar(info, $event)" >+ COMPARAR</button>
+                            <button class="btn " [class]="filterMark(info.ad_id)?'btn-bookmark-primary':'btn-bookmark'"  [id]="'btn'+i" (click)="SelectMark(info,i)"><span class="icon-bookmark text-black"></span></button>
+                        </div>
+                        <a routerLink="comprar" [queryParams]="CreateRoute(info)">
+                            <img loading="lazy"  (click)="GoShow(info)" [src]="GetThumb(info?.ad?.thumbnail)"  (error)="onImgError($event)"  alt="">
+                        </a>
+
+                        <div class="section-media">
+
+                            <div class="card-media">
+                                <img loading="lazy"  src="../../../../assets/img/icon-photo.png" alt="">
+                                <span class="notranslate"> {{ GetLength(info?.ad)}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-carousel-body">
+                        <h3 class="title notranslate"> {{info?.ad?.title}}  </h3>
+                        <div class="content-body text-start">
+                            <h5> <span class="font-600"> Marca:</span> {{info.make?.name}}, </h5>
+                            <h5><span class="font-600"> Modelo:</span> {{info.ad.type == 'truck'?info.model:info.model?.name }},</h5>
+                            <h5  *ngIf="info?.ad?.type != 'mobile-home' && info?.ad?.type != 'truck'"><span class="font-600"> Carrocería:</span> {{ info.body_type?.external_name }},</h5>
+                            <h5><span class="font-600"> Año:</span> {{info.first_registration_year}},</h5>
+                            <h5><span class="font-600"> KM:</span> {{info.mileage}}, </h5>
+                            <h5><span class="font-600"> Combustible:</span> {{info.fuel_type?.external_name}},</h5>
+                        </div>
+                        <h5><span class="font-600"> Caja de cambio:</span> {{ info.transmission_type?.external_name }}</h5>
+
+                    </div>
+                    
+                    <div class="card-carousel-footer">
+                        <div class="footer-contact">
+                            <h2 class="font-600 notranslate text-black"> {{GetPrice(info.price)}} €</h2>
+
+                            <div class="contact">
+
+                                <a [attr.href]="info?.dealer_show_room?.whatsapp_number ? 'https://wa.me/' + info?.dealer_show_room?.whatsapp_number : null">
+                                    <img [src]="info?.dealer_show_room?.whatsapp_number ? '/assets/img/btn-wsp.png' : '/assets/img/btn-wsp-dis.png'" alt=""> 
+                                </a> 
+                                <a [href]="'tel:'+ info?.dealer_show_room?.mobile_number"><img loading="lazy"  src="/assets/img/btn-phone.png" alt=""> </a> 
+                            </div>
+                        </div>
+
+                        <div class="dealer">
+                            <img loading="lazy"  [src]="CargarThumbDealer(info?.dealer?.logo_path)" alt="">
+
+                            <div class="info-dealer">
+                                <div class="stast">
+                                    <h4 (click)="GoToDealer(info?.dealer?.id)" class="notranslate"> {{info?.dealer?.company_name}} </h4>
+                                    <span class="color-rojo"> {{info?.ad?.user?.type == 'Profesional'? info?.dealer?.review_ratings:info?.ad?.user?.review_ratings}} <span class="icon-star color-rojo"></span></span>
+                                </div>
+                                
+                                <div style="display: flex;">
+                                    <h4> {{info?.dealer?.zip_code}}, </h4>
+                                    <h4 class="notranslate" > {{info?.dealer?.city}} / {{info?.dealer?.country}}</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+
+                
+                
+            </div>
+            <div class="load"  *ngIf="loading">
+                <div class="content-car-load">
+                    <div class="car-load"></div>
+                </div>
+                <div class="content-load-bar">
+                    <div class="load-bar"></div>
+                </div>
+            </div>
+
+            <pagination-controls 
+                style="
+                    display: grid;
+                    justify-content: center;
+                "
+                *ngIf="res.total"
+                (pageChange)="pageChanged($event)"
+                previousLabel=""
+                nextLabel=""
+            >
+            </pagination-controls>
+
+        </div>
+
+    </div>
+
+
+    

@@ -1,0 +1,31 @@
+<div class="body" *ngIf="isVisible">
+    <div class="boxInfo">
+        <h2>Selecciona el método de pago</h2>
+
+        <div class="row" style="margin-top: 50px;">
+            <label>
+                <input type="radio" name="radio" [(ngModel)]="typePayment" checked value="1"/>
+                <span>Pago con tarjeta crédito/débito</span>
+                <img src="../../../../assets/iconos/credit-card.svg" alt="">
+            </label>
+            <label>
+                <input type="radio" name="radio" value="2" [(ngModel)]="typePayment"/>
+                <span>Pago con tarjeta transferencia bancaria</span>
+                <img src="../../../../assets/iconos/bank.svg" alt="">
+            </label>
+            <label>
+                <input type="radio" name="radio" value="3" [(ngModel)]="typePayment"/>
+                <span>Pago con Paypal</span>
+                <img src="../../../../assets/iconos/paypal.svg" class="paypal">
+            </label>
+        </div>
+
+        <div class="foot">
+            <button class="red" (click)="emit()">
+                <span *ngIf="!loading">continuar</span>
+                <span class="loader" *ngIf="loading"></span>
+            </button>
+            <button class="light" (click)="back()">cancelar</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="over" *ngIf="modal" (click)="close()"></div>
+
+<div class="modalSM" *ngIf="modal">
+    <a (click)="close()"><img src="../../../assets/iconos/close-modal.svg"/></a>
+
+    <div class="boxBottns">
+        <h2>{{titleModal}}</h2>
+
+
+        <button *ngIf="type==1" (click)="type=2">servicios</button>
+        <button *ngIf="type==1" (click)="type=3">productos</button>
+
+        <button *ngIf="type==2" (click)="close()" routerLink="/seller/anuncio">servicio de taller</button>
+        <button *ngIf="type==2" (click)="close()" routerLink="/seller/alquiler">alquiler de vehículo</button>
+
+        <button *ngIf="type==3" (click)="close()" routerLink="/seller/recambios">venta de recambios</button>
+        <button *ngIf="type==3" (click)="close()" routerLink="/seller/sell-vehicle">venta de vehículo</button>
+        <!-- <button *ngIf="type==3" (click)="close()" routerLink="/seller/anuncio">venta de autopartes</button> -->
+    </div>
+</div>

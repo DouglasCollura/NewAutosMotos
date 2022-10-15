@@ -1,0 +1,42 @@
+@import "/src/assets/theme/variables";
+
+@media only screen and (max-width: 768px) {
+
+    .temp-comprar{
+
+        padding: 10px;
+
+        .section-info{
+            flex-direction: column;
+    
+            .info{
+                grid-gap: 30px;
+            }
+    
+            .section-photo{
+                grid-template-rows: auto 90px;
+                .photo-select{
+                    max-width: 600px;
+                    width: auto;
+                }
+            }
+
+            
+        }
+
+        .caracteristicas{
+            flex-direction: column !important;
+            gap: 15px;
+
+            div{
+                display: grid;
+                grid-gap: 10px;
+            }
+        }
+
+        .section-body{
+            width: 100%;
+        }
+    }
+
+}
