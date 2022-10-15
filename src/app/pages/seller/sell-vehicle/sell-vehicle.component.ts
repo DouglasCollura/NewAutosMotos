@@ -177,9 +177,11 @@ export class SellVehicleComponent implements OnInit {
           }
 
           if (this.type == 'auto') {
-
+            console.log("data")
+            console.log(data.data.id)
             this.formDatosVehiculos.controls['make_id'].setValue(JSON.parse(JSON.stringify(data)).data.auto_ad['make_id'])
             this.formDatosVehiculos.controls['model_id'].setValue(JSON.parse(JSON.stringify(data)).data.auto_ad['model']['id'])
+            this.formDatosVehiculos.controls['id'].setValue(data.data.id)
 
             this.Generacion2(JSON.parse(JSON.stringify(data)).data.auto_ad['model']['id'])
 
@@ -254,7 +256,7 @@ export class SellVehicleComponent implements OnInit {
 
             this.formDatosVehiculos.controls['generation_id'].setValue(JSON.parse(JSON.stringify(data)).data.moto_ad['generation_id'])
             this.formDatosVehiculos.controls['vehicle_category_id'].setValue(JSON.parse(JSON.stringify(data)).data.moto_ad['body_type_id'])
-
+            this.formDatosVehiculos.controls['id'].setValue(data.data.id)
             this.formDatosVehiculos.controls['condition'].setValue(JSON.parse(JSON.stringify(data)).data.moto_ad['condition'])
 
             let mes
@@ -311,7 +313,7 @@ export class SellVehicleComponent implements OnInit {
             this.formatFecha()
 
           } else if (this.type == 'truck') {
-
+            this.formDatosVehiculos.controls['id'].setValue(data.data.id)
             this.formDatosVehiculos.controls['make_id'].setValue(JSON.parse(JSON.stringify(data)).data.truck_ad['make_id'])
             this.formDatosVehiculos.controls['model_id'].setValue(JSON.parse(JSON.stringify(data)).data.truck_ad['model'])
 
@@ -383,7 +385,7 @@ export class SellVehicleComponent implements OnInit {
             /**AQUI VA LA CARAVANA */
             this.formDatosVehiculos.controls['make_id'].setValue(JSON.parse(JSON.stringify(data)).data.mobile_home_ad['make_id'])
             this.formDatosVehiculos.controls['model_id'].setValue(JSON.parse(JSON.stringify(data)).data.mobile_home_ad['custom_model'])
-
+            this.formDatosVehiculos.controls['id'].setValue(data.data.id)
             // this.Generacion2(JSON.parse(JSON.stringify(data)).data.mobile_home_ad['model']['id'])
 
             this.formDatosVehiculos.controls['generation_id'].setValue(JSON.parse(JSON.stringify(data)).data.mobile_home_ad['generation'])
@@ -450,7 +452,7 @@ export class SellVehicleComponent implements OnInit {
           }
 
           /** Carga edicion de detalle del anuncio */
-
+          console.log(JSON.parse(JSON.stringify(data)))
           // this.formDetallesAnuncio.controls['id'].setValue(JSON.parse(JSON.stringify(data)).data['id'])
           this.formDetallesAnuncio.controls['title'].setValue(JSON.parse(JSON.stringify(data)).data['title'])
           this.formDetallesAnuncio.controls['description'].setValue(JSON.parse(JSON.stringify(data)).data['description'])

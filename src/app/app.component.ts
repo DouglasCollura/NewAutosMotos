@@ -20,9 +20,24 @@ export class AppComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        // console.log($("#select-lang ").val('es|it'))
-        // $("#select-lang").trigger('change')
-
+        
+        let host:any = window.location.hostname.split('.')
+        if(host[host.length-1] == 'en'){
+            console.log($("#select-lang ").val('es|en'))
+            $("#select-lang").trigger('change')
+        }
+        if(host[host.length-1] == 'de'){
+            console.log($("#select-lang ").val('es|de'))
+            $("#select-lang").trigger('change')
+        }
+        if(host[host.length-1] == 'it'){
+            console.log($("#select-lang ").val('es|it'))
+            $("#select-lang").trigger('change')
+        }
+        if(host[host.length-1] == 'ro'){
+            console.log($("#select-lang ").val('es|ro'))
+            $("#select-lang").trigger('change')
+        }
         // $("#select-lang").change(()=>{
         //     this.lang =$("#select-lang option:selected").val()
 

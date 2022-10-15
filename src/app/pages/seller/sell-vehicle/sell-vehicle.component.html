@@ -1,259 +1,280 @@
-
-
 <div class="temp-signup">
     <h2 class="redVolver" routerLink="/seller/tienda">VOLVER A TIENDA</h2>
     <div class="content">
         <!-- <img src="../../../assets/img/logo.svg" alt=""> -->
 
         <div class="group-fases fasesGoup2">
-            <div class="circle" [class]="fase >=1?'active':''" > <span class="notranslate" >1</span> </div>
-            <hr class="hrNumber2"> 
+            <div class="circle" [class]="fase >=1?'active':''"> <span class="notranslate">1</span> </div>
+            <hr class="hrNumber2">
             <div class="circle" [class]="fase >=2?'active':''"> <span class="notranslate">2</span> </div>
-            <hr class="hrNumber2"> 
+            <hr class="hrNumber2">
             <div class="circle" [class]="fase >=3?'active':''"> <span class="notranslate">3</span> </div>
-            <hr class="hrNumber2"> 
+            <hr class="hrNumber2">
             <div class="circle" [class]="fase ==4?'active':''"><span class="notranslate">4</span> </div>
             <!-- <div class="line-2" [class]="fase ==3?'active':''"></div> -->
         </div>
 
-        
+
 
 
         <!-- ! FASE 1 ################ -->
-        <div class="grid" style="min-width:700px" >
-       
-            <h1 *ngIf="fase==1" class="text-black font-500" style="margin-right: auto;margin-bottom: 10px;">Datos del vehículo</h1>
-            <h1 *ngIf="fase==2" class="text-black font-500" style="margin-right: auto;margin-bottom: 10px;">Detalles del anuncio</h1>
-            <h1 *ngIf="fase==3" class="text-black font-500" style="margin-right: auto;margin-bottom: 10px;">Características</h1>
+        <div class="grid" style="min-width:700px">
+
+            <h1 *ngIf="fase==1" class="text-black font-500" style="margin-right: auto;margin-bottom: 10px;">Datos del
+                vehículo</h1>
+            <h1 *ngIf="fase==2" class="text-black font-500" style="margin-right: auto;margin-bottom: 10px;">Detalles del
+                anuncio</h1>
+            <h1 *ngIf="fase==3" class="text-black font-500" style="margin-right: auto;margin-bottom: 10px;">
+                Características</h1>
             <!-- <h2 class="text-black font-500" style="margin-right: auto;">Datos del vehiculo</h2> -->
-            <h1 *ngIf="fase==4" class="text-black font-500" style="margin-right: auto;margin-bottom: 10px;">Informacion de contacto</h1>
-<!--bloque 2-->
+            <h1 *ngIf="fase==4" class="text-black font-500" style="margin-right: auto;margin-bottom: 10px;">Informacion
+                de contacto</h1>
+            <!--bloque 2-->
 
-<form [formGroup]="formDatosVehiculos">
-    <h2 *ngIf="fase==1" style="color: black;">Datos principales</h2><br>
-    <small *ngIf="fase==1">Selecciona el tipo de vehículo</small>
-    <div class="card-filtro" *ngIf="fase==1">
-        <div class="top">
-         
+            <form [formGroup]="formDatosVehiculos">
+                <h2 *ngIf="fase==1" style="color: black;">Datos principales</h2><br>
+                <small *ngIf="fase==1">Selecciona el tipo de vehículo</small>
+                <div class="card-filtro" *ngIf="fase==1">
+                    <div class="top">
 
-            <button 
-                class="btn  btn-block" 
-                [class]="type=='auto'? 'btn-primary':'btn-primary-inv' " 
-                (click)="cargarTipo('auto')"
-            > <span class="icon-time_to_leave"></span> Auto</button>
-            <button 
-                class="btn btn-block"
-                [class]="type=='moto'? 'btn-primary':'btn-primary-inv' " 
-                (click)="cargarTipo('moto')"
-            > <span class="icon-moped"></span> Motos</button>
-            <button 
-                class="btnbtn-block"
-                [class]="type=='truck'? 'btn-primary':'btn-primary-inv' " 
-                (click)="cargarTipo('truck')"
-            > <span class="icon-truck"></span> Camión</button>
 
-            <button 
-                class="btn btn-block"
-                [class]="type=='MOBILE-HOME'? 'btn-primary':'btn-primary-inv' " 
-                (click)="cargarTipo('MOBILE-HOME')"
-            > <span class="icon-airport_shuttle"></span> Caravana</button>
-        </div>
-    </div>
-<div class="grid gc-2x-g gap-10" *ngIf="fase==1">
- 
-    <div>   
-    
+                        <button class="btn  btn-block" [class]="type=='auto'? 'btn-primary':'btn-primary-inv' "
+                            (click)="cargarTipo('auto')"> <span class="icon-time_to_leave"></span> Auto</button>
+                        <button class="btn btn-block" [class]="type=='moto'? 'btn-primary':'btn-primary-inv' "
+                            (click)="cargarTipo('moto')"> <span class="icon-moped"></span> Motos</button>
+                        <button class="btnbtn-block" [class]="type=='truck'? 'btn-primary':'btn-primary-inv' "
+                            (click)="cargarTipo('truck')"> <span class="icon-truck"></span> Camión</button>
 
-        <div class="form-group">
-            <label>Marca</label>
-            <select class="select-square" formControlName="make_id"  [ngClass]="{ 'errorCampos': d.make_id.errors }" name="" id="" (change)="obtenerModelo($event)">
-                <option value="" >  Selecciona la marca</option>
-                <option [value]="marca.id" *ngFor="let marca of marcas">  {{marca.name}} </option>
-           
- 
-            </select>
-        </div>
-     
-    
+                        <button class="btn btn-block" [class]="type=='MOBILE-HOME'? 'btn-primary':'btn-primary-inv' "
+                            (click)="cargarTipo('MOBILE-HOME')"> <span class="icon-airport_shuttle"></span>
+                            Caravana</button>
+                    </div>
+                </div>
+                <div class="grid gc-2x-g gap-10" *ngIf="fase==1">
 
-        <div class="form-group" >
-            <label>{{is_camion || is_caravana ? 'Categoría' : 'Carrocería'}}</label>
-            <select class="select-square"  formControlName="vehicle_category_id" [ngClass]="{ 'errorCampos': d.vehicle_category_id.errors }" name="" id="" (change)="subcategorias($event)">
-                <option value="" > {{is_camion || is_caravana ? 'Selecciona la categoría' : 'Selecciona la carrocería' }}</option>
-                <option [value]="is_camion ? modelo.category : modelo.id" *ngFor="let modelo of categorias">  {{is_camion ? modelo.category :  is_caravana ? modelo.internal_name : modelo.external_name }} </option>
-           
- 
-            </select>
-           
-        </div>
+                    <div>
 
-        <div class="form-group ">
-            <label>Fecha de la primera matriculación</label>
-            <input type="date" class="input-square" [ngClass]="{ 'errorCampos': d.matriculacion.errors }" formControlName="matriculacion" placeholder="Seleccionar la fecha" (change)="formatFecha()">
-        </div>
 
-        <div class="form-group ">
-            <label>Kilometraje</label>
-            <input type="text" class="input-square" (keypress)="validateNo($event)"  [ngClass]="{ 'errorCampos': d.mileage.errors }" formControlName="mileage" placeholder="Cantidad de KM del vehículo" >
-        </div>
+                        <div class="form-group">
+                            <label>Marca</label>
+                            <select class="select-square" formControlName="make_id"
+                                [ngClass]="{ 'errorCampos': d.make_id.errors }" name="" id=""
+                                (change)="obtenerModelo($event)">
+                                <option value=""> Selecciona la marca</option>
+                                <option [value]="marca.id" *ngFor="let marca of marcas"> {{marca.name}} </option>
 
-        <div class="form-group "  *ngIf="!is_moto">
-            <label>Color interior</label>
-            <select class="select-square" formControlName="interior_color" [ngClass]="{ 'errorCampos': d.interior_color.errors }" name="" id="">
-                <option value="" >  Seleccione un color </option>
-                <option value="amarillo" >  Amarillo </option>
-                <option value="azul" >  Azul </option>
-                <option value="blanco" >  Blanco </option>
-                <option value="bronce" >  Bronce </option>
-                <option value="morado" >  Morado </option>
-                <option value="naranja" >  Naranja </option>
-                <option value="negro" >  Negro </option>
-                <option value="oro" >  Oro </option>
-                <option value="plata" >  Plata </option>
-                <option value="rojo" >  Rojo </option>
-                <option value="plata" >  Rosa </option>
-                <option value="verde" >  Verde </option>
-            </select>
-            <!-- <input type="text" class="input-square" [ngClass]="{ 'errorCampos': d.interior_color.errors }" formControlName="interior_color"  > -->
-        </div>
 
-        <div class="form-group ">
-            <label>Inspección válida hasta</label>
-            <input type="date" class="input-square" [ngClass]="{ 'errorCampos': d.inspeccion.errors }" formControlName="inspeccion" placeholder="Seleccionar la fecha" (change)="formatFechaRevision()">
-        </div>
-        
-    </div>
+                            </select>
+                        </div>
 
-    <div>
 
-        <div class="form-group">
-            <label>Modelo</label>
-            <select class="select-square" *ngIf="!is_camion && !is_caravana" formControlName="model_id" [ngClass]="{ 'errorCampos': d.model_id.errors }" name="" id="" (change)="Generacion($event)">
-                <option value="" >  Selecciona el modelo</option>
-                <option [value]="modelo.id" *ngFor="let modelo of modelos">  {{modelo.name}} </option>
-            </select>
-            <input type="text" *ngIf="is_camion || is_caravana" class="input-square" [ngClass]="{ 'errorCampos': d.model_id.errors }" formControlName="model_id" >
-        </div>
 
-        <div class="form-group" *ngIf="is_camion">
-            <label>SubCategoria</label>
-            <select class="select-square"  formControlName="truck_type" [ngClass]="{ 'errorCampos': d.truck_type.errors }" name="" id="" >
-                <option value="" >  Selecciona la subcategoria</option>
-                <option [value]="modelo.id" *ngFor="let modelo of subcate">  {{modelo.internal_name}} </option>
-           
- 
-            </select>
-           
-        </div>
+                        <div class="form-group">
+                            <label>{{is_camion || is_caravana ? 'Categoría' : 'Carrocería'}}</label>
+                            <select class="select-square" formControlName="vehicle_category_id"
+                                [ngClass]="{ 'errorCampos': d.vehicle_category_id.errors }" name="" id=""
+                                (change)="subcategorias($event)">
+                                <option value=""> {{is_camion || is_caravana ? 'Selecciona la categoría' : 'Selecciona
+                                    la carrocería' }}</option>
+                                <option [value]="is_camion ? modelo.category : modelo.id"
+                                    *ngFor="let modelo of categorias"> {{is_camion ? modelo.category : is_caravana ?
+                                    modelo.internal_name : modelo.external_name }} </option>
 
-  
-        
-        <div class="form-group" *ngIf="!is_moto && !is_camion">
-            <label>Generación</label>
-            <select *ngIf="!is_caravana" class="select-square" formControlName="generation_id" [ngClass]="{ 'errorCampos': d.generation_id.errors }" name="" id="" >
-                <option value="null" >  Selecciona generación</option>
-                <option [value]="genera.id" *ngFor="let genera of generacion">  {{genera.name}} </option>
-           
- 
-            </select>
-            <input *ngIf="is_caravana" type="text" class="input-square" placeholder="" formControlName="generation_id"  >
-        </div>
-        
-        <div class="form-group">
-            <label>Estado</label>
-            <select class="select-square" formControlName="condition" [ngClass]="{ 'errorCampos': d.condition.errors }" name="" id="">
-                <option value="" >  Selecciona estado del vehículo </option>
-                <option value="new" >  Nuevo </option>
-                <option value="used" >  Usado </option>
-            </select>
-        </div>
 
-        <div class="form-group " >
-            <label>Color exterior</label>
-            <select class="select-square" formControlName="exterior_color" [ngClass]="{ 'errorCampos': d.exterior_color.errors }" name="" id="">
-                <option value="" >  Seleccione un color </option>
-                <option value="amarillo" >  Amarillo </option>
-                <option value="azul" >  Azul </option>
-                <option value="blanco" >  Blanco </option>
-                <option value="bronce" >  Bronce </option>
-                <option value="morado" >  Morado </option>
-                <option value="naranja" >  Naranja </option>
-                <option value="negro" >  Negro </option>
-                <option value="oro" >  Oro </option>
-                <option value="plata" >  Plata </option>
-                <option value="rojo" >  Rojo </option>
-                <option value="plata" >  Rosa </option>
-                <option value="verde" >  Verde </option>
-            </select>
+                            </select>
 
-     
-            <!-- <input type="text" class="input-square" [ngClass]="{ 'errorCampos': d.exterior_color.errors }" formControlName="exterior_color"  > -->
-        </div>
+                        </div>
 
-        <!-- <div class="form-group ">
+                        <div class="form-group ">
+                            <label>Fecha de la primera matriculación</label>
+                            <input type="date" class="input-square"
+                                [ngClass]="{ 'errorCampos': d.matriculacion.errors }" formControlName="matriculacion"
+                                placeholder="Seleccionar la fecha" (change)="formatFecha()">
+                        </div>
+
+                        <div class="form-group ">
+                            <label>Kilometraje</label>
+                            <input type="text" class="input-square" (keypress)="validateNo($event)"
+                                [ngClass]="{ 'errorCampos': d.mileage.errors }" formControlName="mileage"
+                                placeholder="Cantidad de KM del vehículo">
+                        </div>
+
+                        <div class="form-group " *ngIf="!is_moto">
+                            <label>Color interior</label>
+                            <select class="select-square" formControlName="interior_color"
+                                [ngClass]="{ 'errorCampos': d.interior_color.errors }" name="" id="">
+                                <option value=""> Seleccione un color </option>
+                                <option value="amarillo"> Amarillo </option>
+                                <option value="azul"> Azul </option>
+                                <option value="blanco"> Blanco </option>
+                                <option value="bronce"> Bronce </option>
+                                <option value="morado"> Morado </option>
+                                <option value="naranja"> Naranja </option>
+                                <option value="negro"> Negro </option>
+                                <option value="oro"> Oro </option>
+                                <option value="plata"> Plata </option>
+                                <option value="rojo"> Rojo </option>
+                                <option value="plata"> Rosa </option>
+                                <option value="verde"> Verde </option>
+                            </select>
+                            <!-- <input type="text" class="input-square" [ngClass]="{ 'errorCampos': d.interior_color.errors }" formControlName="interior_color"  > -->
+                        </div>
+
+                        <div class="form-group ">
+                            <label>Inspección válida hasta</label>
+                            <input type="date" class="input-square" [ngClass]="{ 'errorCampos': d.inspeccion.errors }"
+                                formControlName="inspeccion" placeholder="Seleccionar la fecha"
+                                (change)="formatFechaRevision()">
+                        </div>
+
+                    </div>
+
+                    <div>
+
+                        <div class="form-group">
+                            <label>Modelo</label>
+                            <select class="select-square" *ngIf="!is_camion && !is_caravana" formControlName="model_id"
+                                [ngClass]="{ 'errorCampos': d.model_id.errors }" name="" id=""
+                                (change)="Generacion($event)">
+                                <option value=""> Selecciona el modelo</option>
+                                <option [value]="modelo.id" *ngFor="let modelo of modelos"> {{modelo.name}} </option>
+                            </select>
+                            <input type="text" *ngIf="is_camion || is_caravana" class="input-square"
+                                [ngClass]="{ 'errorCampos': d.model_id.errors }" formControlName="model_id">
+                        </div>
+
+                        <div class="form-group" *ngIf="is_camion">
+                            <label>SubCategoria</label>
+                            <select class="select-square" formControlName="truck_type"
+                                [ngClass]="{ 'errorCampos': d.truck_type.errors }" name="" id="">
+                                <option value=""> Selecciona la subcategoria</option>
+                                <option [value]="modelo.id" *ngFor="let modelo of subcate"> {{modelo.internal_name}}
+                                </option>
+
+
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="form-group" *ngIf="!is_moto && !is_camion">
+                            <label>Generación</label>
+                            <select *ngIf="!is_caravana" class="select-square" formControlName="generation_id"
+                                [ngClass]="{ 'errorCampos': d.generation_id.errors }" name="" id="">
+                                <option value="null"> Selecciona generación</option>
+                                <option [value]="genera.id" *ngFor="let genera of generacion"> {{genera.name}} </option>
+
+
+                            </select>
+                            <input *ngIf="is_caravana" type="text" class="input-square" placeholder=""
+                                formControlName="generation_id">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Estado</label>
+                            <select class="select-square" formControlName="condition"
+                                [ngClass]="{ 'errorCampos': d.condition.errors }" name="" id="">
+                                <option value=""> Selecciona estado del vehículo </option>
+                                <option value="new"> Nuevo </option>
+                                <option value="used"> Usado </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group ">
+                            <label>Color exterior</label>
+                            <select class="select-square" formControlName="exterior_color"
+                                [ngClass]="{ 'errorCampos': d.exterior_color.errors }" name="" id="">
+                                <option value=""> Seleccione un color </option>
+                                <option value="amarillo"> Amarillo </option>
+                                <option value="azul"> Azul </option>
+                                <option value="blanco"> Blanco </option>
+                                <option value="bronce"> Bronce </option>
+                                <option value="morado"> Morado </option>
+                                <option value="naranja"> Naranja </option>
+                                <option value="negro"> Negro </option>
+                                <option value="oro"> Oro </option>
+                                <option value="plata"> Plata </option>
+                                <option value="rojo"> Rojo </option>
+                                <option value="plata"> Rosa </option>
+                                <option value="verde"> Verde </option>
+                            </select>
+
+
+                            <!-- <input type="text" class="input-square" [ngClass]="{ 'errorCampos': d.exterior_color.errors }" formControlName="exterior_color"  > -->
+                        </div>
+
+                        <!-- <div class="form-group ">
             <label>Bastidor (opcional)</label>
             <input type="text" class="input-square"    formControlName="bastidor" placeholder="" >
         </div> -->
 
 
-    </div>
-    <div style="    margin-top: -60px; margin-bottom: 0px;">
-        <div class="form-group ">
-            <label>Información adicional del vehículo</label>
-            <textarea class="input-square" placeholder="Escribir aquí" formControlName="additional_vehicle_info" ></textarea>
-            
-        </div>
-    </div>
-    <br>
+                    </div>
+                    <div style="    margin-top: -60px; margin-bottom: 0px;">
+                        <div class="form-group ">
+                            <label>Información adicional del vehículo</label>
+                            <textarea class="input-square" placeholder="Escribir aquí"
+                                formControlName="additional_vehicle_info"></textarea>
 
-    
-
+                        </div>
+                    </div>
+                    <br>
 
 
-    <div     style="margin-bottom: 70px;"> 
-        
-        <h2 style="color:black;    font-weight: 600;">Datos técnicos</h2><br>
 
-        <div class="form-group">
-            <label>Combustible</label>
-            <select class="select-square" [ngClass]="{ 'errorCampos': d.ad_fuel_type_id.errors }" formControlName="ad_fuel_type_id" name="" id="">
-                <option value="" >  Selecciona tipo de combustible </option>
-                <option [value]="fue.id" *ngFor="let fue of fuel">  {{fue.external_name}} </option>
-           
- 
-            </select>
-        </div>
-     
-        <!-- <div class="form-group ">
+
+
+                    <div style="margin-bottom: 70px;">
+
+                        <h2 style="color:black;    font-weight: 600;">Datos técnicos</h2><br>
+
+                        <div class="form-group">
+                            <label>Combustible</label>
+                            <select class="select-square" [ngClass]="{ 'errorCampos': d.ad_fuel_type_id.errors }"
+                                formControlName="ad_fuel_type_id" name="" id="">
+                                <option value=""> Selecciona tipo de combustible </option>
+                                <option [value]="fue.id" *ngFor="let fue of fuel"> {{fue.external_name}} </option>
+
+
+                            </select>
+                        </div>
+
+                        <!-- <div class="form-group ">
             <label>Tracción (opcional)</label>
             <input type="text" class="input-square" placeholder="Tracción" formControlName="ad_drive_type_id"  >
         </div> -->
 
-        <div class="form-group">
-            <label>Tracción</label>
-            
-            <select class="select-square" formControlName="ad_drive_type_id"  name="" id="" >
-                <option value="" selected>Seleccione</option>
-                <option [value]="marke.id"  *ngFor="let marke of carrwheel">  {{marke.external_name}} </option>
-  
-            </select>
-        </div>
+                        <div class="form-group">
+                            <label>Tracción</label>
 
-        <div class="form-group ">
-            <label>Potencia (HP) (opcional)</label>
-            <input type="text" (keypress)="validateNo($event)" class="input-square" placeholder="Potencia (HP)" formControlName="power_hp"  >
-        </div>
+                            <select class="select-square" formControlName="ad_drive_type_id" name="" id="">
+                                <option value="" selected>Seleccione</option>
+                                <option [value]="marke.id" *ngFor="let marke of carrwheel"> {{marke.external_name}}
+                                </option>
 
-        <div class="form-group ">
-            <label>Emisiones CO2 (G/KM) (opcional)</label>
-            <input type="text" (keypress)="validateNo($event)" class="input-square" placeholder="Emisiones de CO2  (G/KM)" formControlName="co2_emissions"  >
-        </div>
-        <div class="form-group " *ngIf="!is_moto">
-            <label>Plazas (opcional)</label>
-            <input type="text" (keypress)="validateNo($event)" class="input-square" placeholder="Cantidad de plazas" formControlName="seats" (keypress)="validateNo($event)"  >
-        </div>
+                            </select>
+                        </div>
 
-        <!-- <div class="form-group ">
+                        <div class="form-group ">
+                            <label>Potencia (HP) (opcional)</label>
+                            <input type="text" (keypress)="validateNo($event)" class="input-square"
+                                placeholder="Potencia (HP)" formControlName="power_hp">
+                        </div>
+
+                        <div class="form-group ">
+                            <label>Emisiones CO2 (G/KM) (opcional)</label>
+                            <input type="text" (keypress)="validateNo($event)" class="input-square"
+                                placeholder="Emisiones de CO2  (G/KM)" formControlName="co2_emissions">
+                        </div>
+                        <div class="form-group " *ngIf="!is_moto">
+                            <label>Plazas (opcional)</label>
+                            <input type="text" (keypress)="validateNo($event)" class="input-square"
+                                placeholder="Cantidad de plazas" formControlName="seats"
+                                (keypress)="validateNo($event)">
+                        </div>
+
+                        <!-- <div class="form-group ">
             <button class="btn color-rojo" (click)="[SelectImg()]"> SUBIR LOGO </button>
             <div class="content-img">
                 <img [src]="user_imagen_show.img" *ngIf="user_imagen_show?.img" alt="">
@@ -261,223 +282,257 @@
             </div>
         </div> -->
 
-        
-    </div>
 
-    <div>
-<h2 style="    color: #fbfcfe;">.</h2><br>
-        <div class="form-group ">
-            <label>Transmisión</label>
-            
-            <select class="select-square" [ngClass]="{ 'errorCampos': d.ad_transmission_type_id.errors }"  formControlName="ad_transmission_type_id" name="" id="">
-                <option value="" >  Selecciona la transmisión </option>
-                <option [value]="transmita.id" *ngFor="let transmita of transmision">  {{transmita.external_name}} </option>
-           
- 
-            </select>
-      
-        </div>
-
-  
-        
-        <div class="form-group ">
-            <label>Capacidad cilindrica (cm3) (opcional)</label>
-            <input type="text" (keypress)="validateNo($event)" class="input-square" placeholder="Capacidad cilindrica (cm3)" formControlName="engine_displacement"  >
-        </div>
-        
-        <div class="form-group ">
-            <label>Consumo (L/100KM) (opcional)</label>
-            <input type="text" (keypress)="validateNo($event)" class="input-square" placeholder="Consumo (L/100KM)" formControlName="fuel_consumption"  >
-        </div>
-
-        <div class="form-group " *ngIf="!is_moto">
-            <label>Puertas (opcional)</label>
-            <select class="select-square" formControlName="doors" >
-                <option value="">Cantidad de puertas</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-
-            </select>
-            <!-- <input type="text" class="input-square" placeholder="Cantidad de puertas" (keypress)="validateNo($event)"  > -->
-        </div>
-
-        <div class="form-group " *ngIf="is_caravana">
-            <label>Lugares para dormir</label>
-            <input type="text" (keypress)="validateNo($event)" class="input-square" placeholder="Lugares para dormir" formControlName="sleeping_places" (keypress)="validateNo($event)"  >
-        </div>
-
-
-    </div>
-    
-</div>
-
-
-
-
-</form>
-<form [formGroup]="formDetallesAnuncio">
-            <!--bloque 3-->
-            <div class="grid  gap-10" *ngIf="fase==2">
-                <div>   
-                    <div class="form-group ">
-                        <label>Título</label><br>
-                        <input type="text" class="input-square" [ngClass]="{ 'errorCampos': c.title.errors }"  formControlName="title" placeholder="Título">
                     </div>
-                    <div class="form-group ">
-                        <label>Descripción</label>
-                        <textarea class="input-square" formControlName="description" [ngClass]="{ 'errorCampos': c.description.errors }"    placeholder="Escribir aquí"  name="" id="" cols="30" rows="5"></textarea>
-                    </div>
-                    <div class="form-group ">
-                        <label>Precio</label><br>
-                        <input type="text"  oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8" (keypress)="validateNo($event)" min="1" max="99999999" class="input-square" formControlName="price" [ngClass]="{ 'errorCampos': c.price.errors }"   placeholder="precio">
-                    </div>
-                    <div class="form-group " >
-                        
-                        <input type="checkbox" [checked]="c.price_contains_vat.value" style="vertical-align: bottom;" class="input-square claseInput" formControlName="price_contains_vat"   placeholder="precio">
-                        <label class="claseLabelCheck" style="margin-left: 10px;">IVA incluido</label>
-                    </div><br>
-                    <h2 style="color:black">Multimedia</h2>
-                    <br>
-                    <div class="form-group ">
-                        <label>Link youtube (opcional)</label><br>
-                        <input type="text" class="input-square" formControlName="youtube_link"   placeholder="pegar link">
-                    </div>
-                        <div class="form-group">
-                        <h6 class="color-rojo">Subir imágenes (3 mínimo)</h6>
-                        <button class="btn color-negro" (click)="SelectImg(img)" *ngIf="user_imagen_show.length < 30 "><i class="icon icon-upload"></i> SUBIR IMÁGENES </button>
-<!--                         <button class="btn color-rojo" (click)="[SelectImg()]" *ngIf="!user_imagen_show?.img"><i class="icon icon-upload"></i> SUBIR IMAGENES </button>
- -->
-                        <div class="content-img">
-                            <div class="img" *ngIf="thumbnail">
-                                <i class="icon icon-trash" (click)="delete(thumbnail, 1)"></i>
-                                <img [src]="'https://cdn.autosmotos.es/' + thumbnail" alt="">
-                            </div>
-                            <div class="img" *ngFor="let image of user_imagen_show2" >
-                                <i class="icon icon-trash" (click)="delete(image, 2)"></i>
-                                <img *ngIf="image.path" [src]=" 'https://cdn.autosmotos.es/' + image.path" alt="">
-                            </div>
-                            <div class="img" *ngFor="let image of user_imagen_show" >
-                                <i class="icon icon-trash" (click)="delete(image)"></i>
-                                <img *ngIf="image.img" [src]="image.img" alt="">
-                            </div>
-<!--                        <i class="icon icon-trash papeleraFoto" style="color: red !important;" (click)="delete()" *ngIf="user_imagen_show?.img"></i>
-                            <img [src]="user_imagen_show.img" *ngIf="user_imagen_show?.img" alt="">
-                            <img [src]="user_imagen_show2" *ngIf="user_imagen_show2" alt=""> -->
-                            <input #img type="file" id="img" (change)="CargarImagen($event)" style="display:none" accept="image/png, image/gif, image/jpeg" multiple="multiple">
+
+                    <div>
+                        <h2 style="    color: #fbfcfe;">.</h2><br>
+                        <div class="form-group ">
+                            <label>Transmisión</label>
+
+                            <select class="select-square"
+                                [ngClass]="{ 'errorCampos': d.ad_transmission_type_id.errors }"
+                                formControlName="ad_transmission_type_id" name="" id="">
+                                <option value=""> Selecciona la transmisión </option>
+                                <option [value]="transmita.id" *ngFor="let transmita of transmision">
+                                    {{transmita.external_name}} </option>
+
+
+                            </select>
+
                         </div>
+
+
+
+                        <div class="form-group ">
+                            <label>Capacidad cilindrica (cm3) (opcional)</label>
+                            <input type="text" (keypress)="validateNo($event)" class="input-square"
+                                placeholder="Capacidad cilindrica (cm3)" formControlName="engine_displacement">
+                        </div>
+
+                        <div class="form-group ">
+                            <label>Consumo (L/100KM) (opcional)</label>
+                            <input type="text" (keypress)="validateNo($event)" class="input-square"
+                                placeholder="Consumo (L/100KM)" formControlName="fuel_consumption">
+                        </div>
+
+                        <div class="form-group " *ngIf="!is_moto">
+                            <label>Puertas (opcional)</label>
+                            <select class="select-square" formControlName="doors">
+                                <option value="">Cantidad de puertas</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+
+                            </select>
+                            <!-- <input type="text" class="input-square" placeholder="Cantidad de puertas" (keypress)="validateNo($event)"  > -->
+                        </div>
+
+                        <div class="form-group " *ngIf="is_caravana">
+                            <label>Lugares para dormir</label>
+                            <input type="text" (keypress)="validateNo($event)" class="input-square"
+                                placeholder="Lugares para dormir" formControlName="sleeping_places"
+                                (keypress)="validateNo($event)">
+                        </div>
+
+
                     </div>
 
                 </div>
-            </div>
-</form>
-<form [formGroup]="formDetallesContacto">
-            <!--bloque 4-->
 
-            <div class="grid gc-2x-g gap-10" *ngIf="fase==4">
-                <div>   
-                    <div class="form-group ">
-                        <label>Nombre</label>
-                        <input type="text" class="input-square" [ngClass]="{ 'errorCampos': e.first_name.errors }" formControlName="first_name"    placeholder="nombre de contacto">
-                    </div>
-               
-    
-                    <div class="form-group ">
-                        <label>Dirección de correo</label>
-                        <input type="text" class="input-square" [ngClass]="{ 'errorCampos': e.email_address.errors }" formControlName="email_address"    placeholder="dirección de correo">
-                    </div>
-    
-                    <div class="form-group ">
-                        <label>Número de Whatsapp</label>
-                        <input type="text" class="input-square"  [ngClass]="{ 'errorCampos': e.whatsapp_number.errors }" formControlName="whatsapp_number" (keydown)="SoloNumero($event)"  placeholder="Número de Whatsapp">
-                    </div>
-    
-                    <div class="form-group ">
-                        <label>Código postal</label>
-                        <input type="text" class="input-square" [ngClass]="{ 'errorCampos': e.zip_code.errors }" formControlName="zip_code"  placeholder="Código postal">
-                    </div>
-                    <div class="form-group">
-                        <label>País</label>
-                        
-                        <select class="select-square" formControlName="country" [ngClass]="{ 'errorCampos': e.country.errors }"  name="" id="" >
-                            <option value="null" selected>Seleccione</option>
-                            <option [value]="marke.id"  *ngFor="let marke of market">  {{marke.nombre}} </option>
-              
-                        </select>
-                    </div>
 
-                    <!-- <div class="form-group ">
+
+
+            </form>
+            <form [formGroup]="formDetallesAnuncio">
+                <!--bloque 3-->
+                <div class="grid  gap-10" *ngIf="fase==2">
+                    <div>
+                        <div class="form-group ">
+                            <label>Título</label><br>
+                            <input type="text" class="input-square" [ngClass]="{ 'errorCampos': c.title.errors }"
+                                formControlName="title" placeholder="Título">
+                        </div>
+                        <div class="form-group ">
+                            <label>Descripción</label>
+                            <textarea class="input-square" formControlName="description"
+                                [ngClass]="{ 'errorCampos': c.description.errors }" placeholder="Escribir aquí" name=""
+                                id="" cols="30" rows="5"></textarea>
+                        </div>
+                        <div class="form-group ">
+                            <label>Precio</label><br>
+                            <input type="text"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                maxlength="8" (keypress)="validateNo($event)" min="1" max="99999999"
+                                class="input-square" formControlName="price"
+                                [ngClass]="{ 'errorCampos': c.price.errors }" placeholder="precio">
+                        </div>
+                        <div class="form-group ">
+
+                            <input type="checkbox" [checked]="c.price_contains_vat.value"
+                                style="vertical-align: bottom;" class="input-square claseInput"
+                                formControlName="price_contains_vat" placeholder="precio">
+                            <label class="claseLabelCheck" style="margin-left: 10px;">IVA incluido</label>
+                        </div><br>
+                        <h2 style="color:black">Multimedia</h2>
+                        <br>
+                        <div class="form-group ">
+                            <label>Link youtube (opcional)</label><br>
+                            <input type="text" class="input-square" formControlName="youtube_link"
+                                placeholder="pegar link">
+                        </div>
+                        <div class="form-group">
+                            <h6 class="color-rojo">Subir imágenes (3 mínimo)</h6>
+                            <button class="btn color-negro" (click)="SelectImg(img)"
+                                *ngIf="user_imagen_show.length < 30 "><i class="icon icon-upload"></i> SUBIR IMÁGENES
+                            </button>
+                            <!--                         <button class="btn color-rojo" (click)="[SelectImg()]" *ngIf="!user_imagen_show?.img"><i class="icon icon-upload"></i> SUBIR IMAGENES </button>
+ -->
+                            <div class="content-img">
+                                <div class="img" *ngIf="thumbnail">
+                                    <i class="icon icon-trash" (click)="delete(thumbnail, 1)"></i>
+                                    <img [src]="'https://cdn.autosmotos.es/' + thumbnail" alt="">
+                                </div>
+                                <div class="img" *ngFor="let image of user_imagen_show2">
+                                    <i class="icon icon-trash" (click)="delete(image, 2)"></i>
+                                    <img *ngIf="image.path" [src]=" 'https://cdn.autosmotos.es/' + image.path" alt="">
+                                </div>
+                                <div class="img" *ngFor="let image of user_imagen_show">
+                                    <i class="icon icon-trash" (click)="delete(image)"></i>
+                                    <img *ngIf="image.img" [src]="image.img" alt="">
+                                </div>
+                                <!--                        <i class="icon icon-trash papeleraFoto" style="color: red !important;" (click)="delete()" *ngIf="user_imagen_show?.img"></i>
+                            <img [src]="user_imagen_show.img" *ngIf="user_imagen_show?.img" alt="">
+                            <img [src]="user_imagen_show2" *ngIf="user_imagen_show2" alt=""> -->
+                                <input #img type="file" id="img" (change)="CargarImagen($event)" style="display:none"
+                                    accept="image/png, image/gif, image/jpeg" multiple="multiple">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+            <form [formGroup]="formDetallesContacto">
+                <!--bloque 4-->
+
+                <div class="grid gc-2x-g gap-10" *ngIf="fase==4">
+                    <div>
+                        <div class="form-group ">
+                            <label>Nombre</label>
+                            <input type="text" class="input-square" [ngClass]="{ 'errorCampos': e.first_name.errors }"
+                                formControlName="first_name" placeholder="nombre de contacto">
+                        </div>
+
+
+                        <div class="form-group ">
+                            <label>Dirección de correo</label>
+                            <input type="text" class="input-square"
+                                [ngClass]="{ 'errorCampos': e.email_address.errors }" formControlName="email_address"
+                                placeholder="dirección de correo">
+                        </div>
+
+                        <div class="form-group ">
+                            <label>Número de Whatsapp</label>
+                            <input type="text" class="input-square"
+                                [ngClass]="{ 'errorCampos': e.whatsapp_number.errors }"
+                                formControlName="whatsapp_number" (keydown)="SoloNumero($event)"
+                                placeholder="Número de Whatsapp">
+                        </div>
+
+                        <div class="form-group ">
+                            <label>Código postal</label>
+                            <input type="text" class="input-square" [ngClass]="{ 'errorCampos': e.zip_code.errors }"
+                                formControlName="zip_code" placeholder="Código postal">
+                        </div>
+                        <div class="form-group">
+                            <label>País</label>
+
+                            <select class="select-square" formControlName="country"
+                                [ngClass]="{ 'errorCampos': e.country.errors }" name="" id="">
+                                <option value="null" selected>Seleccione</option>
+                                <option [value]="marke.id" *ngFor="let marke of market"> {{marke.nombre}} </option>
+
+                            </select>
+                        </div>
+
+                        <!-- <div class="form-group ">
                         <button class="btn color-rojo" (click)="[SelectImg()]"> SUBIR LOGO </button>
                         <div class="content-img">
                             <img [src]="user_imagen_show.img" *ngIf="user_imagen_show?.img" alt="">
                             <input type="file" id="img" (change)="[CargarImagen($event)]" style="display:none" accept="image/png, image/gif, image/jpeg">
                         </div>
                     </div> -->
-    
-                    
+
+
+                    </div>
+
+                    <div>
+                        <div class="form-group ">
+                            <label>Apellido</label>
+                            <input type="text" class="input-square" formControlName="last_name"
+                                [ngClass]="{ 'errorCampos': e.last_name.errors }" placeholder="apellido">
+                        </div>
+
+
+
+                        <div class="form-group ">
+                            <label>Número de Teléfono</label>
+                            <input type="text" class="input-square" formControlName="mobile_number"
+                                (keydown)="SoloNumero($event)" [ngClass]="{ 'errorCampos': e.mobile_number.errors }"
+                                placeholder="Número de telefono">
+                        </div>
+
+                        <div class="form-group ">
+                            <label>Dirección</label>
+                            <input type="text" class="input-square" formControlName="address"
+                                [ngClass]="{ 'errorCampos': e.address.errors }" placeholder="Dirección">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ciudad</label>
+                            <input type="text" class="input-square" formControlName="city"
+                                [ngClass]="{ 'errorCampos': e.city.errors }" placeholder="Dirección">
+                        </div>
+
+
+                    </div>
                 </div>
-    
-                <div>
-                    <div class="form-group ">
-                        <label>Apellido</label>
-                        <input type="text" class="input-square" formControlName="last_name" [ngClass]="{ 'errorCampos': e.last_name.errors }"   placeholder="apellido">
-                    </div>
-    
-            
-    
-                    <div class="form-group ">
-                        <label>Número de Teléfono</label>
-                        <input type="text" class="input-square" formControlName="mobile_number" (keydown)="SoloNumero($event)" [ngClass]="{ 'errorCampos': e.mobile_number.errors }"   placeholder="Número de telefono">
-                    </div>
 
-                    <div class="form-group ">
-                        <label>Dirección</label>
-                        <input type="text" class="input-square" formControlName="address" [ngClass]="{ 'errorCampos': e.address.errors }"   placeholder="Dirección">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Ciudad</label>
-                        <input type="text" class="input-square" formControlName="city" [ngClass]="{ 'errorCampos': e.city.errors }"  placeholder="Dirección">
-                    </div>
-
-
-                </div>
-            </div>
-
-        </form>
+            </form>
 
 
 
-        <form [formGroup]="formDetallesContacto" *ngIf="fase==3">
-            <!--bloque 4-->
+            <form [formGroup]="formDetallesContacto" *ngIf="fase==3">
+                <!--bloque 4-->
 
-            <!-- <div class="grid gc-2x-g gap-10" > -->
                 <!-- <div class="grid gc-2x-g gap-10" > -->
-                <div *ngFor="let categorias of caracteristicas ">   
-                 
-                  <h2 class="tituloschips" *ngIf="categorias.sub_characteristics.length>0">{{categorias.name}}</h2>
-                  <div style="    margin-left: 20px;" *ngIf="categorias.sub_characteristics.length>0">
-                  
-                        <div style="    display: inline-block;    margin-bottom: 15px;" *ngFor="let chip of categorias.sub_characteristics">
-<!--                             <input type="checkbox" id="{{chip.id}}" (click)="agregar(categorias.id,chip.id)" [checked]="chip.marcado && chip.marcado==1" />
- -->                            <input type="checkbox" id="{{chip.id}}" (change)="agregar(chip.id, $event)" [checked]="checked(chip.id)"/>
+                <!-- <div class="grid gc-2x-g gap-10" > -->
+                <div *ngFor="let categorias of caracteristicas ">
+
+                    <h2 class="tituloschips" *ngIf="categorias.sub_characteristics.length>0">{{categorias.name}}</h2>
+                    <div style="    margin-left: 20px;" *ngIf="categorias.sub_characteristics.length>0">
+
+                        <div style="    display: inline-block;    margin-bottom: 15px;"
+                            *ngFor="let chip of categorias.sub_characteristics">
+                            <!--                             <input type="checkbox" id="{{chip.id}}" (click)="agregar(categorias.id,chip.id)" [checked]="chip.marcado && chip.marcado==1" />
+ --> <input type="checkbox" id="{{chip.id}}" (change)="agregar(chip.id, $event)" [checked]="checked(chip.id)" />
                             <label for="{{chip.id}}"> {{chip.name}}</label>
 
                         </div>
                     </div>
 
-               
-                    
-                </div>
-    
-              
-            <!-- </div> -->
 
-        </form>
+
+                </div>
+
+
+                <!-- </div> -->
+
+            </form>
 
 
 
@@ -487,37 +542,43 @@
         <h4 *ngIf="error == 2" class="text-center color-rojo">Ha ocurrido un error.</h4>
         <h4 *ngIf="error == 3" class="text-center color-rojo">Debe subir al menos 3 imágenes</h4>
         <h4 *ngIf="error == 4" class="text-center color-rojo">Debe seleccionar al menos 1 característica</h4>
-    
+
         <div class="footer espacioBoton" style="display: flex;">
-    
-            <button *ngIf="fase == 1" 
-                    [class]="formDatosVehiculos.valid ? 'btn-primary justify-self-center' : 'btn-primary disable' " 
-                    [attr.disabled]="formDatosVehiculos.valid ? null : '' " 
-                    style="margin-left: auto; margin-top: 15px;" 
-                    (click)="guardarPaso1('2')" >
-                    CONTINUAR  
-                    <span *ngIf="loading" class="icon icon-refresh loader"></span>
-            </button>
-    
-            <button *ngIf="fase == 2" class="btn-primary justify-self-center" (click)="cambiofase('1')" >ANTERIOR </button>
-            <button *ngIf="fase == 2" 
-                    [class]="formDetallesAnuncio.valid ? 'btn-primary justify-self-center' : 'btn-primary disable' " 
-                    [attr.disabled]="formDetallesAnuncio.valid ? null : '' " 
-                    (click)="guardarPaso2('3')" style="margin-left: auto;">
-                    CONTINUAR 
-                    <span *ngIf="loading" class="icon icon-refresh loader"></span>
+
+            <button *ngIf="fase == 1"
+                [class]="formDatosVehiculos.valid ? 'btn-primary justify-self-center' : 'btn-primary disable' "
+                [attr.disabled]="formDatosVehiculos.valid ? null : '' " style="margin-left: auto; margin-top: 15px;"
+                (click)="guardarPaso1('2')">
+                CONTINUAR
+                <span *ngIf="loading" class="icon icon-refresh loader"></span>
             </button>
 
-            <button *ngIf="fase == 3" class="btn-primary justify-self-center" (click)="cambiofase('2')" >ANTERIOR </button>
-            <button *ngIf="fase == 3" class="btn-primary justify-self-center" (click)="guardarPaso3('4')" style="margin-left: auto;">CONTINUAR <span *ngIf="loading" class="icon icon-refresh loader"></span></button>
+            <button *ngIf="fase == 2" class="btn-primary justify-self-center" (click)="cambiofase('1')">ANTERIOR
+            </button>
+            <button *ngIf="fase == 2"
+                [class]="formDetallesAnuncio.valid ? 'btn-primary justify-self-center' : 'btn-primary disable' "
+                [attr.disabled]="formDetallesAnuncio.valid ? null : '' " (click)="guardarPaso2('3')"
+                style="margin-left: auto;">
+                CONTINUAR
+                <span *ngIf="loading" class="icon icon-refresh loader"></span>
+            </button>
 
-            
-    
+            <button *ngIf="fase == 3" class="btn-primary justify-self-center" (click)="cambiofase('2')">ANTERIOR
+            </button>
+            <button *ngIf="fase == 3" class="btn-primary justify-self-center" (click)="guardarPaso3('4')"
+                style="margin-left: auto;">CONTINUAR <span *ngIf="loading"
+                    class="icon icon-refresh loader"></span></button>
+
+
+
             <!-- <button *ngIf="fase == 3" class="btn-primary justify-self-center" (click)="fase(3)" >SIGUIENTE <span *ngIf="loading" class="icon icon-refresh loader"></span> </button> -->
-            <button *ngIf="fase == 4" class="btn-primary justify-self-center" (click)="cambiofase('3')" >ANTERIOR  </button>
-            <button *ngIf="fase == 4"  class="btn-primary justify-self-center" (click)="guardarPaso4()" style="margin-left: auto;">{{editar ? 'GUARDAR CAMBIOS' : 'PUBLICAR ANUNCIO'}}  <span *ngIf="loading" class="icon icon-refresh loader"></span> </button> 
-    
-    
+            <button *ngIf="fase == 4" class="btn-primary justify-self-center" (click)="cambiofase('3')">ANTERIOR
+            </button>
+            <button *ngIf="fase == 4" class="btn-primary justify-self-center" (click)="guardarPaso4()"
+                style="margin-left: auto;">{{editar ? 'GUARDAR CAMBIOS' : 'PUBLICAR ANUNCIO'}} <span *ngIf="loading"
+                    class="icon icon-refresh loader"></span> </button>
+
+
         </div>
 
     </div>
