@@ -525,9 +525,6 @@
     margin-right: 5px;
 }
 
-::ng-deep .swiper-wrapper{
-    max-width: 1600px !important;
-}
 
 ::ng-deep .swiper-button-prev{
     left: -6px!important;
@@ -545,6 +542,13 @@
     right: -6px!important;
 }
 
+::ng-deep .swiper{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
 :root {
     --swiper-theme-color: #F24B4B  !important;
 }
+
+

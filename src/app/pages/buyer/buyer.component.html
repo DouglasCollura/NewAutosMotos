@@ -106,7 +106,7 @@
         <!-- ? CAROUSEL CARROS 1 ====================================================================== -->
         <div class="section">
             <div class="titulo"> 
-                <h2 id="myElement" >Compra un auto destacado 1</h2>
+                <h2 id="myElement" >Compra un auto destacado</h2>
 
                 <button class="btn" (click)="GoTo('compra?type=auto')">VER TODOS</button>
             </div>
@@ -199,91 +199,7 @@
     
                 </ng-template>
             </swiper>
-            <!-- <div class="carousel-container" id="content-destacados" style="overflow: hidden;">
-                <button class="carousel__anterior" (click)="moveLeft('destacados')" aria-label="anterior">
-                    <span class="icon icon-cheveron-left"></span>
-                </button>
-                <div class="content" style="overflow: initial;" id="destacados" >
-                    <div *ngFor="let item of ads_auto" class="card card-carousel">
-                        <div class="card-carousel-img">
-                            <div class="card-carousel-img-top">
-                                <button class="btn" [class]="filterMark(item?.ad?.id)?'btn-bookmark-primary':'btn-bookmark'"  (click)="SelectMark(item, $event)" ><span class="icon-bookmark text-black"></span></button>
-                            </div>
-                            <a routerLink="compra/comprar" [queryParams]="CreateRoute(item?.id, item?.ad?.id)">
-                                <img (click)="GoShow(item?.id, item?.ad?.id)" [src]="CargarThumb(item?.ad?.thumbnail)" (error)="onImgError($event)"  alt="">
-                            </a>
 
-                            <div class="section-media">
-
-                                <div class="card-media">
-                                    <img src="../../../../assets/img/icon-photo.png" alt="">
-                                    <span class="notranslate"> {{ GetLength(item?.ad)}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-carousel-body">
-        
-                            <h2 class="title"> {{item?.ad?.title}} </h2>
-        
-                            <div class="body">
-                                <h5><span class="font-600">Marca:</span> {{item?.make?.name}}, </h5>
-                                <h5><span class="font-600">Modelo:</span> {{item?.model?.name }}, </h5>
-                                <h5  *ngIf="item?.ad?.type != 'mobile-home' && item?.ad?.type != 'truck'"><span class="font-600">Carrocería:</span> {{ item?.body_type?.external_name }}, </h5>
-                                <h5><span class="font-600">Año:</span> {{item?.first_registration_year}}, </h5>
-                                <h5><span class="font-600">KM:</span> {{item?.mileage}}, </h5>
-                                <h5><span class="font-600">Combustible:</span> {{item?.fuel_type?.external_name}}, </h5>
-                                <h5><span class="font-600">Caja manual:</span> {{ item?.transmission_type?.external_name }} </h5>
-                            </div>
-        
-    
-                            <div class="footer">
-                                <div class="footer-contact">
-                                    <h1 class="text-black notranslate font-500"> {{GetPrice(item.price)}}€</h1>
-        
-                                    <div class="contact">
-
-                                        <a [attr.href]="item?.dealer_show_room?.whatsapp_number ? 'https://wa.me/' + item?.dealer_show_room?.whatsapp_number : null">
-                                            <img [src]="item?.dealer_show_room?.whatsapp_number ? '/assets/img/btn-wsp.png' : '/assets/img/btn-wsp-dis.png'" alt=""> 
-                                        </a>  
-                                        <a [href]="'tel:'+ item?.dealer_show_room?.mobile_number"><img src="/assets/img/btn-phone.png" alt=""> </a> 
-                                    </div>
-                                </div>
-        
-                                <div class="dealer">
-                                    <img [src]="CargarThumbDealer(item?.dealer?.logo_path)" alt="">
-        
-                                    <div class="info-dealer">
-                                        <div class="stast">
-                                            <h4 (click)="GoToDealer(item?.dealer?.id)" > {{item?.dealer?.company_name}} </h4>
-                                            <span class="color-rojo"> {{item?.ad?.user?.type == 'Profesional'? item?.dealer?.review_ratings:item?.ad?.user?.review_ratings}} <span class="icon-star color-rojo"></span></span>
-                                        </div>
-                                        
-                                        <div style="display: flex;">
-                                            <h5> {{item?.dealer?.zip_code}}, </h5>
-                                            <h5> {{item?.dealer?.city}} / {{item?.dealer?.country}}</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        
-                    </div>
-
-                    <div class="load"  *ngIf="ads_auto == null">
-                        <div class="content-car-load">
-                            <div class="car-load"></div>
-                        </div>
-                        <div class="content-load-bar">
-                            <div class="load-bar"></div>
-                        </div>
-                    </div>
-
-                </div>
-                
-                <button class="carousel__siguiente" (click)="moveRight('destacados')" aria-label="siguiente">
-                    <span class="icon icon-cheveron-right"></span>
-                </button>
-            </div> -->
         </div>
 
 
@@ -296,7 +212,7 @@
             </div>
 
             <swiper [config]="config">
-                <ng-template swiperSlide style="width: 200px!important;" class="swiper-slide" *ngFor="let item of ultimos">
+                <ng-template swiperSlide style="width: 250px!important;"  class="swiper-slide" *ngFor="let item of ultimos">
                     <div  class="card card-carousel">
                         <div class="card-carousel-img">
                             <div class="card-carousel-img-top">
@@ -373,91 +289,7 @@
                 </ng-template>
             </swiper>
 
-            <!-- <div class="carousel-container" >
-                <button class="carousel__anterior"  (click)="moveLeft('ultimos')"  aria-label="anterior">
-                    <span class="icon icon-cheveron-left"></span>
-                </button>
-                
-                <div class="content" id="ultimos" >
-                    <div *ngFor="let item of ultimos" class="card card-carousel">
-                        <div class="card-carousel-img">
-                            <div class="card-carousel-img-top">
-                                <button class="btn" [class]="filterMark(item?.ad?.id)?'btn-bookmark-primary':'btn-bookmark'"  (click)="SelectMark(item, $event)" ><span class="icon-bookmark text-black"></span></button>
-                            </div>
-                            <a routerLink="compra/comprar" [queryParams]="CreateRoute(item?.id, item?.ad?.id)">
-                                <img (click)="GoShow(item?.id, item?.ad?.id)" [src]="CargarThumb(item?.ad?.thumbnail)" (error)="onImgError($event)"  alt="">
-                            </a>
-
-                            <div class="section-media">
-                           
-                                <div class="card-media">
-                                    <img src="../../../../assets/img/icon-photo.png" alt="">
-                                    <span class="notranslate"> {{ GetLength(item?.ad)}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-carousel-body">
-        
-                            <h2 class="title"> {{item?.ad?.title}} </h2>
-        
-                            <div class="body">
-                                <h5><span class="font-600">Marca:</span> {{item?.make?.name}}, </h5>
-                                <h5><span class="font-600">Modelo:</span> {{item?.model?.name }}, </h5>
-                                <h5  *ngIf="item?.ad?.type != 'mobile-home' && item?.ad?.type != 'truck'"><span class="font-600">Carrocería:</span> {{ item?.body_type?.external_name }}, </h5>
-                                <h5><span class="font-600">Año:</span> {{item?.first_registration_year}}, </h5>
-                                <h5><span class="font-600">KM:</span> {{item?.mileage}}, </h5>
-                                <h5><span class="font-600">Combustible:</span> {{item?.fuel_type?.external_name}}, </h5>
-                                <h5><span class="font-600">Caja manual:</span> {{ item?.transmission_type?.external_name }} </h5>
-                            </div>
-        
-    
-                            <div class="footer">
-                                <div class="footer-contact">
-                                    <h1 class="text-black notranslate font-500"> {{GetPrice(item.price)}}€</h1>
-        
-                                    <div class="contact">
-                                     
-                                        <a [attr.href]="item?.dealer_show_room?.whatsapp_number ? 'https://wa.me/' + item?.dealer_show_room?.whatsapp_number : null">
-                                            <img [src]="item?.dealer_show_room?.whatsapp_number ? '/assets/img/btn-wsp.png' : '/assets/img/btn-wsp-dis.png'" alt=""> 
-                                        </a>  
-                                        <a [href]="'tel:'+item?.dealer_show_room?.mobile_number"><img src="/assets/img/btn-phone.png" alt=""> </a> 
-                                    </div>
-                                </div>
-        
-                                <div class="dealer">
-                                    <img [src]="CargarThumbDealer(item?.dealer?.logo_path)" alt="">
-        
-                                    <div class="info-dealer">
-                                        <div class="stast">
-                                            <h4 (click)="GoToDealer(item?.dealer?.id)"> {{item?.dealer?.company_name}} </h4>
-                                            <span class="color-rojo"> {{item?.ad?.user?.type == 'Profesional'? item?.dealer?.review_ratings:item?.ad?.user?.review_ratings}} <span class="icon-star color-rojo"></span></span>
-                                        </div>
-                                        
-                                        <div style="display: flex;">
-                                            <h5> {{item?.dealer?.zip_code}}, </h5>
-                                            <h5> {{item?.dealer?.city}} / {{item?.dealer?.country}}</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="load"  *ngIf="ultimos == null">
-                        <div class="content-car-load">
-                            <div class="car-load"></div>
-                        </div>
-                        <div class="content-load-bar">
-                            <div class="load-bar"></div>
-                        </div>
-                    </div>
-                   
-                </div>
-
-                <button class="carousel__siguiente" (click)="moveRight('ultimos')"  aria-label="siguiente">
-                    <span class="icon icon-cheveron-right"></span>
-                </button>
-            </div> -->
+            
         </div>
 
         <!-- ! TALLERES ====================================================================== -->
@@ -523,54 +355,7 @@
                 </ng-template>
             </swiper>
 
-            <!-- <div class="carousel-container">
-                <button class="carousel__anterior" (click)="moveLeft('talleres')"  aria-label="anterior">
-                    <span class="icon icon-cheveron-left"></span>
-                </button>
-
-                <div class="content" id="talleres" >
-                    <div *ngFor="let item of talleres" class="card-h">
-                        <div class="card-h-img">
-                            <img [src]="CargarThumb(item?.ad?.thumbnail)" (click)=" item?.website_url!=null && GoPage(item?.website_url)"  (error)="onImgError($event)"   alt="">
-                        </div>
-        
-                        <div class="card-h-body">
-                            <div class="section">
-                                <h4 class="title" > {{item?.ad?.title }} </h4>
-                                <button class="btn" [class]="filterMark(item?.ad?.id)?'btn-bookmark-primary':'btn-bookmark'"  (click)="SelectMark(item,$event)" ><span class="icon icon-bookmark"></span></button>
-                            </div>
-        
-                            <div class="section">
-                                <h5> {{item?.address}} </h5>
-        
-                                <h5 class="color-rojo">{{item?.ad?.user?.type == 'Profesional'? item?.dealer?.review_ratings:item?.ad?.user?.review_ratings}} <span class="icon icon-star color-rojo"></span> </h5>
-                            </div>
-        
-                            <div class="footer">
-                                
-                                <a [attr.href]="item?.whatsapp_number ? 'https://wa.me/' + item?.whatsapp_number : null">
-                                    <img class="phone-img" [src]="item?.whatsapp_number ? '/assets/img/btn-wsp.png' : '/assets/img/btn-wsp-dis.png'" alt=""> 
-                                </a> 
-                                <a [href]="'tel:'+ item?.mobile_number"><img class="phone-img" src="/assets/img/btn-phone.png" alt=""> </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="load"  *ngIf="talleres == null">
-                        <div class="content-car-load">
-                            <div class="car-load"></div>
-                        </div>
-                        <div class="content-load-bar">
-                            <div class="load-bar"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="carousel__siguiente" (click)="moveRight('talleres')"   aria-label="siguiente">
-                    <span class="icon icon-cheveron-right"></span>
-                </button>
-            </div>
-             -->
+            
         </div>
 
 
@@ -589,8 +374,6 @@
                 </button>
                 
                 <div class="content" id="recambios" >
-
-                    
                     
                     <div *ngFor="let item of recambios" class="card card-carousel-recambio">
                         <div class="card-carousel-img">
@@ -615,12 +398,7 @@
     
                             <div class="grid gc-2x-g">
                                 <div class="flex-column">
-                                    <!-- <button class="btn"  (click)="item?.whatsapp_number&&GoToWts(item?.whatsapp_number)">
-                                        <img [src]="item?.whatsapp_number?'../../../../assets/img/btn-wsp.png':'../../../../assets/img/btn-wsp-dis.png'" alt="">
-                                    </button>
-                                    <button class="btn"  (click)="GoToCall(item?.mobile_number)" > 
-                                        <img  [src]="item?.mobile_number?'../../../assets/img/btn-phone.png':'../../../assets/img/btn-phone-dis.png'" alt="">
-                                    </button>  -->
+                                   
                                     <a [attr.href]="item?.whatsapp_number ? 'https://wa.me/' + item?.whatsapp_number : null">
                                         <img loading="lazy"  class="phone-img" [src]="item?.whatsapp_number ? '/assets/img/btn-wsp.png' : '/assets/img/btn-wsp-dis.png'" alt=""> 
                                     </a> 
@@ -683,7 +461,6 @@
         </div> -->
 
     </div>
-
 
 
 </div>

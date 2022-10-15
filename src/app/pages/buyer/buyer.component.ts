@@ -137,29 +137,22 @@ export class BuyerComponent implements OnInit, AfterViewInit {
     sel_name_marca:string=null
 
     config: SwiperOptions = {
+        slidesPerView: 6,
         navigation: true,
-        spaceBetween:60,
+
         breakpoints: {
             0: {
                 slidesPerView: 1,
-                spaceBetween:90,
+                
             },
-            500: {
+            800: {
                 slidesPerView: 2,
-                spaceBetween:90,
-            },
-            850: {
-                slidesPerView: 3,
-                spaceBetween:90,
             },
             1000: {
                 slidesPerView: 3,
-                spaceBetween:110,
             },
             1300: {
-                slidesPerView: 5,
-                spaceBetween:90,
-
+                slidesPerView: 4,
             },
         }
     };
@@ -425,43 +418,5 @@ export class BuyerComponent implements OnInit, AfterViewInit {
         this.router.navigate(['dealers/'+id])
     }
 
-    MoveCar( e:any){
-        var myElement:any = document.getElementById(e);
-        var myContainer:any = document.getElementById('content-destacados');
-        // create a simple instance
-        // by default, it only adds horizontal recognizers
-        var mc = new Hammer(myElement);
-
-        // listen to events...
-        mc.on("panright panleft ", function(ev) {
-            // console.log("container")
-            // console.log(myContainer.getBoundingClientRect())
-            // console.log("content")
-            // console.log(myElement.getBoundingClientRect())
-            // console.log(-myElement.getBoundingClientRect().x)
-            // console.log(-myElement.getBoundingClientRect().x+ev.deltaX)
-            // const matrixValues = myElement..match(/matrix.*\((.+)\)/)[1].split(', ')
-            // if (matrixType === '3d') {
-            //     const x = matrixValues[12]
-            //     const y = matrixValues[13]
-            //     const z = matrixValues[14]
-            // }
-            if(ev.additionalEvent == 'panright'){
-                if( (myContainer.getBoundingClientRect().x+20) > myElement.getBoundingClientRect().x ){
-                    $(myElement).css({
-                        'transform': 'translate3d(' + -myElement.getBoundingClientRect().x+ev.deltaX + 'px,0,0)'
-                      });
-                }
-            }
-            if(ev.additionalEvent == 'panleft'){
-                $(myElement).css({
-                    'transform': 'translate3d(' + ev.deltaX+ 'px,0,0)'
-                });
-                let x=myElement.style.transform.split('translate3d(')[1]
-                console.log(x.split(','))
-            }
-
-
-        });
-    }
+    
 }
