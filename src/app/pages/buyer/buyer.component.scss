@@ -525,6 +525,10 @@
     margin-right: 5px;
 }
 
+::ng-deep .swiper-wrapper{
+    max-width: 1600px !important;
+}
+
 ::ng-deep .swiper-button-prev{
     left: -6px!important;
 }
