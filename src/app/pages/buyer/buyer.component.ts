@@ -100,7 +100,7 @@ export class BuyerComponent implements OnInit, AfterViewInit {
         // })
 
 
-        this.AutosService.Marcas(this.type == 'all'? 'auto':this.type).then(res=>{
+        this.AutosService.Marcas(this.type).then(res=>{
             this.marcas = res.data.data;
         })
 
@@ -123,7 +123,7 @@ export class BuyerComponent implements OnInit, AfterViewInit {
     talleres:any;
     recambios:any;
     //?GESTION=================================================================================
-    type:string='all';
+    type:string='auto';
     marca:string="";
     modelo:any="";
     pais:any="";
@@ -186,7 +186,7 @@ export class BuyerComponent implements OnInit, AfterViewInit {
     //?CARGA=================================================================================
     GetCount(){
         this.count=null;
-        this.AdsService.GetCount({type:this.type == 'auto'? 'all':this.type, make_id:this.marca, model_id:this.modelo, country: this.pais })
+        this.AdsService.GetCount({type:this.type, make_id:this.marca, model_id:this.modelo, country: this.pais })
         .then(res=>{
             
             this.count=res.data
@@ -217,10 +217,7 @@ export class BuyerComponent implements OnInit, AfterViewInit {
     }   
 
     Filtrar(){
-        let fil=""
-        if(this.type == 'all'){
-            this.type = 'auto';
-        }
+       
         this.router.navigate(
             ['/compra'],
             {

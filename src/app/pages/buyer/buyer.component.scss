@@ -542,6 +542,11 @@
     right: -6px!important;
 }
 
+::ng-deep .swiper-slide{
+    max-width: 290px !important;
+    width: 290px !important;
+}
+
 ::ng-deep .swiper{
     margin-left: 0px !important;
     margin-right: 0px !important;

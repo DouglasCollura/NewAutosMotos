@@ -59,7 +59,9 @@
                         <button (click)="dropDown('body_type')" >Carrocería <span class="icon icon-cheveron-down"></span></button>
 
                         <div class="dropdown" id="body_type">
-                            <button (click)="dropDown('select-body_type')" class="btn-select" > {{sel_body_type_name == ""? 'Cualquiera': sel_body_type_name}} <span class="icon icon-cheveron-down"></span></button>
+                            <button *ngIf="sel_body_type_name == ''" class="btn-select" (click)="dropDown('select-body_type')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+
+                            <button *ngIf="sel_body_type_name != ''" (click)="dropDown('select-body_type')" class="btn-select notranslate" > {{sel_body_type_name}} <span class="icon icon-cheveron-down"></span></button>
                             
                             <div class="content-select " id="select-body_type">
                                 <div class="select-marca">
@@ -84,7 +86,8 @@
                         <button (click)="dropDown('categoria')" >Categoría <span class="icon icon-cheveron-down"></span></button>
 
                         <div class="dropdown" id="categoria">
-                            <button (click)="dropDown('select-categoria')" class="btn-select" > {{sel_category_name == ""? 'Cualquiera': sel_category_name}} <span class="icon icon-cheveron-down"></span></button>
+                            <button *ngIf="sel_category_name == ''" class="btn-select" (click)="dropDown('select-categoria')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+                            <button *ngIf="sel_category_name != ''"  (click)="dropDown('select-categoria')" class="btn-select notranslate" > {{sel_category_name}} <span class="icon icon-cheveron-down"></span></button>
                             
                             <div class="content-select " id="select-categoria">
                                 <div class="select-marca">
@@ -104,7 +107,8 @@
                         <button (click)="dropDown('subcategoria')" > {{filter.type =='truck'? 'Sub Categoría':'Categoría'}} <span class="icon icon-cheveron-down"></span></button>
 
                         <div class="dropdown" id="subcategoria">
-                            <button (click)="dropDown('select-subcategoria')" class="btn-select" > {{sel_subcategory_name == ""? 'Cualquiera': sel_subcategory_name}} <span class="icon icon-cheveron-down"></span></button>
+                            <button *ngIf="sel_subcategory_name == ''" class="btn-select" (click)="dropDown('select-subcategoria')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+                            <button *ngIf="sel_subcategory_name != ''" (click)="dropDown('select-subcategoria')" class="btn-select notranslate" > {{sel_subcategory_name }} <span class="icon icon-cheveron-down"></span></button>
                             
                             <div class="content-select " id="select-subcategoria">
                                 <div class="select-marca">
@@ -123,14 +127,22 @@
                         <button (click)="dropDown('marca')" >Marca <span class="icon icon-cheveron-down"></span></button>
 
                         <div class="dropdown" id="marca">
-                            <button (click)="dropDown('select-marca')" class="btn-select" > {{sel_marca_name == ""? 'Cualquiera': sel_marca_name}} <span class="icon icon-cheveron-down"></span></button>
+                            <button *ngIf="sel_marca_name == ''" class="btn-select" (click)="dropDown('select-marca')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+                            <button 
+                                *ngIf="sel_marca_name != ''"
+                                (click)="dropDown('select-marca')" 
+                                class="btn-select notranslate" 
+                            > {{sel_marca_name}} <span class="icon icon-cheveron-down"></span></button>
                             
                             <div class="content-select " id="select-marca">
                                 <div class="select-marca">
                                     <div class="img">
                                         <img loading="lazy"  [src]="'../../../assets/img/logo.svg'"(error)="onImgError($event)" alt="">
                                     </div>
-                                    <button  [class]="sel_marca == null?'select':''" (click)="sel_marca_name = '';sel_marca = null;modelos=[]" > Cualquiera </button>
+                                    <button  
+                                        [class]="sel_marca == null?'select':''"
+                                        (click)="sel_marca_name = '';sel_marca = null;modelos=[]" 
+                                    > Cualquiera </button>
                                 </div>
                                 <div class="select-marca" *ngFor="let item of marcas; let i = index">
                                     <div class="img">
@@ -147,7 +159,9 @@
                     <div class="section">
                         <button (click)="dropDown('modelo')">Modelo <span class="icon icon-cheveron-down"></span></button>
                         <div class="dropdown" id="modelo">
-                            <button (click)="dropDown('select-modelo')" class="btn-select" > {{sel_modelo_name == ''? 'Cualquiera': sel_modelo_name}} <span class="icon icon-cheveron-down"></span></button>
+                            <button *ngIf="sel_modelo_name == ''" class="btn-select" (click)="dropDown('select-modelo')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+
+                            <button *ngIf="sel_modelo_name != ''" (click)="dropDown('select-modelo')" class="btn-select notranslate" > {{sel_modelo_name}} <span class="icon icon-cheveron-down"></span></button>
                             
                             <div class="content-select" id="select-modelo">
                                 <button  [class]="sel_modelo == null?'select':''" (click)="sel_modelo_name='';sel_modelo = null" >  Cualquiera</button>
@@ -161,7 +175,9 @@
                         <button (click)="dropDown('pais')">País <span class="icon icon-cheveron-down"></span></button>
 
                         <div class="dropdown" id="pais">
-                            <button (click)="dropDown('select-pais')" class="btn-select" > {{filter.country == null? 'Cualquiera': filter.country}} <span class="icon icon-cheveron-down"></span></button>
+                            <button *ngIf="filter.country == null" class="btn-select" (click)="dropDown('select-pais')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+
+                            <button *ngIf="filter.country != null" (click)="dropDown('select-pais')" class="btn-select notranslate" > {{filter.country}} <span class="icon icon-cheveron-down"></span></button>
 
                             <div class="content-select" id="select-pais">
                                 <button [class]="filter.country == null?'select':''" (click)="filter.country = null;dropDown('select-pais')" >  Cualquiera </button>
@@ -225,7 +241,8 @@
                     <div class="section">
                         <button (click)="dropDown('condicion')">Condición <span class="icon icon-cheveron-down"></span></button>
                         <div class="dropdown" id="condicion">
-                            <button (click)="dropDown('select-condicion')" class="btn-select" > {{filter.condition == null? 'Cualquiera': sel_condicion_name}} <span class="icon icon-cheveron-down"></span></button>
+                            <button *ngIf="filter.condition == null" class="btn-select" (click)="dropDown('select-condicion')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+                            <button *ngIf="filter.condition != null" (click)="dropDown('select-condicion')" class="btn-select notranslate" > {{filter.condition }} <span class="icon icon-cheveron-down"></span></button>
 
                             <div class="content-select" id="select-condicion">
                                 <button  [class]="filter.condition == null?'select':''" (click)="filter.condition = null;dropDown('select-condicion')" > Cualquiera </button>
@@ -261,7 +278,8 @@
                         <div class="section">
                             <button (click)="dropDown('combustible')">Combustible <span class="icon icon-cheveron-down"></span></button>
                             <div class="dropdown" id="combustible">
-                                <button (click)="dropDown('select-combustible')" class="btn-select" > {{filter.fuel_type_id == null? 'Cualquiera': sel_combustible_name}} <span class="icon icon-cheveron-down"></span></button>
+                                <button *ngIf="filter.fuel_type_id == null" class="btn-select" (click)="dropDown('select-combustible')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+                                <button *ngIf="filter.fuel_type_id != null" (click)="dropDown('select-combustible')" class="btn-select notranslate" > {{sel_combustible_name}} <span class="icon icon-cheveron-down"></span></button>
 
                                 <div class="content-select" id="select-combustible">
                                     <button [class]="filter.fuel_type_id == null?'select':''" (click)="filter.fuel_type_id = null;dropDown('select-combustible')" >  Cualquiera </button>
@@ -274,7 +292,8 @@
                         <div class="section">
                             <button (click)="dropDown('transmision')">Transmisión <span class="icon icon-cheveron-down"></span></button>
                             <div class="dropdown" id="transmision">
-                                <button (click)="dropDown('select-transmision')" class="btn-select" > {{filter.transmission_type_id == null? 'Cualquiera': sel_transmision_name}} <span class="icon icon-cheveron-down"></span></button>
+                                <button *ngIf="filter.transmission_type_id == null" class="btn-select" (click)="dropDown('select-transmision')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+                                <button *ngIf="filter.transmission_type_id != null" (click)="dropDown('select-transmision')" class="btn-select notranslate" > {{ sel_transmision_name}} <span class="icon icon-cheveron-down"></span></button>
 
                                 <div class="content-select" id="select-transmision">
                                     <button [class]="filter.transmission_type_id == null?'select':''" (click)="filter.transmission_type_id = null;dropDown('select-transmision')" >  Cualquiera </button>
@@ -288,7 +307,8 @@
                             <button (click)="dropDown('traccion')">Tracción <span class="icon icon-cheveron-down"></span></button>
 
                             <div class="dropdown" id="traccion">
-                                <button (click)="dropDown('select-traccion')" class="btn-select" > {{filter.drive_type_id == null? 'Cualquiera': sel_traccion_name}} <span class="icon icon-cheveron-down"></span></button>
+                                <button *ngIf="filter.drive_type_id == null" class="btn-select" (click)="dropDown('select-traccion')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+                                <button *ngIf="filter.drive_type_id != null" (click)="dropDown('select-traccion')" class="btn-select notranslate" > {{sel_traccion_name}} <span class="icon icon-cheveron-down"></span></button>
 
                                 <div class="content-select" id="select-traccion">
                                     <button [class]="filter.drive_type_id == null?'select':''" (click)="filter.drive_type_id = null;dropDown('select-traccion')" >  Cualquiera </button>
@@ -374,7 +394,8 @@
                             <button (click)="dropDown('puertas')">Puertas <span class="icon icon-cheveron-down"></span></button>
 
                             <div class="dropdown" id="puertas">
-                                <button (click)="dropDown('select-puertas')" class="btn-select" > {{filter.doors == null? 'Cualquiera': sel_puertas_name}} <span class="icon icon-cheveron-down"></span></button>
+                                <button *ngIf="filter.doors == null" class="btn-select" (click)="dropDown('select-puertas')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+                                <button *ngIf="filter.doors != null" (click)="dropDown('select-puertas')" class="btn-select notranslate" > {{sel_puertas_name}} <span class="icon icon-cheveron-down"></span></button>
 
                                 <div class="content-select" id="select-puertas">
                                     <button  [class]="filter.doors == null?'select':''" (click)="filter.doors = null;sel_puertas_name='Cualquiera';dropDown('select-puertas')" >  Cualquiera</button>
@@ -399,7 +420,8 @@
                             <button (click)="dropDown('consumo')" >Consumo de combustible <span class="icon icon-cheveron-down"></span></button>
 
                             <div class="dropdown" id="consumo">
-                                <button (click)="dropDown('select-consumo')" class="btn-select" > {{sel_consumo_name == ""? 'Cualquiera': sel_consumo_name}} <span class="icon icon-cheveron-down"></span></button>
+                                <button *ngIf="sel_consumo_name == ''" class="btn-select" (click)="dropDown('select-consumo')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+                                <button *ngIf="sel_consumo_name != ''" (click)="dropDown('select-consumo')" class="btn-select notranslate" > {{sel_consumo_name}} <span class="icon icon-cheveron-down"></span></button>
                                 
                                 <div class="content-select " id="select-consumo">
                                     <div class="select-consumo">

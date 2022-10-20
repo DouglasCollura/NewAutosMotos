@@ -383,6 +383,7 @@ export class CompraComponent implements OnInit {
 
     GetModelos(marca:any){
         this.modelos=null;
+        this.sel_modelo_name = '';
         this.sel_marca_name=marca.name;
         this.filter.make_id = marca.id;
         this.AutosService.Modelos(marca.id).then( (res:any)=>{
