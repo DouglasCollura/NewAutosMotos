@@ -343,19 +343,50 @@
                         <!-- * COLOR EXT -->
                         <div class="section">
                             <button (click)="dropDown('color_ext')">Color exterior <span class="icon icon-cheveron-down"></span></button>
-
                             <div class="dropdown" id="color_ext">
-                                <input type="text" placeholder="Color" (keypress)="SoloLetra($event)" [(ngModel)]="filter.exterior_color" autocomplete="off" class="fecha" >
+
+                                <select class="select-square" [(ngModel)]="filter.exterior_color" name="" id="color_ext">
+                                    <option [value]="null"> Seleccione un color </option>
+                                    <option value="amarillo"> Amarillo </option>
+                                    <option value="azul"> Azul </option>
+                                    <option value="blanco"> Blanco </option>
+                                    <option value="bronce"> Bronce </option>
+                                    <option value="morado"> Morado </option>
+                                    <option value="naranja"> Naranja </option>
+                                    <option value="negro"> Negro </option>
+                                    <option value="oro"> Oro </option>
+                                    <option value="plata"> Plata </option>
+                                    <option value="rojo"> Rojo </option>
+                                    <option value="plata"> Rosa </option>
+                                    <option value="verde"> Verde </option>
+                                </select>
                             </div>
+                            <!-- <div class="dropdown" id="color_ext">
+                                <input type="text" placeholder="Color" (keypress)="SoloLetra($event)" [(ngModel)]="filter.exterior_color" autocomplete="off" class="fecha" >
+                            </div> -->
                         </div>
 
                         <!-- * COLOR INT -->
                         <div class="section">
                             <button (click)="dropDown('color_int')">Color interior <span class="icon icon-cheveron-down"></span></button>
-
                             <div class="dropdown" id="color_int">
-                                <input type="text" placeholder="Color" (keypress)="SoloLetra($event)" [(ngModel)]="filter.interior_color" autocomplete="off" class="fecha" >
+                                <select class="select-square" [(ngModel)]="filter.interior_color" name=""  >
+                                    <option [value]="null"> Seleccione un color </option>
+                                    <option value="amarillo"> Amarillo </option>
+                                    <option value="azul"> Azul </option>
+                                    <option value="blanco"> Blanco </option>
+                                    <option value="bronce"> Bronce </option>
+                                    <option value="morado"> Morado </option>
+                                    <option value="naranja"> Naranja </option>
+                                    <option value="negro"> Negro </option>
+                                    <option value="oro"> Oro </option>
+                                    <option value="plata"> Plata </option>
+                                    <option value="rojo"> Rojo </option>
+                                    <option value="plata"> Rosa </option>
+                                    <option value="verde"> Verde </option>
+                                </select>
                             </div>
+                            
                         </div>
 
 
@@ -411,8 +442,23 @@
                             <button (click)="dropDown('plazas')">Plazas <span class="icon icon-cheveron-down"></span></button>
 
                             <div class="dropdown" id="plazas">
-                                <input type="text" placeholder="Plazas" maxlength="2" dataType="numeric" (keypress)="SoloNumero($event)" [(ngModel)]="filter.seats" autocomplete="off" class="fecha" >
+                                <select name="" [(ngModel)]="filter.seats" class="select-square" id="">
+                                    <option [value]="null" selected  >Seleccione</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
                             </div>
+                            <!-- <div class="dropdown" id="plazas">
+                                <input type="text" placeholder="Plazas" maxlength="2" dataType="numeric" (keypress)="SoloNumero($event)" [(ngModel)]="filter.seats" autocomplete="off" class="fecha" >
+                            </div> -->
                         </div>
 
                         <div class="section">
@@ -485,7 +531,7 @@
             <h3 *ngIf="mobile">{{ count }} Resultados</h3>
 
             <div class="content">
-                <h1 class="font-600 text-black" *ngIf="res?.total == 0 || res?.count == 0" >No encontramos resultados para la búsqueda, <br> inténtalo de nuevo</h1>
+                <h1 class="font-600 text-black" *ngIf="res?.data?.length == 0 && !loading " >No encontramos resultados para la búsqueda, <br> inténtalo de nuevo</h1>
 
                 <div   *ngFor="let info of res.data | paginate: { itemsPerPage: res?.per_page, currentPage: res?.current_page,totalItems: res?.total }; let i =index" class="card card-carousel">
                     <div class="card-carousel-img">

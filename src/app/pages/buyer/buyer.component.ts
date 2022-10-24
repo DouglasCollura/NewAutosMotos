@@ -200,6 +200,10 @@ export class BuyerComponent implements OnInit, AfterViewInit {
     ChangeType(type:string){
         this.type = type;
         this.marcas=[]
+        this.marca = null; 
+        this.sel_name_marca =null;
+        this.modelo ='';
+        this.pais='';
         this.GetCount()
         this.AutosService.Marcas(type).then(res=>{
             this.marcas = res.data.data;

@@ -158,14 +158,12 @@
 
 
 
-                        <div class="form-group" *ngIf="!is_moto && !is_camion">
+                        <div class="form-group" *ngIf="!is_moto && !is_camion && generacion?.length != 0">
                             <label>Generación</label>
                             <select *ngIf="!is_caravana" class="select-square" formControlName="generation_id"
                                 [ngClass]="{ 'errorCampos': d.generation_id.errors }" name="" id="">
                                 <option value="null"> Selecciona generación</option>
                                 <option [value]="genera.id" *ngFor="let genera of generacion"> {{genera.name}} </option>
-
-
                             </select>
                             <input *ngIf="is_caravana" type="text" class="input-square" placeholder=""
                                 formControlName="generation_id">
@@ -269,9 +267,22 @@
                         </div>
                         <div class="form-group " *ngIf="!is_moto">
                             <label>Plazas (opcional)</label>
-                            <input type="text" (keypress)="validateNo($event)" class="input-square"
+                            <select name="" formControlName="seats" class="select-square" id="">
+                                <option [value]="null" selected  >Seleccione</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                            <!-- <input type="text" (keypress)="validateNo($event)" class="input-square"
                                 placeholder="Cantidad de plazas" formControlName="seats"
-                                (keypress)="validateNo($event)">
+                                (keypress)="validateNo($event)"> -->
                         </div>
 
                         <!-- <div class="form-group ">
