@@ -272,6 +272,11 @@ export class CompraComponent implements OnInit {
     sel_subcategory_name:any="";
     mobile:boolean=false;
     display_filter:boolean=false;
+
+    marca_filtro:any=[];
+    modelo_filtro:any=[];
+    carroseria_filtro:any=[];
+
     //!FUNCIONES=============================================================
 
     //?CARGA=============================================================
@@ -604,6 +609,43 @@ export class CompraComponent implements OnInit {
             this.loading=false;
 
         })
+    }
+
+    SearchFiltro(tipo:number){
+        if(tipo == 1){
+            this.marca_filtro=[];
+            if(this.sel_marca_name == ''){
+                return
+            }
+            this.marcas.forEach((arrayItem:any)=> {
+                if(arrayItem.name.toLowerCase().indexOf(this.sel_marca_name.toLowerCase())> -1){
+                    this.marca_filtro.push(arrayItem)
+                }
+            });
+        }
+        else if(tipo == 2){
+            this.modelo_filtro=[];
+            if(this.sel_modelo_name == ''){
+                return
+            }
+            this.modelos.forEach((arrayItem:any)=> {
+                if(arrayItem.name.toLowerCase().indexOf(this.sel_modelo_name.toLowerCase())> -1){
+                    this.modelo_filtro.push(arrayItem)
+                }
+            });
+        }else{
+            this.carroseria_filtro=[];
+            if(this.sel_body_type_name == ''){
+                return
+            }
+            this.body_types.forEach((arrayItem:any)=> {
+                if(arrayItem.external_name.toLowerCase().indexOf(this.sel_body_type_name.toLowerCase())> -1){
+                    this.carroseria_filtro.push(arrayItem)
+                }
+            });
+            
+        }
+        
     }
 
     //?CONTROL==============================================================================

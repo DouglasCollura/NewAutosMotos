@@ -59,9 +59,10 @@
                         <button (click)="dropDown('body_type')" >Carrocería <span class="icon icon-cheveron-down"></span></button>
 
                         <div class="dropdown" id="body_type">
-                            <button *ngIf="sel_body_type_name == ''" class="btn-select" (click)="dropDown('select-body_type')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
-
-                            <button *ngIf="sel_body_type_name != ''" (click)="dropDown('select-body_type')" class="btn-select notranslate" > {{sel_body_type_name}} <span class="icon icon-cheveron-down"></span></button>
+                            <div class="content-search">
+                                <input type="text" placeholder="Cualquiera" [(ngModel)]="sel_body_type_name" (keyup)="SearchFiltro(3)">
+                                <button  (click)="dropDown('select-body_type')" ><span class="icon icon-cheveron-down"></span></button>
+                            </div>
                             
                             <div class="content-select " id="select-body_type">
                                 <div class="select-marca">
@@ -70,13 +71,23 @@
                                     </div>
                                     <button  [class]="filter.body_type_id == null?'select':''" (click)="sel_body_type_name = '';filter.body_type_id=null" > Cualquiera </button>
                                 </div>
-                                <div class="select-marca" *ngFor="let item of body_types; let i = index">
-                                    <div class="img">
-                                        <img loading="lazy"  [src]="CargarLogoBody(item)"(error)="onImgError($event)" alt="">
+                                <ng-container *ngIf="carroseria_filtro?.length == 0">
+                                    <div class="select-marca" *ngFor="let item of body_types; let i = index">
+                                        <div class="img">
+                                            <img loading="lazy"  [src]="CargarLogoBody(item)"(error)="onImgError($event)" alt="">
+                                        </div>
+                                        <button  [class]="filter.body_type_id == item.id?'select':''" (click)="filter.body_type_id = item.id;sel_body_type_name=item.external_name?item.external_name:item.internal_name;dropDown('select-body_type')" > {{item.external_name?item.external_name:item.internal_name}} </button>
                                     </div>
-                                    <button  [class]="filter.body_type_id == item.id?'select':''" (click)="filter.body_type_id = item.id;sel_body_type_name=item.external_name?item.external_name:item.internal_name;dropDown('select-body_type')" > {{item.external_name?item.external_name:item.internal_name}} </button>
-                                </div>
+                                </ng-container>
                                 
+                                <ng-container *ngIf="carroseria_filtro?.length != 0">
+                                    <div class="select-marca" *ngFor="let item of carroseria_filtro; let i = index">
+                                        <div class="img">
+                                            <img loading="lazy"  [src]="CargarLogoBody(item)"(error)="onImgError($event)" alt="">
+                                        </div>
+                                        <button  [class]="filter.body_type_id == item.id?'select':''" (click)="filter.body_type_id = item.id;sel_body_type_name=item.external_name?item.external_name:item.internal_name;dropDown('select-body_type')" > {{item.external_name?item.external_name:item.internal_name}} </button>
+                                    </div>
+                                </ng-container>
                             </div>
                         </div>
                     </div>
@@ -127,12 +138,11 @@
                         <button (click)="dropDown('marca')" >Marca <span class="icon icon-cheveron-down"></span></button>
 
                         <div class="dropdown" id="marca">
-                            <button *ngIf="sel_marca_name == ''" class="btn-select" (click)="dropDown('select-marca')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
-                            <button 
-                                *ngIf="sel_marca_name != ''"
-                                (click)="dropDown('select-marca')" 
-                                class="btn-select notranslate" 
-                            > {{sel_marca_name}} <span class="icon icon-cheveron-down"></span></button>
+                            
+                            <div class="content-search">
+                                <input type="text" placeholder="Cualquiera" [(ngModel)]="sel_marca_name" (keyup)="SearchFiltro(1)">
+                                <button  (click)="dropDown('select-marca')" ><span class="icon icon-cheveron-down"></span></button>
+                            </div>
                             
                             <div class="content-select " id="select-marca">
                                 <div class="select-marca">
@@ -143,13 +153,25 @@
                                         [class]="sel_marca == null?'select':''"
                                         (click)="sel_marca_name = '';sel_marca = null;modelos=[]" 
                                     > Cualquiera </button>
-                                </div>
-                                <div class="select-marca" *ngFor="let item of marcas; let i = index">
-                                    <div class="img">
-                                        <img loading="lazy" [src]="CargarLogoMarca(item)"(error)="onImgError($event)" alt="">
+                                </div>  
+                                <ng-container *ngIf="marca_filtro?.length == 0">
+                                    <div  class="select-marca" *ngFor="let item of marcas; let i = index">
+                                        <div class="img">
+                                            <img loading="lazy" [src]="CargarLogoMarca(item)"(error)="onImgError($event)" alt="">
+                                        </div>
+                                        <button class="notranslate" [class]="sel_marca == i?'select':''" (click)="GetModelos(item); sel_marca = i;dropDown('select-marca')" > {{item.name}} </button>
                                     </div>
-                                    <button class="notranslate" [class]="sel_marca == i?'select':''" (click)="GetModelos(item); sel_marca = i;dropDown('select-marca')" > {{item.name}} </button>
-                                </div>
+                                </ng-container>
+                                
+                                <ng-container *ngIf="marca_filtro?.length != 0">
+                                    <div  class="select-marca" *ngFor="let item of marca_filtro; let i = index">
+                                        <div class="img">
+                                            <img loading="lazy" [src]="CargarLogoMarca(item)"(error)="onImgError($event)" alt="">
+                                        </div>
+                                        <button class="notranslate" [class]="sel_marca == i?'select':''" (click)="GetModelos(item); sel_marca = i;dropDown('select-marca')" > {{item.name}}</button>
+                                    </div>
+                                </ng-container>
+                                
                                 
                             </div>
                         </div>
@@ -159,13 +181,21 @@
                     <div class="section">
                         <button (click)="dropDown('modelo')">Modelo <span class="icon icon-cheveron-down"></span></button>
                         <div class="dropdown" id="modelo">
-                            <button *ngIf="sel_modelo_name == ''" class="btn-select" (click)="dropDown('select-modelo')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
-
-                            <button *ngIf="sel_modelo_name != ''" (click)="dropDown('select-modelo')" class="btn-select notranslate" > {{sel_modelo_name}} <span class="icon icon-cheveron-down"></span></button>
+                            <div class="content-search">
+                                <input type="text" placeholder="Cualquiera" [(ngModel)]="sel_modelo_name" (keyup)="SearchFiltro(2)">
+                                <button  (click)="dropDown('select-modelo')" ><span class="icon icon-cheveron-down"></span></button>
+                            </div>
                             
                             <div class="content-select" id="select-modelo">
                                 <button  [class]="sel_modelo == null?'select':''" (click)="sel_modelo_name='';sel_modelo = null" >  Cualquiera</button>
-                                <button class="notranslate" *ngFor="let item of modelos; let i = index" [class]="sel_modelo == i?'select':''" (click)="SelectModel(item);sel_modelo = i;dropDown('select-modelo')" > {{item.name}} </button>
+
+                                <ng-container *ngIf="modelo_filtro?.length == 0">
+                                    <button class="notranslate" *ngFor="let item of modelos; let i = index" [class]="sel_modelo == i?'select':''" (click)="SelectModel(item);sel_modelo = i;dropDown('select-modelo')" > {{item.name}} </button>
+                                </ng-container>
+
+                                <ng-container *ngIf="modelo_filtro?.length != 0">
+                                    <button class="notranslate" *ngFor="let item of modelo_filtro; let i = index" [class]="sel_modelo == i?'select':''" (click)="SelectModel(item);sel_modelo = i;dropDown('select-modelo')" > {{item.name}} </button>
+                                </ng-container>
                             </div>
                         </div>
                     </div>
@@ -195,7 +225,7 @@
                         <button (click)="dropDown('ciudad')">Ciudad <span class="icon icon-cheveron-down"></span></button>
 
                         <div class="dropdown" id="ciudad">
-                            <input type="text" class="input-square" placeholder="Ciudad" [(ngModel)]="filter.city">
+                            <input type="text" class="input-square" placeholder="Ciudad" [(ngModel)]="filter.city" (keydown)="SoloLetra($event)">
 
                         </div>
                     </div>
