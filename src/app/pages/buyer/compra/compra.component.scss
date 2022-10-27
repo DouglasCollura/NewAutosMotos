@@ -342,8 +342,11 @@
         width: 100% !important;
     }
     .select{
-        color: white;
+        color: white !important;
         background: $rojo !important;
+        &>*{
+            color: white !important;
+        }
     }
 }
 
@@ -399,4 +402,19 @@
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+}
+
+.content-color{
+    width:24px;
+    height: 20px;
+    position: relative;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    &+button{
+        font-weight: 600;
+        color:black
+    }
 }

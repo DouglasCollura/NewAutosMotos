@@ -57,8 +57,8 @@ export class CompraComponent implements OnInit {
 
 
     ngOnInit(): void {
-
         var ua = navigator.userAgent;
+
         $(window).resize(()=> {
             if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|opera mobile|palmos|webos|Mobile|mobile|googlebot-mobile|CriOS/i.test(ua) || window.innerWidth <= 768)
             {
@@ -148,10 +148,13 @@ export class CompraComponent implements OnInit {
                     this.search_bar.type = params.type
                     this.types_fil.type=params.type;
                     this.GetMarcas()
-                    this.Filtrar(1)
+
+                    if(params.page){
+                        this.Filtrar(params.page)
+                    }else{
+                        this.Filtrar(1)
+                    }
                     
-                  
-    
                     this.GetTypeFuel()
                     this.GetTypesTransmision()
                     this.GetTypesTraccion()
@@ -990,6 +993,8 @@ export class CompraComponent implements OnInit {
     pageChanged(ev){
         console.log(ev)
         this.res.current_page = ev;
+        var refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.search+'\&page='+ev;    
+        window.history.pushState({ path: refresh }, '', refresh);
 
         if(this.res.path.includes('search_ads_like')){
             this.SearchAll(ev);

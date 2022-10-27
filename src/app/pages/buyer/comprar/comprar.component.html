@@ -29,7 +29,7 @@
                     </div>
                 </div>
 
-                <h1 class="color-rojo" style="font-weight: 500" > {{GetPrice(vehiculo?.price)}}€ </h1>
+                <h1 class="color-rojo notranslate" style="font-weight: 500" > {{GetPrice(vehiculo?.price)}}€ </h1>
 
                 <div class="grid gap-20" id="contacto">
                     <!-- <a class="btn-primary btn-block" *ngIf="vehiculo?.dealerShowRoom?.whatsapp_number"  [href]="'https://wa.me/'+vehiculo?.dealerShowRoom?.whatsapp_number">CONTACTAR POR WPP</a>  -->
@@ -49,10 +49,14 @@
 
                 <div class="card-comentario">
                     <div class="grid gap-10">
-                        <h3 (click)="GoDealer()" style="cursor: pointer;"> <span class="title-info" >Vendedor:</span> {{vehiculo?.dealer?.company_name?vehiculo?.dealer?.company_name: vehiculo?.first_name + ' '+ vehiculo?.last_name}} </h3>
+                        <div class="cont-title" (click)="GoDealer()" >
+                            <span class="title-info" >Vendedor:</span><h3  class="notranslate">   {{ vehiculo?.dealer?.company_name ? vehiculo?.dealer?.company_name : vehiculo?.first_name + ' '+ vehiculo?.last_name}} </h3>
+                        </div>
                         <div class="column-space-between">
-                            <h3> <span class="title-info">Ubicación:</span> {{vehiculo?.dealer?.address ? vehiculo?.dealer?.address: vehiculo?.address }} </h3>
-
+                            <div class="cont-title" (click)="GoDealer()" >
+                                <span class="title-info">Ubicación:</span>
+                                <h3 class="notranslate">  {{vehiculo?.dealer?.address ? vehiculo?.dealer?.address: vehiculo?.address }} </h3>
+                            </div>
                             <button *ngIf="vehiculo?.latitude" (click)="GoToMap()" class="btn vermas">Ver mapa</button>
                         </div>
 
@@ -62,7 +66,7 @@
                         
                         <h3 class="title-info">Otros modos de contacto:</h3>
 
-                        <a class="form-icon mail"
+                        <a class="form-icon mail notranslate"
                             [href]="'mailto:'+vehiculo?.dealer?.email_address?vehiculo?.dealer?.email_address : vehiculo?.email_address"
                         > 
                             <span class="icon icon-mail" style="font-size: 16px" ></span> 

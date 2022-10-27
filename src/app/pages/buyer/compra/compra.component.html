@@ -374,22 +374,89 @@
                         <div class="section">
                             <button (click)="dropDown('color_ext')">Color exterior <span class="icon icon-cheveron-down"></span></button>
                             <div class="dropdown" id="color_ext">
+                                <button *ngIf="filter.exterior_color == null" class="btn-select" (click)="dropDown('select_color_ext')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+                                <button *ngIf="filter.exterior_color != null" (click)="dropDown('select_color_ext')" class="btn-select notranslate" > {{filter.exterior_color }} <span class="icon icon-cheveron-down"></span></button>
+                                <div id="select_color_ext" class="content-select">
 
-                                <select class="select-square" [(ngModel)]="filter.exterior_color" name="" id="color_ext">
-                                    <option [value]="null"> Seleccione un color </option>
-                                    <option value="amarillo"> Amarillo </option>
-                                    <option value="azul"> Azul </option>
-                                    <option value="blanco"> Blanco </option>
-                                    <option value="bronce"> Bronce </option>
-                                    <option value="morado"> Morado </option>
-                                    <option value="naranja"> Naranja </option>
-                                    <option value="negro"> Negro </option>
-                                    <option value="oro"> Oro </option>
-                                    <option value="plata"> Plata </option>
-                                    <option value="rojo"> Rojo </option>
-                                    <option value="plata"> Rosa </option>
-                                    <option value="verde"> Verde </option>
-                                </select>
+                                    <div class="select-marca" [class]="filter.exterior_color == null?'select':''" (click)="filter.exterior_color = null;dropDown('select_color_ext')" >
+                                        <div class="content-color" style="background-color: #FFFFFF; border: 0.4px solid grey"></div>
+                                        <button   > Cualquiera </button>
+                                    </div>
+                                    <div class="select-marca" [class]="filter.exterior_color == 'beige'?'select':''" (click)="filter.exterior_color = 'beige';dropDown('select_color_ext')" >
+                                        <div class="content-color" style="background-color: #D1B371;"></div>
+                                        <button   > Beige </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.exterior_color == 'marron'?'select':''" (click)="filter.exterior_color = 'marron';dropDown('select_color_ext')" >
+                                        <div class="content-color" style="background-color: #A13F00"></div>
+                                        <button   > Marrón </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.exterior_color == 'amarillo'?'select':''"  (click)="filter.exterior_color = 'amarillo';dropDown('select_color_ext')" >
+                                        <div class="content-color" style="background-color: #F9C720;"></div>
+                                        <button   > Amarillo </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.exterior_color == 'metalica'?'select':''"  (click)="filter.exterior_color = 'metalica';dropDown('select_color_ext')" >
+                                        <div class="content-color" style="background-color: #f8f8f8;"></div>
+                                        <button   > Metálica </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.exterior_color == 'azul'?'select':''"  (click)="filter.exterior_color = 'azul';dropDown('select_color_ext')">
+                                        <div class="content-color" style="background-color: #0159B2;"></div>
+                                        <button   > Azul </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.exterior_color == 'blanco'?'select':''"  (click)="filter.exterior_color = 'blanco';dropDown('select_color_ext')">
+                                        <div class="content-color" style="background-color: #FFFFFF; border: 0.6px solid black"></div>
+                                        <button   > Blanco </button>
+                                    </div>
+                                    
+                                    <div class="select-marca" [class]="filter.exterior_color == 'bronce'?'select':''"  (click)="filter.exterior_color = 'bronce';dropDown('select_color_ext')">
+                                        <div class="content-color" style="background-color: #D99D5F;"></div>
+                                        <button   > Bronce </button>
+                                    </div>
+                                    
+                                    <div class="select-marca"  [class]="filter.exterior_color == 'morado'?'select':''"  (click)="filter.exterior_color = 'morado';dropDown('select_color_ext')" >
+                                        <div class="content-color" style="background-color: #9D1283;"></div>
+                                        <button   > Morado </button>
+                                    </div>
+                                    
+                                    <div class="select-marca" [class]="filter.exterior_color == 'naranja'?'select':''"  (click)="filter.exterior_color = 'naranja';dropDown('select_color_ext')">
+                                        <div class="content-color" style="background-color: #FF7400;"></div>
+                                        <button   > Naranja </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.exterior_color == 'negro'?'select':''"  (click)="filter.exterior_color = 'negro';dropDown('select_color_ext')">
+                                        <div class="content-color" style="background-color: #000000;"></div>
+                                        <button   > Negro </button>
+                                    </div>
+                                    
+                                    <div class="select-marca" [class]="filter.exterior_color == 'oro'?'select':''"  (click)="filter.exterior_color = 'oro';dropDown('select_color_ext')">
+                                        <div class="content-color" style="background-color: #E6C947;"></div>
+                                        <button   > Oro </button>
+                                    </div>
+                                    
+                                    <div class="select-marca" [class]="filter.exterior_color == 'plata'?'select':''"  (click)="filter.exterior_color = 'plata';dropDown('select_color_ext')">
+                                        <div class="content-color" style="background-color: #C4C4C4;"></div>
+                                        <button   > Plata </button>
+                                    </div>
+                                    
+                                    <div class="select-marca" [class]="filter.exterior_color == 'rojo'?'select':''"  (click)="filter.exterior_color = 'rojo';dropDown('select_color_ext')">
+                                        <div class="content-color" style="background-color: #D51C2E;"></div>
+                                        <button   > Rojo </button>
+                                    </div>
+                                    
+                                    <div class="select-marca" [class]="filter.exterior_color == 'rosa'?'select':''"  (click)="filter.exterior_color = 'rosa';dropDown('select_color_ext')">
+                                        <div class="content-color" style="background-color: #FFCBDB;"></div>
+                                        <button   > Rosa </button>
+                                    </div>
+                                    
+                                    <div class="select-marca" [class]="filter.exterior_color == 'verde'?'select':''"  (click)="filter.exterior_color = 'verde';dropDown('select_color_ext')">
+                                        <div class="content-color" style="background-color: #3DA313;"></div>
+                                        <button   > Verde </button>
+                                    </div>
+                                </div>
                             </div>
                             <!-- <div class="dropdown" id="color_ext">
                                 <input type="text" placeholder="Color" (keypress)="SoloLetra($event)" [(ngModel)]="filter.exterior_color" autocomplete="off" class="fecha" >
@@ -400,6 +467,97 @@
                         <div class="section">
                             <button (click)="dropDown('color_int')">Color interior <span class="icon icon-cheveron-down"></span></button>
                             <div class="dropdown" id="color_int">
+                                <button *ngIf="filter.interior_color == null" class="btn-select" (click)="dropDown('select_color_int')" > Cualquiera <span class="icon icon-cheveron-down"></span></button>
+                                <button *ngIf="filter.interior_color != null" (click)="dropDown('select_color_int')" class="btn-select notranslate" > {{filter.interior_color }} <span class="icon icon-cheveron-down"></span></button>
+                                <div id="select_color_int" class="content-select">
+
+                                    <div class="select-marca" [class]="filter.interior_color == null?'select':''"  (click)="filter.interior_color = null;dropDown('select_color_int')" >
+                                        <div class="content-color" style="background-color: #FFFFFF; border: 0.4px solid grey"></div>
+                                        <button   > Cualquiera </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'beige'?'select':''" (click)="filter.interior_color = 'beige';dropDown('select_color_int')" >
+                                        <div class="content-color" style="background-color: #D1B371;"></div>
+                                        <button   > Beige </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'marron'?'select':''" (click)="filter.interior_color = 'marron';dropDown('select_color_int')" >
+                                        <div class="content-color" style="background-color: #A13F00"></div>
+                                        <button   > Marrón </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'gris'?'select':''" (click)="filter.interior_color = 'gris';dropDown('select_color_int')" >
+                                        <div class="content-color" style="background-color: #F9C720;"></div>
+                                        <button   > Gris </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'amarillo'?'select':''" (click)="filter.interior_color = 'amarillo';dropDown('select_color_int')" >
+                                        <div class="content-color" style="background-color: #F9C720;"></div>
+                                        <button   > Amarillo </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'azul'?'select':''"  (click)="filter.interior_color = 'azul';dropDown('select_color_int')">
+                                        <div class="content-color" style="background-color: #0159B2;"></div>
+                                        <button   > Azul </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'blanco'?'select':''"  (click)="filter.interior_color = 'blanco';dropDown('select_color_int')">
+                                        <div class="content-color" style="background-color: #FFFFFF; border: 0.6px solid black"></div>
+                                        <button   > Blanco </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'bronce'?'select':''"  (click)="filter.interior_color = 'bronce';dropDown('select_color_int')">
+                                        <div class="content-color" style="background-color: #D99D5F;"></div>
+                                        <button   > Bronce </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'morado'?'select':''"   (click)="filter.interior_color = 'morado';dropDown('select_color_int')" >
+                                        <div class="content-color" style="background-color: #9D1283;"></div>
+                                        <button   > Morado </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'naranja'?'select':''"  (click)="filter.interior_color = 'naranja';dropDown('select_color_int')">
+                                        <div class="content-color" style="background-color: #FF7400;"></div>
+                                        <button   > Naranja </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'negro'?'select':''"  (click)="filter.interior_color = 'negro';dropDown('select_color_int')">
+                                        <div class="content-color" style="background-color: #000000;"></div>
+                                        <button   > Negro </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'oro'?'select':''" (click)="filter.interior_color = 'oro';dropDown('select_color_int')">
+                                        <div class="content-color" style="background-color: #E6C947;"></div>
+                                        <button   > Oro </button>
+                                    </div>
+
+                                    <div class="select-marca" (click)="filter.interior_color = 'plata';dropDown('select_color_int')">
+                                        <div class="content-color" style="background-color: #C4C4C4;"></div>
+                                        <button   > Plata </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'rojo'?'select':''"  (click)="filter.interior_color = 'rojo';dropDown('select_color_int')">
+                                        <div class="content-color" style="background-color: #D51C2E;"></div>
+                                        <button   > Rojo </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'rosa'?'select':''"  (click)="filter.interior_color = 'rosa';dropDown('select_color_int')">
+                                        <div class="content-color" style="background-color: #FFCBDB;"></div>
+                                        <button   > Rosa </button>
+                                    </div>
+                                    
+                                    <div class="select-marca" [class]="filter.interior_color == 'verde'?'select':''"  (click)="filter.interior_color = 'verde';dropDown('select_color_int')">
+                                        <div class="content-color" style="background-color: #3DA313;"></div>
+                                        <button   > Verde </button>
+                                    </div>
+
+                                    <div class="select-marca" [class]="filter.interior_color == 'otro'?'select':''"  (click)="filter.interior_color = 'otro';dropDown('select_color_int')">
+                                        <div class="content-color" style="background-color: #f5f5f5;"></div>
+                                        <button   > Otro </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="dropdown" id="color_int">
                                 <select class="select-square" [(ngModel)]="filter.interior_color" name=""  >
                                     <option [value]="null"> Seleccione un color </option>
                                     <option value="amarillo"> Amarillo </option>
@@ -415,7 +573,7 @@
                                     <option value="plata"> Rosa </option>
                                     <option value="verde"> Verde </option>
                                 </select>
-                            </div>
+                            </div> -->
                             
                         </div>
 
@@ -558,7 +716,7 @@
                     <option value="hightprice"  >Mayor precio</option>
                 </select>
             </div>
-            <h3 *ngIf="mobile">{{ count }} Resultados</h3>
+            <h3 class="notranslate" *ngIf="mobile">{{ count }} Resultados</h3>
 
             <div class="content">
                 <h1 class="font-600 text-black" *ngIf="res?.data?.length == 0 && !loading " >No encontramos resultados para la búsqueda, <br> inténtalo de nuevo</h1>
@@ -646,6 +804,7 @@
                     display: grid;
                     justify-content: center;
                 "
+                 class="notranslate"
                 *ngIf="res.total"
                 (pageChange)="pageChanged($event)"
                 previousLabel=""

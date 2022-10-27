@@ -557,3 +557,8 @@
     max-height: 110px;
     cursor: pointer;
 }
+
+.cont-title{
+    display:flex;cursor: pointer; align-items: flex-end;
+    gap: 4px;
+}
