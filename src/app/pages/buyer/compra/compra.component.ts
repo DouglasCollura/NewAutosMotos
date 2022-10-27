@@ -58,17 +58,22 @@ export class CompraComponent implements OnInit {
 
     ngOnInit(): void {
         var ua = navigator.userAgent;
-
-        $(window).resize(()=> {
+        var width = $(window).width();
+        $(window).resize((ev)=> {
+            console.log(ev)
             if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|opera mobile|palmos|webos|Mobile|mobile|googlebot-mobile|CriOS/i.test(ua) || window.innerWidth <= 768)
             {
-                this.mobile=true;
-                this.display_filter=false
+                if ($(window).width()!=width){
+                    this.mobile=true;
+                    this.display_filter=false
+                }
 
             }else{
-                this.mobile=false;
-                this.display_filter=true
+                if ($(window).width()!=width){
 
+                    this.mobile=false;
+                    this.display_filter=true
+                }
             }
         });
 
